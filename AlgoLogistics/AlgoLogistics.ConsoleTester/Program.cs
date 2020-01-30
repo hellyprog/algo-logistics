@@ -1,28 +1,25 @@
 ﻿using AlgoLogistics.Algorithms;
+using AlgoLogistics.Algorithms.BinarySearch;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.ConsoleTester
 {
-	class A : IAlgorithm<int, int>
-	{
-		public int Execute(int input)
-		{
-			Thread.Sleep(1500);
-
-			return input;
-		}
-	}
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			var alg = new MeasurableAlgorithm<int, int>(new A());
+			var alg = new MeasurableAlgorithm<BinarySearchAlgorithmInput, int?>(new BinarySearchAlgorithm());
 
-			var result = alg.Execute(5);
+			var result = alg.Execute(new BinarySearchAlgorithmInput
+			{
+				ValueToSearch = 200,
+				Source = Enumerable.Range(1, 1000000).ToArray()
+			});
 
-			Console.WriteLine(result);
+			Console.WriteLine(result.Value);
 		}
 	}
 }
