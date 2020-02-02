@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Tests", "Algo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.ConsoleTester", "AlgoLogistics.ConsoleTester\AlgoLogistics.ConsoleTester.csproj", "{F6065110-8100-40EE-A208-CDB9A79AC031}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Domain", "AlgoLogistics.Domain\AlgoLogistics.Domain.csproj", "{1448BD66-4C48-4103-B183-A33865EAF824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1448BD66-4C48-4103-B183-A33865EAF824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1448BD66-4C48-4103-B183-A33865EAF824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1448BD66-4C48-4103-B183-A33865EAF824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1448BD66-4C48-4103-B183-A33865EAF824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
