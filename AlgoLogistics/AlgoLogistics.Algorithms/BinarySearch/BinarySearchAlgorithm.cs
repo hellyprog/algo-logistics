@@ -11,6 +11,8 @@ namespace AlgoLogistics.Algorithms.BinarySearch
 			var startIndex = 0;
 			var endIndex = input.Source.Length - 1;
 
+			Array.Sort(input.Source);
+
 			while (startIndex <= endIndex)
 			{
 				var middle = (startIndex + endIndex) / 2;
