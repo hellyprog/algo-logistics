@@ -11,43 +11,39 @@ namespace AlgoLogistics.Domain.Entities
 		public int Id { get; private set; }
 		public string Description { get; private set; }
 		public decimal Price { get; private set; }
+		public decimal DeliveryPrice { get; private set; }
 		public WeightCategory Weight { get; private set; }
 		public SizeCategory Size { get; private set; }
-		public Measure Measure { get; private set; }
-		public string Sender { get; private set; }
-		public string Receiver { get; private set; }
-		public string FromCity { get; private set; }
-		public string ToCity { get; private set; }
+		public PhysicalParameters PhysicalParameters { get; private set; }
+		public DeliveryDetails DeliveryDetails { get; set; }
 		public DeliveryStatus Status { get; private set; }
 
 		private Package() { }
 
-		public Package(string description, Measure measure, double weight, string sender, string receiver, string fromCity, string toCity)
+		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, string createdBy)
 		{
-			if (!IsValidInput(description, measure, weight, sender, receiver, fromCity, toCity, out ArgumentException exception))
-			{
-				throw exception;
-			}
+			ValidateInput(description, price, physicalParameters, deliveryDetails);
 
 			Description = description;
-			Sender = sender;
-			Receiver = receiver;
-			FromCity = fromCity;
-			ToCity = toCity;
+			DeliveryDetails = deliveryDetails;
 			Status = DeliveryStatus.NotSent;
-			Weight = GetWeightCategory(weight);
-			Size = GetSizeCategory(measure);
-			Price = CalculatePrice();
+			Weight = GetWeightCategory(physicalParameters.Weight);
+			Size = GetSizeCategory(physicalParameters);
+			Price = price;
+			DeliveryPrice = CalculateDeliveryPrice(Size, Weight);
+
+			Created = DateTime.UtcNow;
+			CreatedBy = createdBy;
 		}
 
-		private decimal CalculatePrice()
+		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight)
 		{
-			var price = 0.0m;
+			var price = (decimal)sizeCategory + (decimal)weight;
 
 			return price;
 		}
 
-		private SizeCategory GetSizeCategory(Measure measure)
+		private SizeCategory GetSizeCategory(PhysicalParameters measure)
 		{
 			var volume = measure.Height * measure.Length * measure.Width;
 
@@ -75,7 +71,7 @@ namespace AlgoLogistics.Domain.Entities
 			{
 				return WeightCategory.Light;
 			} 
-			else if (weight > 5 && weight <= 10)
+			else if (weight > 5 && weight <= 15)
 			{
 				return WeightCategory.Medium;
 			}
@@ -85,48 +81,24 @@ namespace AlgoLogistics.Domain.Entities
 			}
 		}
 
-		private bool IsValidInput(string description, Measure measure, double weight, string sender, string receiver, string fromCity, string toCity, out ArgumentException exception)
+		private void ValidateInput(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails)
 		{
-			bool result = false;
-			exception = null;
-
 			if (string.IsNullOrEmpty(description))
 			{
-				exception = new ArgumentException($"{nameof(description)} cannot be null or empty", nameof(description));
-				return result;
+				throw new ArgumentException($"{nameof(description)} cannot be null or empty", nameof(description));
 			} 
-			else if (measure == null)
+			else if (price <= 0)
 			{
-				exception = new ArgumentException($"{nameof(measure)} cannot be null", nameof(measure));
-				return result;
+				throw new ArgumentException($"{nameof(price)} cannot be null or empty", nameof(price));
 			}
-			else if (weight <= 0)
+			else if (physicalParameters == null)
 			{
-				exception = new ArgumentException($"{nameof(weight)} should be greater than zero", nameof(weight));
-				return result;
+				throw new ArgumentException($"{nameof(physicalParameters)} cannot be null", nameof(physicalParameters));
 			}
-			else if (string.IsNullOrEmpty(sender))
+			else if (deliveryDetails == null)
 			{
-				exception = new ArgumentException($"{nameof(sender)} cannot be null or empty", nameof(sender));
-				return result;
+				throw new ArgumentException($"{nameof(deliveryDetails)} cannot be null", nameof(deliveryDetails));
 			}
-			else if (string.IsNullOrEmpty(receiver))
-			{
-				exception = new ArgumentException($"{nameof(receiver)} cannot be null or empty", nameof(receiver));
-				return result;
-			}
-			else if (string.IsNullOrEmpty(fromCity))
-			{
-				exception = new ArgumentException($"{nameof(fromCity)} cannot be null or empty", nameof(fromCity));
-				return result;
-			}
-			else if (string.IsNullOrEmpty(toCity))
-			{
-				exception = new ArgumentException($"{nameof(toCity)} cannot be null or empty", nameof(toCity));
-				return result;
-			}
-
-			return true;
 		}
 	}
 }

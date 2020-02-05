@@ -6,8 +6,8 @@ namespace AlgoLogistics.Domain.Enums
 {
 	public enum WeightCategory
 	{
-		Light,
-		Medium,
-		Heavy
+		Light = 10,
+		Medium = 15,
+		Heavy = 20
 	}
 }
