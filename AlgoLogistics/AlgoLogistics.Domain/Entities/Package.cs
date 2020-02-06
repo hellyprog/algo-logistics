@@ -45,17 +45,19 @@ namespace AlgoLogistics.Domain.Entities
 
 		private SizeCategory GetSizeCategory(PhysicalParameters measure)
 		{
-			var volume = measure.Height * measure.Length * measure.Width;
+			const double SmallLimit = 0.2;
+			const double MediumLimit = 0.5;
+			const double LargeLimit = 1;
 
-			if (volume > 0 && volume <= 0.01)
+			if (measure.Height <= SmallLimit && measure.Length <= SmallLimit && measure.Width <= SmallLimit)
 			{
 				return SizeCategory.Small;
 			}
-			else if (volume > 0.01 && volume <= 0.07)
+			else if (measure.Height <= MediumLimit && measure.Length <= MediumLimit && measure.Width <= MediumLimit)
 			{
 				return SizeCategory.Medium;
 			}
-			else if (volume > 0.07 && volume <= 1)
+			else if (measure.Height <= LargeLimit && measure.Length <= LargeLimit && measure.Width <= LargeLimit)
 			{
 				return SizeCategory.Large;
 			}
@@ -67,11 +69,14 @@ namespace AlgoLogistics.Domain.Entities
 
 		private WeightCategory GetWeightCategory(double weight)
 		{
-			if (weight > 0 && weight <= 5)
+			const double LightLimit = 5;
+			const double MediumLimit = 15;
+
+			if (weight <= LightLimit)
 			{
 				return WeightCategory.Light;
 			} 
-			else if (weight > 5 && weight <= 15)
+			else if (weight <= MediumLimit)
 			{
 				return WeightCategory.Medium;
 			}
