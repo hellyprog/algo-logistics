@@ -220,5 +220,18 @@ namespace AlgoLogistics.Tests.Domain
 
 			Assert.AreEqual(45, package.DeliveryPrice);
 		}
+
+		[Test]
+		public void CreatedPackage_DeliveryStatusIsNotSent_WithGivenParameters()
+		{
+			var package = new Package(
+				"desc",
+				120,
+				new PhysicalParameters(1, 1.1, 0.4, 19),
+				new DeliveryDetails("sender", "receiver", "Lviv", "Kyiv"),
+				"Admin");
+
+			Assert.AreEqual(DeliveryStatus.NotSent, package.Status);
+		}
 	}
 }
