@@ -10,13 +10,14 @@ namespace AlgoLogistics.Algorithms.SelectionSort
 		{
 			for (int i = 0; i < input.Length - 1; i++)
 			{
-				var currentElement = input[i];
+				var smallestElement = input[i];
 				var minimumIndex = i;
 
 				for (int j = i + 1; j < input.Length; j++)
 				{
-					if (input[i] > input[j])
+					if (input[j] < smallestElement)
 					{
+						smallestElement = input[j];
 						minimumIndex = j;
 					}
 				}
