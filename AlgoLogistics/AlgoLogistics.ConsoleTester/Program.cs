@@ -1,5 +1,6 @@
 ﻿using AlgoLogistics.Algorithms;
 using AlgoLogistics.Algorithms.BinarySearch;
+using AlgoLogistics.Algorithms.SelectionSort;
 using System;
 using System.Linq;
 using System.Threading;
@@ -11,15 +12,16 @@ namespace AlgoLogistics.ConsoleTester
 	{
 		static void Main(string[] args)
 		{
-			var alg = new MeasurableAlgorithm<BinarySearchAlgorithmInput, int?>(new BinarySearchAlgorithm());
+			var alg = new MeasurableAlgorithm<int[], int[]>(new SelectionSortAlgorithm());
 
-			var result = alg.Execute(new BinarySearchAlgorithmInput
+			var result = alg.Execute(new int[] { 12, 3, 2, 6, 4, 1 });
+
+			for (int i = 0; i < result.Length; i++)
 			{
-				ValueToSearch = 200,
-				Source = Enumerable.Range(1, 1000000).ToArray()
-			});
+				Console.Write($"{result[i]}  ");
+			}
 
-			Console.WriteLine(result.Value);
+			Console.ReadKey();
 		}
 	}
 }
