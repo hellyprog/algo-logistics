@@ -1,6 +1,6 @@
-﻿using AlgoLogistics.Algorithms;
-using AlgoLogistics.Algorithms.BinarySearch;
-using AlgoLogistics.Algorithms.SelectionSort;
+﻿using AlgoLogistics.Domain.Algorithms;
+using AlgoLogistics.Domain.Algorithms.BinarySearch;
+using AlgoLogistics.Domain.Algorithms.SelectionSort;
 using System;
 using System.Linq;
 using System.Threading;

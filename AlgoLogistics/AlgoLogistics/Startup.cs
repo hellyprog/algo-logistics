@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AlgoLogistics.Application;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,13 @@ namespace AlgoLogistics
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddApplication();
+			services.AddHealthChecks();
+
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "AlgoLogistics API", Version = "v1" });
+			});
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,6 +45,7 @@ namespace AlgoLogistics
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseHealthChecks("/health");
 			app.UseHttpsRedirection();
 
 			app.UseRouting();
@@ -44,6 +55,12 @@ namespace AlgoLogistics
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+			});
+
+			app.UseSwagger();
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoLogistics API v1");
 			});
 		}
 	}
