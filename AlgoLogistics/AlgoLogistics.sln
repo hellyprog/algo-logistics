@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics", "AlgoLogistics\AlgoLogistics.csproj", "{6529E9E4-1C62-4C00-94A6-C89713717A58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics", "AlgoLogistics\AlgoLogistics.csproj", "{6529E9E4-1C62-4C00-94A6-C89713717A58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Algorithms", "AlgoLogistics.Algorithms\AlgoLogistics.Algorithms.csproj", "{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Domain.Algorithms", "AlgoLogistics.Algorithms\AlgoLogistics.Domain.Algorithms.csproj", "{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{66B055AD-0BF6-45EF-93B5-C72A2B222687}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{66B055AD-0BF6-45EF-93B5-C72A2B222687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.ConsoleTester", "AlgoLogistics.ConsoleTester\AlgoLogistics.ConsoleTester.csproj", "{F6065110-8100-40EE-A208-CDB9A79AC031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.ConsoleTester", "AlgoLogistics.ConsoleTester\AlgoLogistics.ConsoleTester.csproj", "{F6065110-8100-40EE-A208-CDB9A79AC031}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Domain", "AlgoLogistics.Domain\AlgoLogistics.Domain.csproj", "{1448BD66-4C48-4103-B183-A33865EAF824}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Domain", "AlgoLogistics.Domain\AlgoLogistics.Domain.csproj", "{1448BD66-4C48-4103-B183-A33865EAF824}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Application", "AlgoLogistics.Application\AlgoLogistics.Application.csproj", "{D33FE7F9-841A-4207-99EF-1715735689E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application", "AlgoLogistics.Application\AlgoLogistics.Application.csproj", "{D33FE7F9-841A-4207-99EF-1715735689E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Infrastructure", "AlgoLogistics.Infrastructure\AlgoLogistics.Infrastructure.csproj", "{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Infrastructure", "AlgoLogistics.Infrastructure\AlgoLogistics.Infrastructure.csproj", "{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Algorithms.BinarySearch;
+﻿using AlgoLogistics.Domain.Algorithms.BinarySearch;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

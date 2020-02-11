@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Algorithms.BinarySearch
+namespace AlgoLogistics.Domain.Algorithms.BinarySearch
 {
 	public class BinarySearchAlgorithmInput
 	{

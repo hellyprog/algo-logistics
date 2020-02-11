@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlgoLogistics.Algorithms\AlgoLogistics.Algorithms.csproj" />
+    <ProjectReference Include="..\AlgoLogistics.Algorithms\AlgoLogistics.Domain.Algorithms.csproj" />
   </ItemGroup>
 
 </Project>
