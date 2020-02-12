@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AlgoLogistics.Application;
+using AlgoLogistics.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace AlgoLogistics
 		{
 			services.AddControllers();
 			services.AddApplication();
+			services.AddInfrastructure(Configuration);
 			services.AddHealthChecks();
 
 			services.AddSwaggerGen(c =>

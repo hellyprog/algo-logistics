@@ -14,6 +14,8 @@ namespace AlgoLogistics.Domain.Entities
 		public double Length { get; set; }
 		public double Weight { get; set; }
 
+		private PhysicalParameters() { }
+
 		public PhysicalParameters(double width, double height, double length, double weight)
 		{
 			if (width <= 0 || height <= 0 || length <= 0 || weight <= 0)

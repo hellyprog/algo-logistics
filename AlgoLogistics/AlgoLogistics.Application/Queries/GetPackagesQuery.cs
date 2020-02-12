@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AlgoLogistics.Application.Queries
 {
-	public class GetPackagesQuery : IRequest<ICollection<Package>>
+	public class GetPackagesQuery : IRequest<List<Package>>
 	{
 	}
 }

@@ -11,6 +11,8 @@ namespace AlgoLogistics.Domain.Entities
 		public string FromCity { get; }
 		public string ToCity { get; }
 
+		private DeliveryDetails() { }
+
 		public DeliveryDetails(string sender, string receiver, string fromCity, string toCity)
 		{
 			CheckForNullsOrEmptyValues(sender, receiver, fromCity, toCity);
