@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Infrastructure.Configurations
+namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 {
 	public class PackageConfiguration : IEntityTypeConfiguration<Package>
 	{
