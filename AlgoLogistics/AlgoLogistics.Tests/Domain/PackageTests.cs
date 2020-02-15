@@ -19,8 +19,8 @@ namespace AlgoLogistics.Tests.Domain
 				new DeliveryDetails("sender", "receiver", "Lviv", "Kyiv"),
 				"Admin");
 
-			Assert.AreEqual(WeightCategory.Light, package.Weight );
-			Assert.AreEqual(SizeCategory.Small, package.Size);
+			Assert.AreEqual(WeightCategory.Light, package.WeightCategory );
+			Assert.AreEqual(SizeCategory.Small, package.SizeCategory);
 		}
 
 		[Test]
@@ -33,8 +33,8 @@ namespace AlgoLogistics.Tests.Domain
 				new DeliveryDetails("sender", "receiver", "Lviv", "Kyiv"),
 				"Admin");
 
-			Assert.AreEqual(WeightCategory.Medium, package.Weight);
-			Assert.AreEqual(SizeCategory.Medium, package.Size);
+			Assert.AreEqual(WeightCategory.Medium, package.WeightCategory);
+			Assert.AreEqual(SizeCategory.Medium, package.SizeCategory);
 		}
 
 		[Test]
@@ -47,8 +47,8 @@ namespace AlgoLogistics.Tests.Domain
 				new DeliveryDetails("sender", "receiver", "Lviv", "Kyiv"),
 				"Admin");
 
-			Assert.AreEqual(WeightCategory.Heavy, package.Weight);
-			Assert.AreEqual(SizeCategory.Large, package.Size);
+			Assert.AreEqual(WeightCategory.Heavy, package.WeightCategory);
+			Assert.AreEqual(SizeCategory.Large, package.SizeCategory);
 		}
 
 		[Test]
@@ -61,8 +61,8 @@ namespace AlgoLogistics.Tests.Domain
 				new DeliveryDetails("sender", "receiver", "Lviv", "Kyiv"),
 				"Admin");
 
-			Assert.AreEqual(WeightCategory.Heavy, package.Weight);
-			Assert.AreEqual(SizeCategory.ExtraLarge, package.Size);
+			Assert.AreEqual(WeightCategory.Heavy, package.WeightCategory);
+			Assert.AreEqual(SizeCategory.ExtraLarge, package.SizeCategory);
 		}
 
 		[Test]

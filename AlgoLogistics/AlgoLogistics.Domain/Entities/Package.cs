@@ -8,12 +8,12 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Package : AuditableEntity
 	{
-		public int Id { get; private set; }
+		public int PackageId { get; private set; }
 		public string Description { get; private set; }
 		public decimal Price { get; private set; }
 		public decimal DeliveryPrice { get; private set; }
-		public WeightCategory Weight { get; private set; }
-		public SizeCategory Size { get; private set; }
+		public WeightCategory WeightCategory { get; private set; }
+		public SizeCategory SizeCategory { get; private set; }
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
 		public DeliveryStatus Status { get; private set; }
@@ -27,10 +27,10 @@ namespace AlgoLogistics.Domain.Entities
 			Description = description;
 			DeliveryDetails = deliveryDetails;
 			Status = DeliveryStatus.NotSent;
-			Weight = GetWeightCategory(physicalParameters.Weight);
-			Size = GetSizeCategory(physicalParameters);
+			WeightCategory = GetWeightCategory(physicalParameters.Weight);
+			SizeCategory = GetSizeCategory(physicalParameters);
 			Price = price;
-			DeliveryPrice = CalculateDeliveryPrice(Size, Weight);
+			DeliveryPrice = CalculateDeliveryPrice(SizeCategory, WeightCategory);
 
 			Created = DateTime.UtcNow;
 			CreatedBy = createdBy;
