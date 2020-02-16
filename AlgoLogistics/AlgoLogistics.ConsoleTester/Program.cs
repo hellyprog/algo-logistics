@@ -1,5 +1,6 @@
 ﻿using AlgoLogistics.Domain.Algorithms;
 using AlgoLogistics.Domain.Algorithms.BinarySearch;
+using AlgoLogistics.Domain.Algorithms.QuickSort;
 using AlgoLogistics.Domain.Algorithms.SelectionSort;
 using System;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace AlgoLogistics.ConsoleTester
 	{
 		static void Main(string[] args)
 		{
-			var alg = new MeasurableAlgorithm<int[], int[]>(new SelectionSortAlgorithm());
+			var alg = new MeasurableAlgorithm<int[], int[]>(new QuickSortAlgorithm());
 
-			var result = alg.Execute(new int[] { 12, 3, 2, 6, 4, 1 });
+			var result = alg.Execute(new int[] { 12, 3, 2, 6, 4, 1, 12 });
 
 			for (int i = 0; i < result.Length; i++)
 			{
