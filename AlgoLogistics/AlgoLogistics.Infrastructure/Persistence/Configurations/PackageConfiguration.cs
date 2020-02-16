@@ -28,19 +28,24 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.OwnsOne(p => p.PhysicalParameters,
 				parameters =>
 				{
-					parameters.Property(p => p.Height).HasColumnName("height");
-					parameters.Property(p => p.Length).HasColumnName("length");
-					parameters.Property(p => p.Weight).HasColumnName("weight");
-					parameters.Property(p => p.Width).HasColumnName("width");
+					parameters.Property(p => p.Height).HasColumnName("height").IsRequired();
+					parameters.Property(p => p.Length).HasColumnName("length").IsRequired();
+					parameters.Property(p => p.Weight).HasColumnName("weight").IsRequired();
+					parameters.Property(p => p.Width).HasColumnName("width").IsRequired();
 				});
 			builder.OwnsOne(p => p.DeliveryDetails,
 				parameters =>
 				{
-					parameters.Property(p => p.FromCity).HasColumnName("from_city");
-					parameters.Property(p => p.ToCity).HasColumnName("to_city");
-					parameters.Property(p => p.Sender).HasColumnName("sender");
-					parameters.Property(p => p.Receiver).HasColumnName("receiver");
+					parameters.Property(p => p.FromCity).HasColumnName("from_city").IsRequired();
+					parameters.Property(p => p.ToCity).HasColumnName("to_city").IsRequired();
+					parameters.Property(p => p.Sender).HasColumnName("sender").IsRequired();
+					parameters.Property(p => p.Receiver).HasColumnName("receiver").IsRequired();
 				});
+
+			builder.Property(p => p.Created).HasColumnName("created");
+			builder.Property(p => p.CreatedBy).HasColumnName("created_by");
+			builder.Property(p => p.LastModified).HasColumnName("last_modified");
+			builder.Property(p => p.LastModifiedBy).HasColumnName("last_modified_by");
 		}
 	}
 }

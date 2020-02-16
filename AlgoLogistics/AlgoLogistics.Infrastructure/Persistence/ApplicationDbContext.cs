@@ -14,7 +14,6 @@ namespace AlgoLogistics.Infrastructure.Persistence
 	{
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
-			Database.EnsureCreated();
 		}
 
 		public DbSet<Package> Packages { get; set; }
