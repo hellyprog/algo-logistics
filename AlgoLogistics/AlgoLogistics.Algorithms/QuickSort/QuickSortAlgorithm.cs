@@ -14,19 +14,23 @@ namespace AlgoLogistics.Domain.Algorithms.QuickSort
 			}
 			else
 			{
-				var pivot = input[0];
+				var pivotIndex = input.Length / 2;
+				var pivot = input[pivotIndex];
 				var lessThanPivot = new List<int>();
 				var greaterThanPivot = new List<int>();
 
-				for (int i = 1; i < input.Length; i++)
+				for (int i = 0; i < input.Length; i++)
 				{
-					if (input[i] <= pivot)
+					if (i != pivotIndex)
 					{
-						lessThanPivot.Add(input[i]);
-					}
-					else
-					{
-						greaterThanPivot.Add(input[i]);
+						if (input[i] <= pivot)
+						{
+							lessThanPivot.Add(input[i]);
+						}
+						else
+						{
+							greaterThanPivot.Add(input[i]);
+						} 
 					}
 				}
 
