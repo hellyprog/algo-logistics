@@ -12,28 +12,24 @@ namespace AlgoLogistics.Domain.Entities
 		public string Description { get; private set; }
 		public decimal Price { get; private set; }
 		public decimal DeliveryPrice { get; private set; }
-		public WeightCategory WeightCategory { get; private set; }
-		public SizeCategory SizeCategory { get; private set; }
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
+		public WeightCategory WeightCategory => GetWeightCategory(PhysicalParameters.Weight);
+		public SizeCategory SizeCategory => GetSizeCategory(PhysicalParameters);
 		public DeliveryStatus Status { get; private set; }
 
 		private Package() { }
 
-		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, string createdBy)
+		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails)
 		{
 			ValidateInput(description, price, physicalParameters, deliveryDetails);
 
 			Description = description;
 			DeliveryDetails = deliveryDetails;
+			PhysicalParameters = physicalParameters;
 			Status = DeliveryStatus.NotSent;
-			WeightCategory = GetWeightCategory(physicalParameters.Weight);
-			SizeCategory = GetSizeCategory(physicalParameters);
 			Price = price;
 			DeliveryPrice = CalculateDeliveryPrice(SizeCategory, WeightCategory);
-
-			Created = DateTime.UtcNow;
-			CreatedBy = createdBy;
 		}
 
 		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight)

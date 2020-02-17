@@ -13,8 +13,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Package> builder)
 		{
-			var weightConverter = new EnumToStringConverter<WeightCategory>();
-			var sizeConverter = new EnumToStringConverter<SizeCategory>();
 			var deliveryStatusConverter = new EnumToStringConverter<DeliveryStatus>();
 
 			builder.HasKey(p => p.PackageId);
@@ -22,8 +20,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.Property(p => p.Description).HasColumnName("description").IsRequired();
 			builder.Property(p => p.Price).HasColumnName("price").IsRequired();
 			builder.Property(p => p.DeliveryPrice).HasColumnName("delivery_price").IsRequired();
-			builder.Property(p => p.WeightCategory).HasColumnName("weight_category").IsRequired().HasConversion(weightConverter);
-			builder.Property(p => p.SizeCategory).HasColumnName("size_category").IsRequired().HasConversion(sizeConverter);
 			builder.Property(p => p.Status).HasColumnName("status").IsRequired().HasConversion(deliveryStatusConverter);
 			builder.OwnsOne(p => p.PhysicalParameters,
 				parameters =>
