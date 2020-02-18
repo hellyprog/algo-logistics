@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlgoLogistics.Application.Common.Models;
 using AlgoLogistics.Application.Queries;
+using AlgoLogistics.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +23,15 @@ namespace AlgoLogistics.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPackages()
         {
             var query = new GetPackagesQuery();
             var result = await _mediator.Send(query);
-            return Ok(result);
+
+            return result.Success
+                ? StatusCode(StatusCodes.Status200OK, result)
+                : StatusCode(StatusCodes.Status500InternalServerError, result);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Application.Common.Interfaces;
+using AlgoLogistics.Application.Common.Models;
 using AlgoLogistics.Application.Queries;
 using AlgoLogistics.Domain.Entities;
 using MediatR;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Application.QueryHandlers
 {
-	public class GetPackagesQueryHandler : IRequestHandler<GetPackagesQuery, List<Package>>
+	public class GetPackagesQueryHandler : IRequestHandler<GetPackagesQuery, ExecutionResult<List<Package>>>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 
@@ -21,11 +22,11 @@ namespace AlgoLogistics.Application.QueryHandlers
 			_applicationDbContext = applicationDbContext;
 		}
 
-		public Task<List<Package>> Handle(GetPackagesQuery request, CancellationToken cancellationToken)
+		public async Task<ExecutionResult<List<Package>>> Handle(GetPackagesQuery request, CancellationToken cancellationToken)
 		{
-			var packages = _applicationDbContext.Packages.ToListAsync();
+			var packages = await _applicationDbContext.Packages.ToListAsync();
 
-			return packages;
+			return ExecutionResult<List<Package>>.CreateSuccessResult(packages);
 		}
 	}
 }
