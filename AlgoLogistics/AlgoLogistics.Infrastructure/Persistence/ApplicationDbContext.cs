@@ -18,11 +18,6 @@ namespace AlgoLogistics.Infrastructure.Persistence
 
 		public DbSet<Package> Packages { get; set; }
 
-		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-		{
-			throw new NotImplementedException();
-		}
-
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

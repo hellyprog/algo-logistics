@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Application.Common.Models;
+using AlgoLogistics.Application.DTOs;
 using AlgoLogistics.Domain.Entities;
 using MediatR;
 using System;
@@ -11,7 +12,7 @@ namespace AlgoLogistics.Application.Commands
 	{
 		public string Description { get; set; }
 		public decimal Price { get; set; }
-		public PhysicalParameters PhysicalParameters { get; set; }
-		public DeliveryDetails DeliveryDetails { get; set; }
+		public PhysicalParametersDTO PhysicalParameters { get; set; }
+		public DeliveryDetailsDTO DeliveryDetails { get; set; }
 	}
 }

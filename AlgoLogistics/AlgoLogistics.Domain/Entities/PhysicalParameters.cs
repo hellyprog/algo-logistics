@@ -9,10 +9,10 @@ namespace AlgoLogistics.Domain.Entities
 		public const double MaxDimensionValueInMetres = 1.5;
 		public const double MaxWeightInKilograms = 50;
 
-		public double Width { get; set; }
-		public double Height { get; set; }
-		public double Length { get; set; }
-		public double Weight { get; set; }
+		public double Width { get; private set; }
+		public double Height { get; private set; }
+		public double Length { get; private set; }
+		public double Weight { get; private set; }
 
 		private PhysicalParameters() { }
 

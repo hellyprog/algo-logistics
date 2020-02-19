@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlgoLogistics.Application.Commands;
 using AlgoLogistics.Application.Common.Models;
 using AlgoLogistics.Application.Queries;
 using AlgoLogistics.Domain.Entities;
@@ -29,9 +30,16 @@ namespace AlgoLogistics.Controllers
             var query = new GetPackagesQuery();
             var result = await _mediator.Send(query);
 
-            return result.Success
-                ? StatusCode(StatusCodes.Status200OK, result)
-                : StatusCode(StatusCodes.Status500InternalServerError, result);
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status201Created)]
+        public async Task<IActionResult> CreatePackage(CreatePackageCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return StatusCode(StatusCodes.Status201Created, result);
         }
     }
 }

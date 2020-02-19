@@ -6,10 +6,10 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class DeliveryDetails
 	{
-		public string Sender { get; }
-		public string Receiver { get; }
-		public string FromCity { get; }
-		public string ToCity { get; }
+		public string Sender { get; private set; }
+		public string Receiver { get; private set; }
+		public string FromCity { get; private set; }
+		public string ToCity { get; private set; }
 
 		private DeliveryDetails() { }
 
