@@ -42,6 +42,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.Property(p => p.CreatedBy).HasColumnName("created_by");
 			builder.Property(p => p.LastModified).HasColumnName("last_modified");
 			builder.Property(p => p.LastModifiedBy).HasColumnName("last_modified_by");
+
+			builder.HasOne(p => p.Shipment)
+				   .WithMany(p => p.Packages);
 		}
 	}
 }

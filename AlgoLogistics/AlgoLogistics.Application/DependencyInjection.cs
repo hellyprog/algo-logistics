@@ -14,16 +14,19 @@ namespace AlgoLogistics.Application
 		public static IServiceCollection AddApplication(this IServiceCollection services)
 		{
 			services.AddMediatR(Assembly.GetExecutingAssembly());
+			services.AddSingleton(GetMapper());
 
+			return services;
+		}
+
+		private static IMapper GetMapper()
+		{
 			var mappingConfig = new MapperConfiguration(mc =>
 			{
 				mc.AddProfile(new MappingProfile());
 			});
 
-			var mapper = mappingConfig.CreateMapper();
-			services.AddSingleton(mapper);
-
-			return services;
+			return mappingConfig.CreateMapper();
 		}
 	}
 }

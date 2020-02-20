@@ -17,6 +17,7 @@ namespace AlgoLogistics.Domain.Entities
 		public WeightCategory WeightCategory => GetWeightCategory(PhysicalParameters.Weight);
 		public SizeCategory SizeCategory => GetSizeCategory(PhysicalParameters);
 		public DeliveryStatus Status { get; private set; }
+		public Shipment Shipment { get; private set; }
 
 		private Package() { }
 
