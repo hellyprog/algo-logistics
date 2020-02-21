@@ -24,13 +24,7 @@ namespace AlgoLogistics.Domain.Entities
 
 		public Shipment(List<Package> packages)
 		{
-			this.packages = GetPackagesForShipment(packages);
-		}
-
-		private List<Package> GetPackagesForShipment(List<Package> packages)
-		{
-			var result = packages.Where(p => p.Status == Enums.DeliveryStatus.NotSent && p.Created.Date == DateTime.Today.AddDays(-1).Date).ToList();
-			return result;
+			this.packages = packages;
 		}
 	}
 }

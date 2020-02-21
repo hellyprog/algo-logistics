@@ -11,6 +11,7 @@ namespace AlgoLogistics.Application.Common.Interfaces
 	public interface IApplicationDbContext
 	{
 		DbSet<Package> Packages { get; set; }
+		DbSet<Shipment> Shipments { get; set; }
 
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}

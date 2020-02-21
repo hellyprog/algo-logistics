@@ -12,6 +12,8 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Shipment> builder)
 		{
+			builder.ToTable("Shipments");
+
 			builder.HasKey(p => p.ShipmentId);
 			builder.Property(p => p.ShipmentId).HasColumnName("shipment_id");
 			builder.OwnsOne(p => p.Route,

@@ -1,4 +1,6 @@
 ﻿using AlgoLogistics.Application.Common;
+using AlgoLogistics.Domain.Interfaces;
+using AlgoLogistics.Domain.Services;
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ namespace AlgoLogistics.Application
 	{
 		public static IServiceCollection AddApplication(this IServiceCollection services)
 		{
+			services.AddTransient<IShipmentService, ShipmentService>();
+
 			services.AddMediatR(Assembly.GetExecutingAssembly());
 			services.AddSingleton(GetMapper());
 

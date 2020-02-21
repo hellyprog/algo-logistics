@@ -15,6 +15,8 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 		{
 			var deliveryStatusConverter = new EnumToStringConverter<DeliveryStatus>();
 
+			builder.ToTable("Packages");
+
 			builder.HasKey(p => p.PackageId);
 			builder.Property(p => p.PackageId).HasColumnName("package_id");
 			builder.Property(p => p.Description).HasColumnName("description").IsRequired();
