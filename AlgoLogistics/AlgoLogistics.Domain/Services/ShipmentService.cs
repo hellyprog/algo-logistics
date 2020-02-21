@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services
 {
 	public class ShipmentService : IShipmentService
 	{
-		public List<Shipment> AssignPackagesToShipments(List<Package> packages)
+		public async Task<List<Shipment>> AssignPackagesToShipmentsAsync(List<Package> packages)
 		{
 			if (packages == null || packages.Count == 0)
 			{
@@ -32,7 +33,7 @@ namespace AlgoLogistics.Domain.Services
 
 				foreach (var package in groupedPackagesByToCity)
 				{
-					var shipment = new Shipment(package.Grouped.ToList());
+					var shipment = await Shipment.CreateAsync(package.Grouped.ToList());
 					shipmentList.Add(shipment);
 				}
 			}

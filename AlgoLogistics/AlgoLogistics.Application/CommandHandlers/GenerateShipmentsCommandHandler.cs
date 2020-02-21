@@ -26,7 +26,7 @@ namespace AlgoLogistics.Application.CommandHandlers
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
 			var packages = _applicationDbContext.Packages.ToList();
-			var shipments = _shipmentService.AssignPackagesToShipments(packages);
+			var shipments = await _shipmentService.AssignPackagesToShipmentsAsync(packages);
 
 			_applicationDbContext.Shipments.AddRange(shipments);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Entities
 {
@@ -22,9 +23,22 @@ namespace AlgoLogistics.Domain.Entities
 		{
 		}
 
-		public Shipment(List<Package> packages)
+		private Shipment(List<Package> packages)
 		{
 			this.packages = packages;
+		}
+
+		public static async Task<Shipment> CreateAsync(List<Package> packages)
+		{
+			var shipment = new Shipment(packages);
+			shipment.Route = await BuildRoute();
+
+			return shipment;
+		}
+
+		private static Task<Route> BuildRoute()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

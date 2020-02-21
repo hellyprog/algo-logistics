@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Interfaces
 {
 	public interface IShipmentService
 	{
-		List<Shipment> AssignPackagesToShipments(List<Package> packages);
+		Task<List<Shipment>> AssignPackagesToShipmentsAsync(List<Package> packages);
 	}
 }
