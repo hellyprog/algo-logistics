@@ -16,17 +16,21 @@ namespace AlgoLogistics.Application.CommandHandlers
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly IShipmentService _shipmentService;
+		private readonly IPackagesDataQuery _packagesDataQuery;
 
-		public GenerateShipmentsCommandHandler(IApplicationDbContext applicationDbContext, IShipmentService shipmentService)
+		public GenerateShipmentsCommandHandler(
+			IApplicationDbContext applicationDbContext, 
+			IShipmentService shipmentService,
+			IPackagesDataQuery packagesDataQuery)
 		{
 			_applicationDbContext = applicationDbContext;
 			_shipmentService = shipmentService;
+			_packagesDataQuery = packagesDataQuery;
 		}
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
-			var packages = _applicationDbContext.Packages.ToList();
-			var shipments = await _shipmentService.AssignPackagesToShipmentsAsync(packages);
+			var shipments = await _shipmentService.GenerateShipments(_packagesDataQuery);
 
 			_applicationDbContext.Shipments.AddRange(shipments);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);

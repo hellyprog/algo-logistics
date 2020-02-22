@@ -1,13 +1,13 @@
 ﻿using AlgoLogistics.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Interfaces
 {
-	public interface IShipmentService
+	public interface IPackagesDataQuery
 	{
-		Task<List<Shipment>> GenerateShipments(IPackagesDataQuery query);
+		IQueryable<Package> GetPackages();
 	}
 }

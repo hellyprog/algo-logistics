@@ -10,15 +10,11 @@ namespace AlgoLogistics.Domain.Services
 {
 	public class ShipmentService : IShipmentService
 	{
-		public async Task<List<Shipment>> AssignPackagesToShipmentsAsync(List<Package> packages)
+		public async Task<List<Shipment>> GenerateShipments(IPackagesDataQuery query)
 		{
-			if (packages == null || packages.Count == 0)
-			{
-				throw new ArgumentException("Packages cannot be null or empty");
-			}
-
 			var shipmentList = new List<Shipment>();
 
+			var packages = query.GetPackages();
 			var groupedPackagesByFromCity = from package in packages
 											where package.Status == Enums.DeliveryStatus.NotSent
 											&& package.Created.Date == DateTime.Now.AddDays(-1).Date

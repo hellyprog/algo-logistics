@@ -25,8 +25,10 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 						.HasConversion(p => string.Join('-', p), p => p.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
 						.HasColumnName("path");
 				});
+			
 			builder.HasMany(p => p.Packages)
-				   .WithOne(p => p.Shipment);
+				   .WithOne(p => p.Shipment)
+				   .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 			builder.Property(p => p.Created).HasColumnName("created");
 			builder.Property(p => p.CreatedBy).HasColumnName("created_by");

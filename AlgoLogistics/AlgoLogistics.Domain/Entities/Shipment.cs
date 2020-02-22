@@ -9,14 +9,10 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Shipment : AuditableEntity
 	{
-		private List<Package> packages;
+		private HashSet<Package> _packages;
 
 		public int ShipmentId { get; private set; }
-		public IEnumerable<Package> Packages
-		{ 
-			get { return packages; }
-			private set { packages = value.ToList(); }
-		}
+		public IEnumerable<Package> Packages => _packages?.ToList();
 		public Route Route { get; private set; }
 
 		private Shipment()
@@ -25,19 +21,21 @@ namespace AlgoLogistics.Domain.Entities
 
 		private Shipment(List<Package> packages)
 		{
-			this.packages = packages;
+			_packages = packages.ToHashSet();
 		}
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages)
 		{
 			var shipment = new Shipment(packages);
-			shipment.Route = await BuildRoute();
+			shipment.Route = await BuildRoute(packages);
 
 			return shipment;
 		}
 
-		private static Task<Route> BuildRoute()
+		private static Task<Route> BuildRoute(List<Package> packages)
 		{
+			var startCity = packages.First().DeliveryDetails.FromCity;
+			var destinationCity = packages.First().DeliveryDetails.ToCity;
 			throw new NotImplementedException();
 		}
 	}
