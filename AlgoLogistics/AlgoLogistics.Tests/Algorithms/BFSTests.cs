@@ -21,7 +21,7 @@ namespace AlgoLogistics.Tests.Algorithms
 		{
 			var input = new BFSAlgorithmInput
 			{
-				Root = BuildGraph(),
+				Root = BuildGraph(true),
 				NameToSearch = "Rivne"
 			};
 
@@ -44,7 +44,7 @@ namespace AlgoLogistics.Tests.Algorithms
 			Assert.IsFalse(result);
 		}
 
-		private Node BuildGraph()
+		private Node BuildGraph(bool loopEnabled = false)
 		{
 			var lviv = new Node { Name = "Lviv", Nodes = new List<Node>() };
 			var lutsk = new Node { Name = "Lutsk", Nodes = new List<Node>() };
@@ -56,8 +56,16 @@ namespace AlgoLogistics.Tests.Algorithms
 			var kamianets = new Node { Name = "Kamianets", Nodes = new List<Node>() };
 			var rivne = new Node { Name = "Rivne", Nodes = new List<Node>() };
 
-			lutsk.Nodes.Add(rivne);
-			ternopil.Nodes.Add(kamianets);
+			if (loopEnabled)
+			{
+				lutsk.Nodes.Add(lviv);
+				lutsk.Nodes.Add(rivne);
+			}
+			else
+			{
+				lutsk.Nodes.Add(rivne);
+				ternopil.Nodes.Add(kamianets);
+			}
 
 			return lviv;
 		}
