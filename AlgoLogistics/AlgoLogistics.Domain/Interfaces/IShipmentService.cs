@@ -8,6 +8,6 @@ namespace AlgoLogistics.Domain.Interfaces
 {
 	public interface IShipmentService
 	{
-		Task<List<Shipment>> GenerateShipments(IPackagesDataQuery query);
+		Task<List<Shipment>> GenerateShipments(List<Package> packages);
 	}
 }

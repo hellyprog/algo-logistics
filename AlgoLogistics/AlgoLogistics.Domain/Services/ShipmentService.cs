@@ -10,14 +10,11 @@ namespace AlgoLogistics.Domain.Services
 {
 	public class ShipmentService : IShipmentService
 	{
-		public async Task<List<Shipment>> GenerateShipments(IPackagesDataQuery query)
+		public async Task<List<Shipment>> GenerateShipments(List<Package> packages)
 		{
 			var shipmentList = new List<Shipment>();
 
-			var packages = query.GetPackages();
 			var groupedPackagesByFromCity = from package in packages
-											where package.Status == Enums.DeliveryStatus.NotSent
-											&& package.Created.Date == DateTime.Now.AddDays(-1).Date
 											group package by package.DeliveryDetails.FromCity into g
 											select new { g.Key, Grouped = g };
 

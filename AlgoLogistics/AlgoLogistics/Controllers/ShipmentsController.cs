@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AlgoLogistics.Application.Commands;
 using AlgoLogistics.Application.Common.Models;
+using AlgoLogistics.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,15 @@ namespace AlgoLogistics.Controllers
             _mediator = mediator;
         }
         
+        [HttpGet]
+        public async Task<IActionResult> GetShipments()
+        {
+            var query = new GetShipmentsQuery();
+            var result = await _mediator.Send(query);
+
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> GenerateShipments()
         {

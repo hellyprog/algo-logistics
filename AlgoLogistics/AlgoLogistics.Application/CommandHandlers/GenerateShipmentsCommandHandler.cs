@@ -1,8 +1,10 @@
 ﻿using AlgoLogistics.Application.Commands;
 using AlgoLogistics.Application.Common.Interfaces;
 using AlgoLogistics.Application.Common.Models;
+using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +18,23 @@ namespace AlgoLogistics.Application.CommandHandlers
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly IShipmentService _shipmentService;
-		private readonly IPackagesDataQuery _packagesDataQuery;
 
 		public GenerateShipmentsCommandHandler(
 			IApplicationDbContext applicationDbContext, 
-			IShipmentService shipmentService,
-			IPackagesDataQuery packagesDataQuery)
+			IShipmentService shipmentService)
 		{
 			_applicationDbContext = applicationDbContext;
 			_shipmentService = shipmentService;
-			_packagesDataQuery = packagesDataQuery;
 		}
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
-			var shipments = await _shipmentService.GenerateShipments(_packagesDataQuery);
+			var packages = await (from package in _applicationDbContext.Packages
+								   where package.Status == DeliveryStatus.NotSent
+								   && package.Created.Date == DateTime.Now.AddDays(-1).Date
+								   select package).ToListAsync();
+											
+			var shipments = await _shipmentService.GenerateShipments(packages);
 
 			_applicationDbContext.Shipments.AddRange(shipments);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
