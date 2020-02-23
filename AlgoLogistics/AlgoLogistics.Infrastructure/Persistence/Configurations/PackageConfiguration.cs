@@ -19,6 +19,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 
 			builder.HasKey(p => p.PackageId);
 			builder.Property(p => p.PackageId).HasColumnName("package_id");
+			builder.Property(p => p.InvoiceNo).HasColumnName("invoice_no");
 			builder.Property(p => p.Description).HasColumnName("description").IsRequired();
 			builder.Property(p => p.Price).HasColumnName("price").IsRequired();
 			builder.Property(p => p.DeliveryPrice).HasColumnName("delivery_price").IsRequired();

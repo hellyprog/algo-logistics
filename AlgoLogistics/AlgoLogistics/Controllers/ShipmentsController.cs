@@ -13,11 +13,11 @@ namespace AlgoLogistics.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ShipmentController : BaseAlgoLogisticsController
+    public class ShipmentsController : BaseAlgoLogisticsController
     {
         private readonly IMediator _mediator;
 
-        public ShipmentController(IMediator mediator)
+        public ShipmentsController(IMediator mediator)
         {
             _mediator = mediator;
         }

@@ -2,6 +2,7 @@
 using AlgoLogistics.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace AlgoLogistics.Domain.Entities
@@ -9,6 +10,7 @@ namespace AlgoLogistics.Domain.Entities
 	public class Package : AuditableEntity
 	{
 		public int PackageId { get; private set; }
+		public string InvoiceNo { get; private set; }
 		public string Description { get; private set; }
 		public decimal Price { get; private set; }
 		public decimal DeliveryPrice { get; private set; }
@@ -23,22 +25,32 @@ namespace AlgoLogistics.Domain.Entities
 
 		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails)
 		{
-			ValidateInput(description, price, physicalParameters, deliveryDetails);
+			Description = description ?? throw new ArgumentNullException(nameof(description));
+			DeliveryDetails = deliveryDetails ?? throw new ArgumentNullException(nameof(deliveryDetails));
+			PhysicalParameters = physicalParameters ?? throw new ArgumentNullException(nameof(physicalParameters));
+			Price = price > 0 ? price : throw new ArgumentException($"{nameof(price)} cannot be less than zero", nameof(price));
 
-			Description = description;
-			DeliveryDetails = deliveryDetails;
-			PhysicalParameters = physicalParameters;
 			Status = DeliveryStatus.NotSent;
-			Price = price;
 			DeliveryPrice = CalculateDeliveryPrice(SizeCategory, WeightCategory);
+			InvoiceNo = GenerateInvoiceNo();
 		}
 
-		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight)
+		private string GenerateInvoiceNo()
 		{
-			var price = (decimal)sizeCategory + (decimal)weight;
+			var currentTime = DateTime.Now.ToString();
+			var algorithm = SHA256.Create();
+			var invoiceNoBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(currentTime));
+			
+			var sb = new StringBuilder();
+			foreach (byte b in invoiceNoBytes)
+			{
+				sb.Append(b.ToString("X2"));
+			}
 
-			return price;
+			return sb.ToString();
 		}
+
+		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight) => (decimal)sizeCategory + (decimal)weight;
 
 		private SizeCategory GetSizeCategory(PhysicalParameters measure)
 		{
@@ -80,26 +92,6 @@ namespace AlgoLogistics.Domain.Entities
 			else
 			{
 				return WeightCategory.Heavy;
-			}
-		}
-
-		private void ValidateInput(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails)
-		{
-			if (string.IsNullOrEmpty(description))
-			{
-				throw new ArgumentException($"{nameof(description)} cannot be null or empty", nameof(description));
-			} 
-			else if (price <= 0)
-			{
-				throw new ArgumentException($"{nameof(price)} cannot be null or empty", nameof(price));
-			}
-			else if (physicalParameters == null)
-			{
-				throw new ArgumentException($"{nameof(physicalParameters)} cannot be null", nameof(physicalParameters));
-			}
-			else if (deliveryDetails == null)
-			{
-				throw new ArgumentException($"{nameof(deliveryDetails)} cannot be null", nameof(deliveryDetails));
 			}
 		}
 	}
