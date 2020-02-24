@@ -16,20 +16,17 @@ namespace AlgoLogistics.Controllers
     [ApiController]
     public class ShipmentsController : BaseAlgoLogisticsController
     {
-        private readonly IMediator _mediator;
         private readonly IShipmentService _shipmentService;
 
         public ShipmentsController(IMediator mediator, IShipmentService shipmentService)
         {
-            _mediator = mediator;
             _shipmentService = shipmentService;
         }
         
         [HttpGet]
         public async Task<IActionResult> GetShipments()
         {
-            var query = new GetShipmentsQuery();
-            var result = await _mediator.Send(query);
+            var result = await _shipmentService.GetShipmentsAsync();
 
             return StatusCode(StatusCodes.Status200OK, result);
         }
@@ -37,10 +34,11 @@ namespace AlgoLogistics.Controllers
         [HttpPost]
         public async Task<IActionResult> GenerateShipments()
         {
-            var command = new GenerateShipmentsCommand();
-            var result = await _mediator.Send(command);
+            var result = await _shipmentService.GenerateShipmentsAsync();
 
-            return StatusCode(StatusCodes.Status200OK, result);
+            return result.Success
+                ? StatusCode(StatusCodes.Status200OK, result)
+                : StatusCode(StatusCodes.Status400BadRequest, result);
         }
     }
 }

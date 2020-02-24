@@ -35,11 +35,14 @@ namespace AlgoLogistics.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreatePackage(CreatePackageCommand command)
         {
-            var result = await _mediator.Send(command);
+            var result = await _packageService.CreatePackageAsync(command);
 
-            return StatusCode(StatusCodes.Status201Created, result);
+            return result.Success 
+                ? StatusCode(StatusCodes.Status201Created, result)
+                : StatusCode(StatusCodes.Status400BadRequest, result);
         }
     }
 }

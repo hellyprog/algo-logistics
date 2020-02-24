@@ -1,13 +1,10 @@
-﻿using AlgoLogistics.Domain.Services.Common.Interfaces;
+﻿using AlgoLogistics.DataAccess;
+using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.Queries;
-using AlgoLogistics.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

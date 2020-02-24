@@ -8,4 +8,8 @@
     <PackageReference Include="MediatR" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AlgoLogistics.Domain.Services\AlgoLogistics.Domain.Services.csproj" />
+  </ItemGroup>
+
 </Project>

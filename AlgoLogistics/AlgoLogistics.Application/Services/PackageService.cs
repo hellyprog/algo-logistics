@@ -1,4 +1,6 @@
-﻿using AlgoLogistics.Domain.Entities;
+﻿using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.Queries;
 using MediatR;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Application.Services
 {
-	public class PackageService
+	public class PackageService : IPackageService
 	{
 		private readonly IMediator _mediator;
 
@@ -22,6 +24,13 @@ namespace AlgoLogistics.Application.Services
 		{
 			var query = new GetPackagesQuery();
 			var result = await _mediator.Send(query);
+
+			return result;
+		}
+
+		public async Task<ExecutionResult> CreatePackageAsync(CreatePackageCommand command)
+		{
+			var result = await _mediator.Send(command);
 
 			return result;
 		}

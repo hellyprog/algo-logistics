@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Queries;
@@ -38,6 +40,9 @@ namespace AlgoLogistics
 
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
 			services.AddSingleton(GetMapper());
+
+			services.AddTransient<IPackageService, PackageService>();
+			services.AddTransient<IShipmentService, ShipmentService>();
 
 			services.AddSwaggerGen(c =>
 			{
