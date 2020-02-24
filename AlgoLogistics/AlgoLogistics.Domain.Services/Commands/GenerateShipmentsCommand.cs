@@ -1,10 +1,10 @@
-﻿using AlgoLogistics.Application.Common.Models;
+﻿using AlgoLogistics.Domain.Services.Common.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Application.Commands
+namespace AlgoLogistics.Domain.Services.Commands
 {
 	public class GenerateShipmentsCommand : IRequest<ExecutionResult>
 	{

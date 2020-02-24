@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlgoLogistics.Application\AlgoLogistics.Application.csproj" />
+    <ProjectReference Include="..\AlgoLogistics.DataAccess\AlgoLogistics.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

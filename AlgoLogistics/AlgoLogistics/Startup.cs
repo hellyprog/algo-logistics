@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using AlgoLogistics.Application;
+using AlgoLogistics.Domain.Services;
+using AlgoLogistics.Domain.Services.Common;
+using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Infrastructure;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,9 +33,11 @@ namespace AlgoLogistics
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
-			services.AddApplication();
-			services.AddInfrastructure(Configuration);
 			services.AddHealthChecks();
+			services.AddInfrastructure(Configuration);
+
+			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
+			services.AddSingleton(GetMapper());
 
 			services.AddSwaggerGen(c =>
 			{
@@ -49,11 +54,8 @@ namespace AlgoLogistics
 
 			app.UseHealthChecks("/health");
 			app.UseHttpsRedirection();
-
 			app.UseRouting();
-
 			app.UseAuthorization();
-
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
@@ -64,6 +66,16 @@ namespace AlgoLogistics
 			{
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "AlgoLogistics API v1");
 			});
+		}
+
+		private static IMapper GetMapper()
+		{
+			var mappingConfig = new MapperConfiguration(mc =>
+			{
+				mc.AddProfile(new MappingProfile());
+			});
+
+			return mappingConfig.CreateMapper();
 		}
 	}
 }

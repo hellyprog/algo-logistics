@@ -1,6 +1,6 @@
-﻿using AlgoLogistics.Application.Common.Interfaces;
-using AlgoLogistics.Application.Common.Models;
-using AlgoLogistics.Application.Queries;
+﻿using AlgoLogistics.Domain.Services.Common.Interfaces;
+using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.QueryHandlers
+namespace AlgoLogistics.Domain.Services.QueryHandlers
 {
 	public class GetPackagesQueryHandler : IRequestHandler<GetPackagesQuery, ExecutionResult<List<Package>>>
 	{

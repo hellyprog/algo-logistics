@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Application.DTOs
+namespace AlgoLogistics.Domain.Services.DTOs
 {
 	public class DeliveryDetailsDTO
 	{

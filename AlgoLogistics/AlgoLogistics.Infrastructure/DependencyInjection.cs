@@ -1,14 +1,8 @@
-﻿using AlgoLogistics.Infrastructure.Persistence;
+﻿using AlgoLogistics.DataAccess;
+using AlgoLogistics.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using AlgoLogistics.Application.Common.Interfaces;
 
 namespace AlgoLogistics.Infrastructure
 {

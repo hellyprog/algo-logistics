@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Application.Common.Models
+namespace AlgoLogistics.Domain.Services.Common.Models
 {
 	public class ExecutionResult<T> : ExecutionResult
 	{

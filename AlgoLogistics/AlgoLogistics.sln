@@ -13,9 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.ConsoleTester
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Domain", "AlgoLogistics.Domain\AlgoLogistics.Domain.csproj", "{1448BD66-4C48-4103-B183-A33865EAF824}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application", "AlgoLogistics.Application\AlgoLogistics.Application.csproj", "{D33FE7F9-841A-4207-99EF-1715735689E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Domain.Services", "AlgoLogistics.Domain.Services\AlgoLogistics.Domain.Services.csproj", "{D33FE7F9-841A-4207-99EF-1715735689E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Infrastructure", "AlgoLogistics.Infrastructure\AlgoLogistics.Infrastructure.csproj", "{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.DataAccess", "AlgoLogistics.DataAccess\AlgoLogistics.DataAccess.csproj", "{212A107B-1788-4258-BE15-7ED86931B32B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Application", "AlgoLogistics.Application\AlgoLogistics.Application.csproj", "{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6464C2-96D9-4158-97BE-8D8BA896A2AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212A107B-1788-4258-BE15-7ED86931B32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212A107B-1788-4258-BE15-7ED86931B32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212A107B-1788-4258-BE15-7ED86931B32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212A107B-1788-4258-BE15-7ED86931B32B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

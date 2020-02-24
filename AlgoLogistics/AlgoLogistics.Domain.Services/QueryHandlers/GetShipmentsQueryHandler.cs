@@ -1,16 +1,14 @@
-﻿using AlgoLogistics.Application.Common.Interfaces;
-using AlgoLogistics.Application.Common.Models;
-using AlgoLogistics.Application.Queries;
+﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.QueryHandlers
+namespace AlgoLogistics.Domain.Services.QueryHandlers
 {
 	public class GetShipmentsQueryHandler : IRequestHandler<GetShipmentsQuery, ExecutionResult<List<Shipment>>>
 	{

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.Common.Interfaces
+namespace AlgoLogistics.DataAccess
 {
 	public interface IApplicationDbContext
 	{

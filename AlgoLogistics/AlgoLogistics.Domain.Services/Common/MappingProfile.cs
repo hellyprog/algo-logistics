@@ -1,11 +1,11 @@
-﻿using AlgoLogistics.Application.DTOs;
+﻿using AlgoLogistics.Domain.Services.DTOs;
 using AlgoLogistics.Domain.Entities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Application.Common
+namespace AlgoLogistics.Domain.Services.Common
 {
 	public class MappingProfile : Profile
 	{

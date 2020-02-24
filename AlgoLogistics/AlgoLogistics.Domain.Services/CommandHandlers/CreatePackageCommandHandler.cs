@@ -1,16 +1,13 @@
-﻿using AlgoLogistics.Application.Commands;
-using AlgoLogistics.Application.Common.Interfaces;
-using AlgoLogistics.Application.Common.Models;
+﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.Commands;
+using AlgoLogistics.Domain.Services.Common.Models;
 using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.CommandHandlers
+namespace AlgoLogistics.Domain.Services.CommandHandlers
 {
 	public class CreatePackageCommandHandler : IRequestHandler<CreatePackageCommand, ExecutionResult>
 	{

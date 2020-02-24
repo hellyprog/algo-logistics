@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AlgoLogistics.Application.Commands;
-using AlgoLogistics.Application.Common.Models;
-using AlgoLogistics.Application.Queries;
+using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Domain.Services.Commands;
+using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,12 @@ namespace AlgoLogistics.Controllers
     public class ShipmentsController : BaseAlgoLogisticsController
     {
         private readonly IMediator _mediator;
+        private readonly IShipmentService _shipmentService;
 
-        public ShipmentsController(IMediator mediator)
+        public ShipmentsController(IMediator mediator, IShipmentService shipmentService)
         {
             _mediator = mediator;
+            _shipmentService = shipmentService;
         }
         
         [HttpGet]

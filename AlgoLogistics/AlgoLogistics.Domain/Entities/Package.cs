@@ -35,6 +35,18 @@ namespace AlgoLogistics.Domain.Entities
 			InvoiceNo = GenerateInvoiceNo();
 		}
 
+		public void ProcessStatus()
+		{
+			Status = Status switch
+			{
+				DeliveryStatus.NotSent => DeliveryStatus.OnTheRoad,
+				DeliveryStatus.OnTheRoad => DeliveryStatus.Arrived,
+				DeliveryStatus.Arrived => DeliveryStatus.Received,
+				DeliveryStatus.Received => DeliveryStatus.Received,
+				_ => throw new ArgumentException(message: "Invalid emun value", nameof(Status))
+			};
+		}
+
 		private string GenerateInvoiceNo()
 		{
 			var currentTime = DateTime.Now.ToString();

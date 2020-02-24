@@ -1,11 +1,11 @@
-﻿using AlgoLogistics.Application.Common.Models;
+﻿using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Application.Queries
+namespace AlgoLogistics.Domain.Services.Queries
 {
 	public class GetPackagesQuery : IRequest<ExecutionResult<List<Package>>>
 	{

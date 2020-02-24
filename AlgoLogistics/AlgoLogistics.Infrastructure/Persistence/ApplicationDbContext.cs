@@ -1,17 +1,15 @@
-﻿using AlgoLogistics.Application.Common.Interfaces;
+﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Infrastructure.Persistence
 {
-	public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : DbContext, IApplicationDbContext
 	{
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{

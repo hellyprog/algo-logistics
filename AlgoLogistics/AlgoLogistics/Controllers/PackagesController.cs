@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AlgoLogistics.Application.Commands;
-using AlgoLogistics.Application.Common.Models;
-using AlgoLogistics.Application.Queries;
+using AlgoLogistics.Domain.Services.Commands;
+using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AlgoLogistics.Application.Interfaces;
 
 namespace AlgoLogistics.Controllers
 {
@@ -16,19 +17,18 @@ namespace AlgoLogistics.Controllers
     [ApiController]
     public class PackagesController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IPackageService _packageService;
 
-        public PackagesController(IMediator mediator)
+        public PackagesController(IPackageService packageService)
         {
-            _mediator = mediator;
+            _packageService = packageService;
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPackages()
         {
-            var query = new GetPackagesQuery();
-            var result = await _mediator.Send(query);
+            var result = await _packageService.GetPackagesAsync();
 
             return StatusCode(StatusCodes.Status200OK, result);
         }
