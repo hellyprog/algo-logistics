@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.Queries;
@@ -24,6 +25,7 @@ namespace AlgoLogistics.Controllers
         }
         
         [HttpGet]
+        [ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetShipments()
         {
             var result = await _shipmentService.GetShipmentsAsync();
@@ -32,6 +34,8 @@ namespace AlgoLogistics.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GenerateShipments()
         {
             var result = await _shipmentService.GenerateShipmentsAsync();
