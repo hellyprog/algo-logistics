@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Domain.Algorithms.BFS;
+﻿using AlgoLogistics.Algorithms.BFS;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Domain.Algorithms.SelectionSort;
+﻿using AlgoLogistics.Algorithms.SelectionSort;
 using NUnit.Framework;
 using System;
 using System.Linq;

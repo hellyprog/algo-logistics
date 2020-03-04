@@ -1,0 +1,212 @@
+[
+  {
+    "city": "Lviv",
+    "conections": [
+      {
+        "city": "Lutsk",
+        "distance": 150
+      },
+      {
+        "city": "Ternopil",
+        "distance": 133
+      },
+      {
+        "city": "Uzgorod",
+        "distance": 267
+      },
+      {
+        "city": "Ivano-Frankivsk",
+        "distance": 132
+      },
+      {
+        "city": "Rivne",
+        "distance": 210
+      }
+    ]
+  },
+  {
+    "city": "Uzgorod",
+    "connections": [
+      {
+        "city": "Lviv",
+        "distance": 267
+      },
+      {
+        "city": "Ivano-Frankivsk",
+        "distance": 293
+      }
+    ]
+  },
+  {
+    "city": "Lutsk",
+    "connections": [
+      {
+        "city": "Lviv",
+        "distance": 150
+      },
+      {
+        "city": "Rivne",
+        "distance": 72
+      },
+      {
+        "city": "Ternopil",
+        "distance": 167
+      }
+    ]
+  },
+  {
+    "city": "Rivne",
+    "conections": [
+      {
+        "city": "Lutsk",
+        "distance": 72
+      },
+      {
+        "city": "Ternopil",
+        "distance": 159
+      },
+      {
+        "city": "Lviv",
+        "distance": 210
+      },
+      {
+        "city": "Zhytomyr",
+        "distance": 188
+      },
+      {
+        "city": "Khmelnytskyi",
+        "distance": 194
+      }
+    ]
+  },
+  {
+    "city": "Ternopil",
+    "conections": [
+      {
+        "city": "Lutsk",
+        "distance": 167
+      },
+      {
+        "city": "Lviv",
+        "distance": 159
+      },
+      {
+        "city": "Rivne",
+        "distance": 159
+      },
+      {
+        "city": "Ivano-Frankivsk",
+        "distance": 134
+      },
+      {
+        "city": "Khmelnytskyi",
+        "distance": 111
+      },
+      {
+        "city": "Chernivtsi",
+        "distance": 170
+      }
+    ]
+  },
+  {
+    "city": "Ivano-Frankivsk",
+    "conections": [
+      {
+        "city": "Chernivtsi",
+        "distance": 137
+      },
+      {
+        "city": "Lviv",
+        "distance": 132
+      },
+      {
+        "city": "Uzgorod",
+        "distance": 293
+      },
+      {
+        "city": "Ternopil",
+        "distance": 134
+      }
+    ]
+  },
+  {
+    "city": "Chernivtsi",
+    "conections": [
+      {
+        "city": "Ivano-Frankivsk",
+        "distance": 137
+      },
+      {
+        "city": "Khmelnitskyi",
+        "distance": 187
+      },
+      {
+        "city": "Vinnytsia",
+        "distance": 270
+      },
+      {
+        "city": "Ternopil",
+        "distance": 170
+      }
+    ]
+  },
+  {
+    "city": "Khmelnitskyi",
+    "conections": [
+      {
+        "city": "Rivne",
+        "distance": 194
+      },
+      {
+        "city": "Chernivtsi",
+        "distance": 187
+      },
+      {
+        "city": "Vinnytsia",
+        "distance": 119
+      },
+      {
+        "city": "Ternopil",
+        "distance": 111
+      },
+      {
+        "city": "Zhytomyr",
+        "distance": 183
+      }
+    ]
+  },
+  {
+    "city": "Zhytomyr",
+    "conections": [
+      {
+        "city": "Rivne",
+        "distance": 188
+      },
+      {
+        "city": "Khmelnitskyi",
+        "distance": 183
+      },
+      {
+        "city": "Vinnytsia",
+        "distance": 127
+      }
+    ]
+  },
+  {
+    "city": "Vinnytsia",
+    "conections": [
+      {
+        "city": "Chernivtsi",
+        "distance": 270
+      },
+      {
+        "city": "Khmelnitskyi",
+        "distance": 119
+      },
+      {
+        "city": "Zhytomyr",
+        "distance": 127
+      }
+    ]
+  }
+]

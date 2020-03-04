@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Domain.Algorithms.QuickSort;
+﻿using AlgoLogistics.Algorithms.QuickSort;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

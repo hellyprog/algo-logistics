@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Domain.Algorithms.SelectionSort
+namespace AlgoLogistics.Algorithms.SelectionSort
 {
 	public class SelectionSortAlgorithm : IAlgorithm<int[], int[]>
 	{ 

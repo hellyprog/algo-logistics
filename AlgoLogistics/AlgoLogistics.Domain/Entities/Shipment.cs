@@ -26,8 +26,10 @@ namespace AlgoLogistics.Domain.Entities
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages)
 		{
-			var shipment = new Shipment(packages);
-			shipment.Route = await BuildRoute(packages);
+			var shipment = new Shipment(packages)
+			{
+				Route = await BuildRoute(packages)
+			};
 
 			return shipment;
 		}

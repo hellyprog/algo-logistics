@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Domain.Algorithms.BFS
+namespace AlgoLogistics.Algorithms.BFS
 {
 	public class Node
 	{

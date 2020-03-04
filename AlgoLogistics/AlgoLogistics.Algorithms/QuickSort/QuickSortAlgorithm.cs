@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Domain.Algorithms.QuickSort
+namespace AlgoLogistics.Algorithms.QuickSort
 {
 	public class QuickSortAlgorithm : IAlgorithm<int[], int[]>
 	{

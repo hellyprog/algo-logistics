@@ -1,8 +1,8 @@
-﻿using AlgoLogistics.Domain.Algorithms;
-using AlgoLogistics.Domain.Algorithms.BFS;
-using AlgoLogistics.Domain.Algorithms.BinarySearch;
-using AlgoLogistics.Domain.Algorithms.QuickSort;
-using AlgoLogistics.Domain.Algorithms.SelectionSort;
+﻿using AlgoLogistics.Algorithms;
+using AlgoLogistics.Algorithms.BFS;
+using AlgoLogistics.Algorithms.BinarySearch;
+using AlgoLogistics.Algorithms.QuickSort;
+using AlgoLogistics.Algorithms.SelectionSort;
 using System;
 using System.Linq;
 using System.Threading;

@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Domain.Algorithms.Dijkstra;
+﻿using AlgoLogistics.Algorithms.Dijkstra;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

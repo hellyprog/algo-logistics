@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace AlgoLogistics.Domain.Algorithms
+namespace AlgoLogistics.Algorithms
 {
 	public class MeasurableAlgorithm<TInput, TResult> : IAlgorithm<TInput, TResult>
 	{

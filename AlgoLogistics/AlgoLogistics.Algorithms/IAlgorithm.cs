@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlgoLogistics.Domain.Algorithms
+namespace AlgoLogistics.Algorithms
 {
 	public interface IAlgorithm<TInput, TResult>
 	{
