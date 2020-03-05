@@ -1,6 +1,7 @@
 ﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Enums;
+using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using MediatR;
@@ -16,10 +17,14 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 	public class GenerateShipmentsCommandHandler : IRequestHandler<GenerateShipmentsCommand, ExecutionResult>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
+		private readonly ICityNetworkProvider _cityNetworkProvider;
 
-		public GenerateShipmentsCommandHandler(IApplicationDbContext applicationDbContext)
+		public GenerateShipmentsCommandHandler(
+			IApplicationDbContext applicationDbContext,
+			ICityNetworkProvider cityNetworkProvider)
 		{
 			_applicationDbContext = applicationDbContext;
+			_cityNetworkProvider = cityNetworkProvider;
 		}
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
@@ -43,7 +48,7 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 				foreach (var package in groupedPackagesByToCity)
 				{
-					var shipment = await Shipment.CreateAsync(package.Grouped.ToList());
+					var shipment = await Shipment.CreateAsync(package.Grouped.ToList(), _cityNetworkProvider);
 					shipmentList.Add(shipment);
 				}
 			}

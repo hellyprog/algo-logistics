@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AlgoLogistics.Application.Integration.Services;
 using AlgoLogistics.Application.Interfaces;
 using AlgoLogistics.Application.Services;
+using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Queries;
@@ -43,6 +45,7 @@ namespace AlgoLogistics
 
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
+			services.AddTransient<ICityNetworkProvider, CityNetworkProvider>();
 
 			services.AddSwaggerGen(c =>
 			{
