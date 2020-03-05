@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.DataAccess", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application", "AlgoLogistics.Application\AlgoLogistics.Application.csproj", "{97BDB2CF-D4AB-40B0-B4D7-25CD9ECCE6D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application.IntegrationServices", "AlgoLogistics.Application.IntegrationServices\AlgoLogistics.Application.IntegrationServices.csproj", "{BF772F9A-5FF9-4CCD-8405-0EA9C81E8D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application.Integration", "AlgoLogistics.Application.IntegrationServices\AlgoLogistics.Application.Integration.csproj", "{BF772F9A-5FF9-4CCD-8405-0EA9C81E8D2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,6 +3,7 @@ using AlgoLogistics.Algorithms.BFS;
 using AlgoLogistics.Algorithms.BinarySearch;
 using AlgoLogistics.Algorithms.QuickSort;
 using AlgoLogistics.Algorithms.SelectionSort;
+using AlgoLogistics.Application.Integration.Services;
 using System;
 using System.Linq;
 using System.Threading;
@@ -12,13 +13,10 @@ namespace AlgoLogistics.ConsoleTester
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static async Task Main(string[] args)
 		{
-			var alg = new BFSAlgorithm();
-
-			var result = alg.Execute(new BFSAlgorithmInput { NameToSearch = "Kamianets" });
-
-			Console.WriteLine(result);
+			var provider = new CityNetworkProvider();
+			var result = await provider.GetCityNetwork();
 			Console.ReadKey();
 		}
 	}

@@ -1,210 +1,210 @@
 [
   {
-    "city": "Lviv",
-    "conections": [
+    "name": "Lviv",
+    "connections": [
       {
-        "city": "Lutsk",
+        "name": "Lutsk",
         "distance": 150
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 133
       },
       {
-        "city": "Uzgorod",
+        "name": "Uzgorod",
         "distance": 267
       },
       {
-        "city": "Ivano-Frankivsk",
+        "name": "Ivano-Frankivsk",
         "distance": 132
       },
       {
-        "city": "Rivne",
+        "name": "Rivne",
         "distance": 210
       }
     ]
   },
   {
-    "city": "Uzgorod",
+    "name": "Uzgorod",
     "connections": [
       {
-        "city": "Lviv",
+        "name": "Lviv",
         "distance": 267
       },
       {
-        "city": "Ivano-Frankivsk",
+        "name": "Ivano-Frankivsk",
         "distance": 293
       }
     ]
   },
   {
-    "city": "Lutsk",
+    "name": "Lutsk",
     "connections": [
       {
-        "city": "Lviv",
+        "name": "Lviv",
         "distance": 150
       },
       {
-        "city": "Rivne",
+        "name": "Rivne",
         "distance": 72
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 167
       }
     ]
   },
   {
-    "city": "Rivne",
+    "name": "Rivne",
     "conections": [
       {
-        "city": "Lutsk",
+        "name": "Lutsk",
         "distance": 72
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 159
       },
       {
-        "city": "Lviv",
+        "name": "Lviv",
         "distance": 210
       },
       {
-        "city": "Zhytomyr",
+        "name": "Zhytomyr",
         "distance": 188
       },
       {
-        "city": "Khmelnytskyi",
+        "name": "Khmelnytskyi",
         "distance": 194
       }
     ]
   },
   {
-    "city": "Ternopil",
+    "name": "Ternopil",
     "conections": [
       {
-        "city": "Lutsk",
+        "name": "Lutsk",
         "distance": 167
       },
       {
-        "city": "Lviv",
+        "name": "Lviv",
         "distance": 159
       },
       {
-        "city": "Rivne",
+        "name": "Rivne",
         "distance": 159
       },
       {
-        "city": "Ivano-Frankivsk",
+        "name": "Ivano-Frankivsk",
         "distance": 134
       },
       {
-        "city": "Khmelnytskyi",
+        "name": "Khmelnytskyi",
         "distance": 111
       },
       {
-        "city": "Chernivtsi",
+        "name": "Chernivtsi",
         "distance": 170
       }
     ]
   },
   {
-    "city": "Ivano-Frankivsk",
+    "name": "Ivano-Frankivsk",
     "conections": [
       {
-        "city": "Chernivtsi",
+        "name": "Chernivtsi",
         "distance": 137
       },
       {
-        "city": "Lviv",
+        "name": "Lviv",
         "distance": 132
       },
       {
-        "city": "Uzgorod",
+        "name": "Uzgorod",
         "distance": 293
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 134
       }
     ]
   },
   {
-    "city": "Chernivtsi",
+    "name": "Chernivtsi",
     "conections": [
       {
-        "city": "Ivano-Frankivsk",
+        "name": "Ivano-Frankivsk",
         "distance": 137
       },
       {
-        "city": "Khmelnitskyi",
+        "name": "Khmelnitskyi",
         "distance": 187
       },
       {
-        "city": "Vinnytsia",
+        "name": "Vinnytsia",
         "distance": 270
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 170
       }
     ]
   },
   {
-    "city": "Khmelnitskyi",
+    "name": "Khmelnitskyi",
     "conections": [
       {
-        "city": "Rivne",
+        "name": "Rivne",
         "distance": 194
       },
       {
-        "city": "Chernivtsi",
+        "name": "Chernivtsi",
         "distance": 187
       },
       {
-        "city": "Vinnytsia",
+        "name": "Vinnytsia",
         "distance": 119
       },
       {
-        "city": "Ternopil",
+        "name": "Ternopil",
         "distance": 111
       },
       {
-        "city": "Zhytomyr",
+        "name": "Zhytomyr",
         "distance": 183
       }
     ]
   },
   {
-    "city": "Zhytomyr",
+    "name": "Zhytomyr",
     "conections": [
       {
-        "city": "Rivne",
+        "name": "Rivne",
         "distance": 188
       },
       {
-        "city": "Khmelnitskyi",
+        "name": "Khmelnitskyi",
         "distance": 183
       },
       {
-        "city": "Vinnytsia",
+        "name": "Vinnytsia",
         "distance": 127
       }
     ]
   },
   {
-    "city": "Vinnytsia",
+    "name": "Vinnytsia",
     "conections": [
       {
-        "city": "Chernivtsi",
+        "name": "Chernivtsi",
         "distance": 270
       },
       {
-        "city": "Khmelnitskyi",
+        "name": "Khmelnitskyi",
         "distance": 119
       },
       {
-        "city": "Zhytomyr",
+        "name": "Zhytomyr",
         "distance": 127
       }
     ]
