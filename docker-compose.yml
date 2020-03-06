@@ -1,0 +1,6 @@
+version: '3'
+services:
+  algo-logistics:
+    build: ./AlgoLogistics
+    ports:
+      - 5005:80
