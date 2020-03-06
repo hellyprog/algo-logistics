@@ -15,8 +15,6 @@ namespace AlgoLogistics.ConsoleTester
 	{
 		static async Task Main(string[] args)
 		{
-			var provider = new CityNetworkProvider();
-			var result = await provider.GetCityNetwork();
 			Console.ReadKey();
 		}
 	}
