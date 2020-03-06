@@ -1,6 +1,7 @@
 version: '3'
 services:
-  algo-logistics:
+  algo-logistics-service:
     build: ./AlgoLogistics
+    image: devdockerid/algo-logistics:latest
     ports:
       - 5005:80
