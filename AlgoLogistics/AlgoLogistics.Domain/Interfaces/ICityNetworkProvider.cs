@@ -8,6 +8,6 @@ namespace AlgoLogistics.Domain.Interfaces
 {
 	public interface ICityNetworkProvider
 	{
-		Task<List<City>> GetCityNetwork();
+		Task<List<City>> GetCityNetworkAsync();
 	}
 }

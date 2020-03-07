@@ -11,7 +11,7 @@ namespace AlgoLogistics.Application.Integration.Services
 {
 	public class CityNetworkProvider : ICityNetworkProvider
 	{
-		public async Task<List<City>> GetCityNetwork()
+		public async Task<List<City>> GetCityNetworkAsync()
 		{
 			using var sr = new StreamReader("cities-network.json");
 			var json = await sr.ReadToEndAsync();

@@ -35,11 +35,18 @@ namespace AlgoLogistics.Domain.Entities
 			return shipment;
 		}
 
-		private static Task<Route> BuildRoute(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
+		private static async Task<Route> BuildRoute(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;
-			var cityNetwork = cityNetworkProvider.GetCityNetwork();
+			var cityNetwork = await cityNetworkProvider.GetCityNetworkAsync();
+			var graph = ConvertToGraph(cityNetwork);
+			throw new NotImplementedException();
+		}
+
+		private static Dictionary<string, Dictionary<string, int>> ConvertToGraph(List<City> cityNetwork)
+		{
+			var graphDictionary = new Dictionary<string, Dictionary<string, int>>();
 			throw new NotImplementedException();
 		}
 	}
