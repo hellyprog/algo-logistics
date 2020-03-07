@@ -39,6 +39,7 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;
+			var cityNetwork = cityNetworkProvider.GetCityNetwork();
 			throw new NotImplementedException();
 		}
 	}
