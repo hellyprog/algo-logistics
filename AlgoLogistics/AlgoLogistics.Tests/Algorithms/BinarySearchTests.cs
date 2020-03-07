@@ -21,7 +21,7 @@ namespace AlgoLogistics.Tests.Algorithms
 		{
 			var testArray = new int[] { 1, 9, 15, 72 };
 
-			var index = _sut.Execute(new BinarySearchAlgorithmInput
+			var index = _sut.Search(new BinarySearchAlgorithmInput
 			{
 				Source = testArray,
 				ValueToSearch = 15
@@ -35,7 +35,7 @@ namespace AlgoLogistics.Tests.Algorithms
 		{
 			var testArray = new int[] { 1, 9, 3, 72, 43 };
 
-			var index = _sut.Execute(new BinarySearchAlgorithmInput
+			var index = _sut.Search(new BinarySearchAlgorithmInput
 			{
 				Source = testArray,
 				ValueToSearch = 3
@@ -49,7 +49,7 @@ namespace AlgoLogistics.Tests.Algorithms
 		{
 			var testArray = new int[] { 1, 9, 15, 72 };
 
-			var index = _sut.Execute(new BinarySearchAlgorithmInput
+			var index = _sut.Search(new BinarySearchAlgorithmInput
 			{
 				Source = testArray,
 				ValueToSearch = 13

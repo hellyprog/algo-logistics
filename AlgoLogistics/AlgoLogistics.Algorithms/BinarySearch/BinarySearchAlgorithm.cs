@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms.BinarySearch
 {
-	public class BinarySearchAlgorithm : IAlgorithm<BinarySearchAlgorithmInput, int?>
+	public class BinarySearchAlgorithm : ISearchAlgorithm<BinarySearchAlgorithmInput, int?>
 	{
-		public int? Execute(BinarySearchAlgorithmInput input)
+		public int? Search(BinarySearchAlgorithmInput input)
 		{
 			var startIndex = 0;
 			var endIndex = input.Source.Length - 1;

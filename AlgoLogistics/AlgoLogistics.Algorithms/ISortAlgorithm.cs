@@ -4,7 +4,8 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms
 {
-	public interface IAlgorithm
+	public interface ISortAlgorithm<TInput, TResult> : IAlgorithm
 	{
+		TResult Sort(TInput input);
 	}
 }

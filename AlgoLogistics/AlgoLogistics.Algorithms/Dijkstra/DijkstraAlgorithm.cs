@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms.Dijkstra
 {
-	public class DijkstraAlgorithm : IAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput>
+	public class DijkstraAlgorithm : ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput>
 	{
-		public DijkstraAlgorithmOutput Execute(DijkstraAlgorithmInput input)
+		public DijkstraAlgorithmOutput Search(DijkstraAlgorithmInput input)
 		{
 			throw new NotImplementedException();
 		}

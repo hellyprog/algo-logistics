@@ -25,7 +25,7 @@ namespace AlgoLogistics.Tests.Algorithms
 				NameToSearch = "Rivne"
 			};
 
-			var result = _sut.Execute(input);
+			var result = _sut.Search(input);
 
 			Assert.IsTrue(result);
 		}
@@ -39,7 +39,7 @@ namespace AlgoLogistics.Tests.Algorithms
 				NameToSearch = "Kyiv"
 			};
 
-			var result = _sut.Execute(input);
+			var result = _sut.Search(input);
 
 			Assert.IsFalse(result);
 		}

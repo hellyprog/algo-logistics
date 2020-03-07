@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms.SelectionSort
 {
-	public class SelectionSortAlgorithm : IAlgorithm<int[], int[]>
+	public class SelectionSortAlgorithm : ISortAlgorithm<int[], int[]>
 	{ 
-		public int[] Execute(int[] input)
+		public int[] Sort(int[] input)
 		{
 			for (int i = 0; i < input.Length - 1; i++)
 			{

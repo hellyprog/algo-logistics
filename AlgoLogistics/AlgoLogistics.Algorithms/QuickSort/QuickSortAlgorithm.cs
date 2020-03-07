@@ -4,9 +4,9 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms.QuickSort
 {
-	public class QuickSortAlgorithm : IAlgorithm<int[], int[]>
+	public class QuickSortAlgorithm : ISortAlgorithm<int[], int[]>
 	{
-		public int[] Execute(int[] input)
+		public int[] Sort(int[] input)
 		{
 			if (input.Length < 2)
 			{
@@ -34,8 +34,8 @@ namespace AlgoLogistics.Algorithms.QuickSort
 					}
 				}
 
-				var sortedLess = Execute(lessThanPivot.ToArray());
-				var sortedGreater = Execute(greaterThanPivot.ToArray());
+				var sortedLess = Sort(lessThanPivot.ToArray());
+				var sortedGreater = Sort(greaterThanPivot.ToArray());
 				var resultList = new List<int>();
 				resultList.AddRange(sortedLess);
 				resultList.Add(pivot);

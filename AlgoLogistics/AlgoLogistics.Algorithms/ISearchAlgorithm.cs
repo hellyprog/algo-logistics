@@ -4,7 +4,8 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms
 {
-	public interface IAlgorithm
+	public interface ISearchAlgorithm<TInput, TResult> : IAlgorithm
 	{
+		TResult Search(TInput input);
 	}
 }

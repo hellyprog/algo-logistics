@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AlgoLogistics.Algorithms\AlgoLogistics.Algorithms.csproj" />
+  </ItemGroup>
+
 </Project>

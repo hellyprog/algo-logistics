@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AlgoLogistics.Algorithms.BFS
 {
-	public class BFSAlgorithm : IAlgorithm<BFSAlgorithmInput, bool>
+	public class BFSAlgorithm : ISearchAlgorithm<BFSAlgorithmInput, bool>
 	{
-		public bool Execute(BFSAlgorithmInput input)
+		public bool Search(BFSAlgorithmInput input)
 		{
 			var queue = new Queue<Node>();
 			var checkedNodes = new HashSet<Node>();

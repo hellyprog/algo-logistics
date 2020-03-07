@@ -44,10 +44,19 @@ namespace AlgoLogistics.Domain.Entities
 			throw new NotImplementedException();
 		}
 
-		private static Dictionary<string, Dictionary<string, int>> ConvertToGraph(List<City> cityNetwork)
+		private static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
 		{
-			var graphDictionary = new Dictionary<string, Dictionary<string, int>>();
-			throw new NotImplementedException();
+			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
+
+			foreach (var city in cityNetwork)
+			{
+				var key = city.Name;
+				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
+
+				graphDictionary.Add(key, value);
+			}
+
+			return graphDictionary;
 		}
 	}
 }
