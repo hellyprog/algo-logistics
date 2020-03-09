@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AlgoLogistics.Algorithms;
+using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Application.Integration.Services;
 using AlgoLogistics.Application.Interfaces;
 using AlgoLogistics.Application.Services;
@@ -42,6 +44,8 @@ namespace AlgoLogistics
 
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
 			services.AddSingleton(GetMapper());
+
+			services.AddTransient<ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput>, DijkstraAlgorithm>();
 
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();

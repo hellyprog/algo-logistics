@@ -13,7 +13,7 @@ namespace AlgoLogistics.Application.Integration.Services
 	{
 		public async Task<List<City>> GetCityNetworkAsync()
 		{
-			using var sr = new StreamReader("cities-network.json");
+			using var sr = new StreamReader(@"cities-network.json");
 			var json = await sr.ReadToEndAsync();
 
 			var network = JsonConvert.DeserializeObject<List<City>>(json);

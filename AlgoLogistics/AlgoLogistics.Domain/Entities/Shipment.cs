@@ -1,4 +1,5 @@
-﻿using AlgoLogistics.Domain.Common;
+﻿using AlgoLogistics.Algorithms;
+using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,23 @@ namespace AlgoLogistics.Domain.Entities
 			_packages = packages.ToHashSet();
 		}
 
-		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
+		public static async Task<Shipment> CreateAsync<TAlgorithmInput, TAlgorithmOutput>(
+			List<Package> packages, 
+			ICityNetworkProvider cityNetworkProvider, 
+			ISearchAlgorithm<TAlgorithmInput, TAlgorithmOutput> searchAlgorithm)
 		{
 			var shipment = new Shipment(packages)
 			{
-				Route = await BuildRoute(packages, cityNetworkProvider)
+				Route = await BuildRoute(packages, cityNetworkProvider, searchAlgorithm)
 			};
 
 			return shipment;
 		}
 
-		private static async Task<Route> BuildRoute(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
+		private static async Task<Route> BuildRoute<TAlgorithmInput, TAlgorithmOutput>(
+			List<Package> packages, 
+			ICityNetworkProvider cityNetworkProvider, 
+			ISearchAlgorithm<TAlgorithmInput, TAlgorithmOutput> searchAlgorithm)
 		{
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;

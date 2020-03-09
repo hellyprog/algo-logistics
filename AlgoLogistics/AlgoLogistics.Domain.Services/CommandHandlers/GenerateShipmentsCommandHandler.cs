@@ -1,4 +1,6 @@
-﻿using AlgoLogistics.DataAccess;
+﻿using AlgoLogistics.Algorithms;
+using AlgoLogistics.Algorithms.Dijkstra;
+using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
@@ -18,13 +20,16 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly ICityNetworkProvider _cityNetworkProvider;
+		private readonly ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput> _searchAlgorithm;
 
 		public GenerateShipmentsCommandHandler(
 			IApplicationDbContext applicationDbContext,
-			ICityNetworkProvider cityNetworkProvider)
+			ICityNetworkProvider cityNetworkProvider,
+			ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput> searchAlgorithm)
 		{
 			_applicationDbContext = applicationDbContext;
 			_cityNetworkProvider = cityNetworkProvider;
+			_searchAlgorithm = searchAlgorithm;
 		}
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
@@ -48,7 +53,7 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 				foreach (var package in groupedPackagesByToCity)
 				{
-					var shipment = await Shipment.CreateAsync(package.Grouped.ToList(), _cityNetworkProvider);
+					var shipment = await Shipment.CreateAsync(package.Grouped.ToList(), _cityNetworkProvider, _searchAlgorithm);
 					shipmentList.Add(shipment);
 				}
 			}

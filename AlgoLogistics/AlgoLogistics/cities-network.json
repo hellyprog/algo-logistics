@@ -56,7 +56,7 @@
   },
   {
     "name": "Rivne",
-    "conections": [
+    "connections": [
       {
         "name": "Lutsk",
         "distance": 72
@@ -81,7 +81,7 @@
   },
   {
     "name": "Ternopil",
-    "conections": [
+    "connections": [
       {
         "name": "Lutsk",
         "distance": 167
@@ -110,7 +110,7 @@
   },
   {
     "name": "Ivano-Frankivsk",
-    "conections": [
+    "connections": [
       {
         "name": "Chernivtsi",
         "distance": 137
@@ -131,7 +131,7 @@
   },
   {
     "name": "Chernivtsi",
-    "conections": [
+    "connections": [
       {
         "name": "Ivano-Frankivsk",
         "distance": 137
@@ -152,7 +152,7 @@
   },
   {
     "name": "Khmelnitskyi",
-    "conections": [
+    "connections": [
       {
         "name": "Rivne",
         "distance": 194
@@ -177,7 +177,7 @@
   },
   {
     "name": "Zhytomyr",
-    "conections": [
+    "connections": [
       {
         "name": "Rivne",
         "distance": 188
@@ -194,7 +194,7 @@
   },
   {
     "name": "Vinnytsia",
-    "conections": [
+    "connections": [
       {
         "name": "Chernivtsi",
         "distance": 270
