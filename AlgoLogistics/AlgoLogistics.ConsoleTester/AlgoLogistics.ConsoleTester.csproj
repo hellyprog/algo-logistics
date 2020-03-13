@@ -10,4 +10,10 @@
     <ProjectReference Include="..\AlgoLogistics.Application.IntegrationServices\AlgoLogistics.Application.Integration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="cities-network.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

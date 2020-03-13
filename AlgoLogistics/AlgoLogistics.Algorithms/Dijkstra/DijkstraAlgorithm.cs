@@ -14,6 +14,8 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 
 			var costs = nodesToProcess.ToDictionary(x => x.Key,
 				x => knownConnections.Keys.Contains(x.Key) ? knownConnections[x.Key] : double.PositiveInfinity);
+			costs.Add(input.Start, 0);
+
 			var parents = nodesToProcess.ToDictionary(x => x.Key,
 				x => knownConnections.Keys.Contains(x.Key) ? input.Start : null);
 
@@ -38,13 +40,34 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 
 					processedNodes.Add(node);
 				}
+
+				node = FindLowestCostNode(costs, processedNodes);
 			}
 
 			return new DijkstraAlgorithmOutput
 			{
 				Value = costs[input.End],
-				Path = null
+				Path = GetPath(parents, input.Start, input.End)
 			};
+		}
+
+		private Queue<string> GetPath(Dictionary<string, string> parents, string start, string end)
+		{
+			var result = new List<string>
+			{
+				end
+			};
+
+			var keyToGet = end;
+
+			while (parents.TryGetValue(keyToGet, out keyToGet))
+			{
+				result.Add(keyToGet);
+			} 
+			
+			result.Reverse();
+			
+			return new Queue<string>(result);
 		}
 
 		private string FindLowestCostNode(Dictionary<string, double> costs, List<string> processedNodes)
