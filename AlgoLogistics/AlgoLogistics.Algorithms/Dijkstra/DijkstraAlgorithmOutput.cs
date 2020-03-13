@@ -6,7 +6,7 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 {
 	public class DijkstraAlgorithmOutput
 	{
-		public int Value { get; set; }
+		public double Value { get; set; }
 		public Queue<string> Path { get; set; }
 	}
 }

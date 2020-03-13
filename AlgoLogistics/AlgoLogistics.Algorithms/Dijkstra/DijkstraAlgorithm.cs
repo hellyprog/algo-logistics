@@ -21,15 +21,39 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 
 			var node = FindLowestCostNode(costs, processedNodes);
 
-			throw new NotImplementedException();
+			while (!string.IsNullOrEmpty(node))
+			{
+				var cost = costs[node];
+				var neighbours = input.Graph[node];
+
+				foreach (var item in neighbours.Keys)
+				{
+					var newCost = cost + neighbours[item];
+
+					if (costs[item] > newCost)
+					{
+						costs[item] = newCost;
+						parents[item] = node;
+					}
+
+					processedNodes.Add(node);
+				}
+			}
+
+			return new DijkstraAlgorithmOutput
+			{
+				Value = costs[input.End],
+				Path = null
+			};
 		}
 
 		private string FindLowestCostNode(Dictionary<string, double> costs, List<string> processedNodes)
 		{
 			var lowestValue = double.PositiveInfinity;
 			KeyValuePair<string, double> lowestCostNode = default;
+			var costsToProcess = costs.Where(c => !processedNodes.Contains(c.Key));
 
-			foreach (var item in costs)
+			foreach (var item in costsToProcess)
 			{
 				if (item.Value < lowestValue)
 				{
