@@ -1,19 +1,77 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
+using AlgoLogistics.Domain.Entities;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace AlgoLogistics.Tests.Algorithms
 {
+	[TestFixture]
 	public class DijkstraAlgorithmTests
 	{
 		private DijkstraAlgorithm _sut;
+		private Dictionary<string, Dictionary<string, double>> _graph;
 
 		[SetUp]
-		void Setup()
+		public void Setup()
 		{
 			_sut = new DijkstraAlgorithm();
+
+			using var sr = new StreamReader(@"Algorithms/cities-network.json");
+			var json = sr.ReadToEnd();
+
+			var network = JsonConvert.DeserializeObject<List<City>>(json);
+			_graph = ConvertToGraph(network);
+		}
+
+		[TestCaseSource(typeof(DijkstraAlgorithmDataClass), "Data")]
+		public double ExectuteTests(string start, string end)
+		{
+			var input = new DijkstraAlgorithmInput
+			{
+				Graph = _graph,
+				Start = start,
+				End = end
+			};
+
+			var result = _sut.Search(input);
+
+			return result.Value;
+		}
+
+		private Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
+		{
+			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
+
+			foreach (var city in cityNetwork)
+			{
+				var key = city.Name;
+				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
+
+				graphDictionary.Add(key, value);
+			}
+
+			return graphDictionary;
+		}
+	}
+
+	internal class DijkstraAlgorithmDataClass
+	{ 
+		public static IEnumerable Data
+		{
+			get 
+			{
+				yield return new TestCaseData("Lutsk", "Uzgorod").Returns(417);
+				yield return new TestCaseData("Lviv", "Chernivtsi").Returns(269);
+				yield return new TestCaseData("Chernivtsi", "Zhytomyr").Returns(370);
+				yield return new TestCaseData("Lviv", "Ternopil").Returns(133);
+				yield return new TestCaseData("Lviv", "Vinnytsia").Returns(363);
+			}
 		}
 	}
 }

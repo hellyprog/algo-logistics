@@ -17,4 +17,10 @@
     <ProjectReference Include="..\AlgoLogistics.Domain\AlgoLogistics.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Algorithms\cities-network.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
