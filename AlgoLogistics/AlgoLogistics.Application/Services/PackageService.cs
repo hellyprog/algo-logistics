@@ -20,17 +20,25 @@ namespace AlgoLogistics.Application.Services
 			_mediator = mediator;
 		}
 
-		public async Task<ExecutionResult<List<Package>>> GetPackagesAsync()
+		public async Task<ExecutionResult> CreatePackageAsync(CreatePackageCommand command)
 		{
-			var query = new GetPackagesQuery();
+			var result = await _mediator.Send(command);
+
+			return result;
+		}
+
+		public async Task<ExecutionResult<Package>> GetPackageByInvoiceNoAsync(string invoiceNo)
+		{
+			var query = new GetPackageQuery { InvoiceNo = invoiceNo };
 			var result = await _mediator.Send(query);
 
 			return result;
 		}
 
-		public async Task<ExecutionResult> CreatePackageAsync(CreatePackageCommand command)
+		public async Task<ExecutionResult<List<Package>>> GetPackagesAsync()
 		{
-			var result = await _mediator.Send(command);
+			var query = new GetPackagesQuery();
+			var result = await _mediator.Send(query);
 
 			return result;
 		}

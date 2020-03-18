@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.QueryHandlers
 {
-	public class GetPackagesQueryHandler : IRequestHandler<GetPackagesQuery, ExecutionResult<List<Package>>>
+	public class PackagesQueryHandler : 
+		IRequestHandler<GetPackagesQuery, ExecutionResult<List<Package>>>,
+		IRequestHandler<GetPackageQuery, ExecutionResult<Package>>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 
-		public GetPackagesQueryHandler(IApplicationDbContext applicationDbContext)
+		public PackagesQueryHandler(IApplicationDbContext applicationDbContext)
 		{
 			_applicationDbContext = applicationDbContext;
 		}
@@ -24,6 +26,13 @@ namespace AlgoLogistics.Domain.Services.QueryHandlers
 			var packages = await _applicationDbContext.Packages.ToListAsync();
 
 			return ExecutionResult<List<Package>>.CreateSuccessResult(packages);
+		}
+
+		public async Task<ExecutionResult<Package>> Handle(GetPackageQuery request, CancellationToken cancellationToken)
+		{
+			var package = await _applicationDbContext.Packages.FirstOrDefaultAsync(p => p.InvoiceNo == request.InvoiceNo);
+
+			return ExecutionResult<Package>.CreateSuccessResult(package);
 		}
 	}
 }

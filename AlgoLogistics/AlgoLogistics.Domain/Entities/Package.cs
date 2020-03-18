@@ -49,17 +49,7 @@ namespace AlgoLogistics.Domain.Entities
 
 		private string GenerateInvoiceNo()
 		{
-			var currentTime = DateTime.Now.ToString();
-			var algorithm = SHA256.Create();
-			var invoiceNoBytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(currentTime));
-			
-			var sb = new StringBuilder();
-			foreach (byte b in invoiceNoBytes)
-			{
-				sb.Append(b.ToString("X2"));
-			}
-
-			return sb.ToString();
+			return Guid.NewGuid().ToString();
 		}
 
 		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight) => (decimal)sizeCategory + (decimal)weight;

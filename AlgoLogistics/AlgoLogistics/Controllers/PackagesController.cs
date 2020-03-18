@@ -33,6 +33,15 @@ namespace AlgoLogistics.Controllers
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
+        [HttpGet("{invoiceNo}")]
+        [ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetPackages(string invoiceNo)
+        {
+            var result = await _packageService.GetPackageByInvoiceNoAsync(invoiceNo);
+
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]

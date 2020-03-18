@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.QueryHandlers
 {
-	public class GetShipmentsQueryHandler : IRequestHandler<GetShipmentsQuery, ExecutionResult<List<Shipment>>>
+	public class ShipmentsQueryHandler : IRequestHandler<GetShipmentsQuery, ExecutionResult<List<Shipment>>>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 
-		public GetShipmentsQueryHandler(IApplicationDbContext applicationDbContext)
+		public ShipmentsQueryHandler(IApplicationDbContext applicationDbContext)
 		{
 			_applicationDbContext = applicationDbContext;
 		}

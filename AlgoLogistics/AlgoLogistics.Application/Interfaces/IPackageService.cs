@@ -11,6 +11,7 @@ namespace AlgoLogistics.Application.Interfaces
 	public interface IPackageService
 	{
 		Task<ExecutionResult> CreatePackageAsync(CreatePackageCommand command);
+		Task<ExecutionResult<Package>> GetPackageByInvoiceNoAsync(string invoiceNo);
 		Task<ExecutionResult<List<Package>>> GetPackagesAsync();
 	}
 }
