@@ -31,13 +31,13 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			var shipment = new Shipment(packages)
 			{
-				Route = await BuildRoute(packages, cityNetworkProvider)
+				Route = await BuildRouteAsync(packages, cityNetworkProvider)
 			};
 
 			return shipment;
 		}
 
-		private static async Task<Route> BuildRoute(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
+		private static async Task<Route> BuildRouteAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;
