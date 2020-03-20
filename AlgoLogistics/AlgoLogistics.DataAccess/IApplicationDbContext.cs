@@ -12,6 +12,7 @@ namespace AlgoLogistics.DataAccess
 	{
 		DbSet<Package> Packages { get; set; }
 		DbSet<Shipment> Shipments { get; set; }
+		public DbSet<City> Cities { get; set; }
 
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}

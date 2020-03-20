@@ -17,6 +17,7 @@ namespace AlgoLogistics.Infrastructure.Persistence
 
 		public DbSet<Package> Packages { get; set; }
 		public DbSet<Shipment> Shipments { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -41,6 +42,19 @@ namespace AlgoLogistics.Infrastructure.Persistence
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
 			base.OnModelCreating(builder);
+
+            builder.Entity<City>().HasData(
+                new City { CityId = 1, Name = "Lviv" },
+                new City { CityId = 2, Name = "Uzgorod" },
+                new City { CityId = 3, Name = "Lutsk" },
+                new City { CityId = 4, Name = "Rivne" },
+                new City { CityId = 5, Name = "Ternopil" },
+                new City { CityId = 6, Name = "Ivano-Frankivsk" },
+                new City { CityId = 7, Name = "Chernivtsi" },
+                new City { CityId = 8, Name = "Zhytomyr" },
+                new City { CityId = 9, Name = "Khmelnytskyi" },
+                new City { CityId = 10, Name = "Vinnytsia" }
+            );
 		}
 	}
 }
