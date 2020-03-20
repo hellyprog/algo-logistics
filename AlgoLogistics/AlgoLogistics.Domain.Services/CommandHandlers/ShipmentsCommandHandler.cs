@@ -16,20 +16,17 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.CommandHandlers
 {
-	public class GenerateShipmentsCommandHandler : IRequestHandler<GenerateShipmentsCommand, ExecutionResult>
+	public class ShipmentsCommandHandler : IRequestHandler<GenerateShipmentsCommand, ExecutionResult>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly ICityNetworkProvider _cityNetworkProvider;
-		private readonly ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput> _searchAlgorithm;
 
-		public GenerateShipmentsCommandHandler(
+		public ShipmentsCommandHandler(
 			IApplicationDbContext applicationDbContext,
-			ICityNetworkProvider cityNetworkProvider,
-			ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput> searchAlgorithm)
+			ICityNetworkProvider cityNetworkProvider)
 		{
 			_applicationDbContext = applicationDbContext;
 			_cityNetworkProvider = cityNetworkProvider;
-			_searchAlgorithm = searchAlgorithm;
 		}
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
@@ -53,7 +50,7 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 				foreach (var package in groupedPackagesByToCity)
 				{
-					var shipment = await Shipment.CreateAsync(package.Grouped.ToList(), _cityNetworkProvider, _searchAlgorithm);
+					var shipment = await Shipment.CreateAsync(package.Grouped.ToList(), _cityNetworkProvider);
 					shipmentList.Add(shipment);
 				}
 			}

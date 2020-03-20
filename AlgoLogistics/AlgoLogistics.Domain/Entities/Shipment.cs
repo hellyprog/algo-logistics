@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Algorithms;
+using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Interfaces;
 using System;
@@ -26,29 +27,34 @@ namespace AlgoLogistics.Domain.Entities
 			_packages = packages.ToHashSet();
 		}
 
-		public static async Task<Shipment> CreateAsync<TAlgorithmInput, TAlgorithmOutput>(
-			List<Package> packages, 
-			ICityNetworkProvider cityNetworkProvider, 
-			ISearchAlgorithm<TAlgorithmInput, TAlgorithmOutput> searchAlgorithm)
+		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var shipment = new Shipment(packages)
 			{
-				Route = await BuildRoute(packages, cityNetworkProvider, searchAlgorithm)
+				Route = await BuildRoute(packages, cityNetworkProvider)
 			};
 
 			return shipment;
 		}
 
-		private static async Task<Route> BuildRoute<TAlgorithmInput, TAlgorithmOutput>(
-			List<Package> packages, 
-			ICityNetworkProvider cityNetworkProvider, 
-			ISearchAlgorithm<TAlgorithmInput, TAlgorithmOutput> searchAlgorithm)
+		private static async Task<Route> BuildRoute(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;
 			var cityNetwork = await cityNetworkProvider.GetCityNetworkAsync();
 			var graph = ConvertToGraph(cityNetwork);
-			throw new NotImplementedException();
+
+			var searchAlgorithm = new DijkstraAlgorithm();
+			var algorithmResult = searchAlgorithm.Search(new DijkstraAlgorithmInput
+			{
+				Start = startCity,
+				End = destinationCity,
+				Graph = graph
+			});
+
+			var route = new Route(startCity, destinationCity, algorithmResult.Value, algorithmResult.Path);
+
+			return route;
 		}
 
 		private static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)

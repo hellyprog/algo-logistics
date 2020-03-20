@@ -21,8 +21,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 				{
 					route.Property(p => p.StartCity).HasColumnName("start_city");
 					route.Property(p => p.DestinationCity).HasColumnName("destination_city");
+					route.Property(p => p.Distance).HasColumnName("distance");
 					route.Property(p => p.Path)
-						.HasConversion(p => string.Join('-', p), p => p.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
+						.HasConversion(p => string.Join('-', p), p => new Queue<string>(p.Split('-', StringSplitOptions.RemoveEmptyEntries).ToList()))
 						.HasColumnName("path");
 				});
 			

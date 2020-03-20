@@ -45,8 +45,6 @@ namespace AlgoLogistics
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
 			services.AddSingleton(GetMapper());
 
-			services.AddTransient<ISearchAlgorithm<DijkstraAlgorithmInput, DijkstraAlgorithmOutput>, DijkstraAlgorithm>();
-
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
 			services.AddTransient<ICityNetworkProvider, CityNetworkProvider>();

@@ -6,15 +6,17 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Route
 	{
-		public Route(string startCity, string destinationCity, List<string> path)
+		public Route(string startCity, string destinationCity, double distance, Queue<string> path)
 		{
-			this.StartCity = startCity ?? throw new ArgumentNullException(nameof(startCity));
-			this.DestinationCity = destinationCity ?? throw new ArgumentNullException(nameof(destinationCity));
-			this.Path = path ?? throw new ArgumentNullException(nameof(path));
+			StartCity = startCity ?? throw new ArgumentNullException(nameof(startCity));
+			DestinationCity = destinationCity ?? throw new ArgumentNullException(nameof(destinationCity));
+			Path = path ?? throw new ArgumentNullException(nameof(path));
+			Distance = distance > 0 ? distance : throw new ArgumentException(nameof(distance));
 		}
 
 		public string StartCity { get; set; }
 		public string DestinationCity { get; set; }
-		public List<string> Path { get; set; }
+		public double Distance { get; set; }
+		public Queue<string> Path { get; set; }
 	}
 }

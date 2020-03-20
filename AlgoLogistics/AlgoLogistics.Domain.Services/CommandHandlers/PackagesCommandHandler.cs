@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.CommandHandlers
 {
-	public class CreatePackageCommandHandler : IRequestHandler<CreatePackageCommand, ExecutionResult>
+	public class PackagesCommandHandler : IRequestHandler<CreatePackageCommand, ExecutionResult>
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly IMapper _mapper;
 
-		public CreatePackageCommandHandler(IApplicationDbContext applicationDbContext, IMapper mapper)
+		public PackagesCommandHandler(IApplicationDbContext applicationDbContext, IMapper mapper)
 		{
 			_applicationDbContext = applicationDbContext;
 			_mapper = mapper;
