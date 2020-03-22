@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace AlgoLogistics.Domain.Entities
@@ -15,10 +16,12 @@ namespace AlgoLogistics.Domain.Entities
 
 		public DeliveryDetails(string sender, string receiver, string fromCity, string toCity)
 		{
-			this.Sender = sender ?? throw new ArgumentNullException(nameof(sender));
-			this.Receiver = receiver ?? throw new ArgumentNullException(nameof(receiver));
-			this.FromCity = fromCity ?? throw new ArgumentNullException(nameof(fromCity));
-			this.ToCity = toCity ?? throw new ArgumentNullException(nameof(toCity));
+			var textInfo = new CultureInfo("en-US", false).TextInfo;
+
+			Sender = textInfo.ToTitleCase(sender) ?? throw new ArgumentNullException(nameof(sender));
+			Receiver = textInfo.ToTitleCase(receiver) ?? throw new ArgumentNullException(nameof(receiver));
+			FromCity = textInfo.ToTitleCase(fromCity) ?? throw new ArgumentNullException(nameof(fromCity));
+			ToCity = textInfo.ToTitleCase(toCity) ?? throw new ArgumentNullException(nameof(toCity));
 		}
 	}
 }

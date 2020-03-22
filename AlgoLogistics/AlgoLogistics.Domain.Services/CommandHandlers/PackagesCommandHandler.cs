@@ -4,6 +4,8 @@ using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +26,14 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 		{
 			var deliveryDetails = _mapper.Map<DeliveryDetails>(request.DeliveryDetails);
 			var physicalParameters = _mapper.Map<PhysicalParameters>(request.PhysicalParameters);
+
+			var existingCities = await _applicationDbContext.Cities.Select(c => c.Name).ToListAsync();
+
+			if (!existingCities.Contains(deliveryDetails.FromCity) || !existingCities.Contains(deliveryDetails.ToCity))
+			{
+				return ExecutionResult.CreateFailureResult("Our serice doesn't work in provided city");
+			}
+
 			var package = new Package(request.Description, request.Price, physicalParameters, deliveryDetails);
 
 			_applicationDbContext.Packages.Add(package);
