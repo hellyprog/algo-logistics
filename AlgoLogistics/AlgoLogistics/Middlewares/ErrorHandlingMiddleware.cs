@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Infrastructure.Logging;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -26,6 +27,7 @@ namespace AlgoLogistics.Middlewares
 			}
 			catch (Exception ex)
 			{
+				Logger.LogException(ex);
 				await HandleExceptionAsync(context, ex);
 			}
 		}
