@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AlgoLogistics.Infrastructure.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -17,10 +18,7 @@ namespace AlgoLogistics
 
 		public static void Main(string[] args)
 		{
-			Log.Logger = new LoggerConfiguration()
-				.Enrich.FromLogContext()
-				.WriteTo.Console()
-				.CreateLogger();
+			Log.Logger = Logger.Create();
 
 			try
 			{
