@@ -32,10 +32,13 @@ namespace AlgoLogistics.Infrastructure.Logging
 					}));
 		}
 
-		public static void UseLoggingMiddlewares(this IApplicationBuilder app)
+		public static void LogException(Exception e)
 		{
-			//app.UseMiddleware<RequestResponseLoggingMiddleware>();
-			app.UseMiddleware<ExceptionLoggingMiddleware>();
+			Log.Logger
+				.ForContext(LoggingConstants.TypeKey, LoggingConstants.ExceptionLogType)
+				.Error("Error: {error_message}\nStack trace: {stack_trace}",
+					e.Message,
+					e.StackTrace);
 		}
 	}
 }

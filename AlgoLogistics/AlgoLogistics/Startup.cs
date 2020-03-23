@@ -14,6 +14,7 @@ using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
+using AlgoLogistics.Middlewares;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -67,7 +68,9 @@ namespace AlgoLogistics
 			app.UseHttpsRedirection();
 			app.UseRouting();
 			app.UseAuthorization();
-			app.UseLoggingMiddlewares();
+
+			app.UseMiddleware<RequestResponseLoggingMiddleware>();
+			app.UseMiddleware<ErrorHandlingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

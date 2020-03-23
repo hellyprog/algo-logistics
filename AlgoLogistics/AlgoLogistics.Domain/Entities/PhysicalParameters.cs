@@ -20,7 +20,7 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			if (width <= 0 || height <= 0 || length <= 0 || weight <= 0)
 			{
-				throw new ArgumentException("Parameters cannot be negative");
+				throw new ArgumentException("Parameters cannot be negative or equal to zero");
 			}
 
 			if (width > MaxDimensionValueInMetres || height > MaxDimensionValueInMetres || length > MaxDimensionValueInMetres)

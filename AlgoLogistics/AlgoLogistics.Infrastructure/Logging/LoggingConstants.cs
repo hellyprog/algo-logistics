@@ -7,5 +7,6 @@ namespace AlgoLogistics.Infrastructure.Logging
 	public static class LoggingConstants
 	{
 		public const string TypeKey = "log_type";
+		public const string ExceptionLogType = "EXCEPTION";
 	}
 }
