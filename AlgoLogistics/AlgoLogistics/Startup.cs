@@ -13,6 +13,7 @@ using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Infrastructure;
+using AlgoLogistics.Infrastructure.Logging;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -66,6 +67,7 @@ namespace AlgoLogistics
 			app.UseHttpsRedirection();
 			app.UseRouting();
 			app.UseAuthorization();
+			app.UseLoggingMiddlewares();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

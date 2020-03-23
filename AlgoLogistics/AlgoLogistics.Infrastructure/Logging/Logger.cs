@@ -1,5 +1,7 @@
-﻿using Serilog;
+﻿using Microsoft.AspNetCore.Builder;
+using Serilog;
 using Serilog.Formatting.Compact;
+using Serilog.Formatting.Elasticsearch;
 using Serilog.Sinks.Elasticsearch;
 using System;
 
@@ -18,12 +20,22 @@ namespace AlgoLogistics.Infrastructure.Logging
 
 		private static LoggerConfiguration LogToElasticSearch(this LoggerConfiguration loggerConfiguration)
 		{
-			return loggerConfiguration.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(@"http://localhost:9200"))
-			{
-				AutoRegisterTemplate = true,
-				AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-				IndexFormat = "algo-logistics-{0:yyyy.MM.dd}"
-			});
+			return loggerConfiguration
+				.WriteTo.Logger(lc => lc.Filter
+					.ByIncludingOnly(l => l.Properties.ContainsKey(LoggingConstants.TypeKey))
+					.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(@"http://localhost:9200"))
+					{
+						AutoRegisterTemplate = true,
+						AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+						CustomFormatter = new ElasticsearchJsonFormatter(),
+						IndexFormat = "algo-logistics-{0:yyyy.MM.dd}"
+					}));
+		}
+
+		public static void UseLoggingMiddlewares(this IApplicationBuilder app)
+		{
+			//app.UseMiddleware<RequestResponseLoggingMiddleware>();
+			app.UseMiddleware<ExceptionLoggingMiddleware>();
 		}
 	}
 }
