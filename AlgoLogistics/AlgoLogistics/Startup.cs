@@ -4,10 +4,12 @@ using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
+using AlgoLogistics.Filters;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,11 @@ namespace AlgoLogistics
 			services.AddHealthChecks();
 			services.AddInfrastructure(Configuration);
 
+			services.AddMvc(opt =>
+			{
+				opt.Filters.Add(typeof(ValidatorActionFilter));
+			}).AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Info>());
+
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
 			services.AddSingleton(GetMapper());
 
@@ -59,8 +66,8 @@ namespace AlgoLogistics
 			app.UseRouting();
 			app.UseAuthorization();
 
-			app.UseMiddleware<RequestResponseLoggingMiddleware>();
-			app.UseMiddleware<ErrorHandlingMiddleware>();
+			//app.UseMiddleware<RequestResponseLoggingMiddleware>();
+			//app.UseMiddleware<ErrorHandlingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();

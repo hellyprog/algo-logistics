@@ -16,22 +16,22 @@ namespace AlgoLogistics.Domain.Entities
 		public decimal DeliveryPrice { get; private set; }
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
-		public WeightCategory WeightCategory => GetWeightCategory(PhysicalParameters.Weight);
-		public SizeCategory SizeCategory => GetSizeCategory(PhysicalParameters);
+		public int? PackageCategoryId { get; set; }
+		public PackageCategory PackageCategory { get; set; }
 		public DeliveryStatus Status { get; private set; }
 		public Shipment Shipment { get; private set; }
 
 		private Package() { }
 
-		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails)
+		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, int packageCategoryId)
 		{
-			Description = description ?? throw new ArgumentNullException(nameof(description));
+			Description = !string.IsNullOrEmpty(description) ? description : throw new ArgumentNullException(nameof(description));
 			DeliveryDetails = deliveryDetails ?? throw new ArgumentNullException(nameof(deliveryDetails));
 			PhysicalParameters = physicalParameters ?? throw new ArgumentNullException(nameof(physicalParameters));
 			Price = price > 0 ? price : throw new ArgumentException($"{nameof(price)} cannot be less than zero", nameof(price));
 
+			PackageCategoryId = packageCategoryId;
 			Status = DeliveryStatus.NotSent;
-			DeliveryPrice = CalculateDeliveryPrice(SizeCategory, WeightCategory);
 			InvoiceNo = GenerateInvoiceNo();
 		}
 
@@ -50,51 +50,6 @@ namespace AlgoLogistics.Domain.Entities
 		private string GenerateInvoiceNo()
 		{
 			return Guid.NewGuid().ToString();
-		}
-
-		private decimal CalculateDeliveryPrice(SizeCategory sizeCategory, WeightCategory weight) => (decimal)sizeCategory + (decimal)weight;
-
-		private SizeCategory GetSizeCategory(PhysicalParameters measure)
-		{
-			const double SmallLimit = 0.2;
-			const double MediumLimit = 0.5;
-			const double LargeLimit = 1;
-
-			if (measure.Height <= SmallLimit && measure.Length <= SmallLimit && measure.Width <= SmallLimit)
-			{
-				return SizeCategory.Small;
-			}
-			else if (measure.Height <= MediumLimit && measure.Length <= MediumLimit && measure.Width <= MediumLimit)
-			{
-				return SizeCategory.Medium;
-			}
-			else if (measure.Height <= LargeLimit && measure.Length <= LargeLimit && measure.Width <= LargeLimit)
-			{
-				return SizeCategory.Large;
-			}
-			else
-			{
-				return SizeCategory.ExtraLarge;
-			}
-		}
-
-		private WeightCategory GetWeightCategory(double weight)
-		{
-			const double LightLimit = 5;
-			const double MediumLimit = 15;
-
-			if (weight <= LightLimit)
-			{
-				return WeightCategory.Light;
-			} 
-			else if (weight <= MediumLimit)
-			{
-				return WeightCategory.Medium;
-			}
-			else
-			{
-				return WeightCategory.Heavy;
-			}
 		}
 	}
 }

@@ -16,7 +16,7 @@ namespace AlgoLogistics.Domain.Services.Common
 				.ReverseMap();
 
 			CreateMap<PhysicalParametersDTO, PhysicalParameters>()
-				.ConstructUsing(s => new PhysicalParameters(s.Width, s.Height, s.Length, s.Weight))
+				.ConstructUsing(s => new PhysicalParameters(s.Width, s.Height, s.Length))
 				.ReverseMap();
 		}
 	}

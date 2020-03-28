@@ -4,14 +4,16 @@ using AlgoLogistics.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200328211323_WeightRemoval")]
+    partial class WeightRemoval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,11 +129,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnName("last_modified_by")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PackageCategoryId")
-                        .IsRequired()
-                        .HasColumnName("package_category_id")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnName("price")
                         .HasColumnType("decimal(18,2)");
@@ -145,8 +142,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PackageId");
-
-                    b.HasIndex("PackageCategoryId");
 
                     b.HasIndex("ShipmentId");
 
@@ -256,12 +251,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("AlgoLogistics.Domain.Entities.Package", b =>
                 {
-                    b.HasOne("AlgoLogistics.Domain.Entities.PackageCategory", "PackageCategory")
-                        .WithMany("Packages")
-                        .HasForeignKey("PackageCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AlgoLogistics.Domain.Entities.Shipment", "Shipment")
                         .WithMany("Packages")
                         .HasForeignKey("ShipmentId");

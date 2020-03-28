@@ -6,6 +6,7 @@ namespace AlgoLogistics.Domain.Enums
 {
 	public enum SizeCategory
 	{
+		ExtraSmall = 5,
 		Small = 10,
 		Medium = 15,
 		Large = 20,

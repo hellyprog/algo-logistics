@@ -4,14 +4,16 @@ using AlgoLogistics.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200328203754_PackageCategories")]
+    partial class PackageCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,11 +129,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnName("last_modified_by")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PackageCategoryId")
-                        .IsRequired()
-                        .HasColumnName("package_category_id")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnName("price")
                         .HasColumnType("decimal(18,2)");
@@ -145,8 +142,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PackageId");
-
-                    b.HasIndex("PackageCategoryId");
 
                     b.HasIndex("ShipmentId");
 
@@ -174,6 +169,15 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnName("size_category")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Weight")
+                        .HasColumnName("weight")
+                        .HasColumnType("float");
+
+                    b.Property<string>("WeightCategory")
+                        .IsRequired()
+                        .HasColumnName("weight_category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Width")
                         .HasColumnName("width")
                         .HasColumnType("float");
@@ -181,48 +185,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                     b.HasKey("PackageCategoryId");
 
                     b.ToTable("PackageCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            PackageCategoryId = 1,
-                            Height = 0.050000000000000003,
-                            Length = 0.20000000000000001,
-                            SizeCategory = "ExtraSmall",
-                            Width = 0.14999999999999999
-                        },
-                        new
-                        {
-                            PackageCategoryId = 2,
-                            Height = 0.10000000000000001,
-                            Length = 0.29999999999999999,
-                            SizeCategory = "Small",
-                            Width = 0.20000000000000001
-                        },
-                        new
-                        {
-                            PackageCategoryId = 3,
-                            Height = 0.20000000000000001,
-                            Length = 0.29999999999999999,
-                            SizeCategory = "Medium",
-                            Width = 0.29999999999999999
-                        },
-                        new
-                        {
-                            PackageCategoryId = 4,
-                            Height = 0.29999999999999999,
-                            Length = 0.40000000000000002,
-                            SizeCategory = "Large",
-                            Width = 0.29999999999999999
-                        },
-                        new
-                        {
-                            PackageCategoryId = 5,
-                            Height = 0.29999999999999999,
-                            Length = 0.45000000000000001,
-                            SizeCategory = "ExtraLarge",
-                            Width = 0.29999999999999999
-                        });
                 });
 
             modelBuilder.Entity("AlgoLogistics.Domain.Entities.Shipment", b =>
@@ -256,12 +218,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("AlgoLogistics.Domain.Entities.Package", b =>
                 {
-                    b.HasOne("AlgoLogistics.Domain.Entities.PackageCategory", "PackageCategory")
-                        .WithMany("Packages")
-                        .HasForeignKey("PackageCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AlgoLogistics.Domain.Entities.Shipment", "Shipment")
                         .WithMany("Packages")
                         .HasForeignKey("ShipmentId");
@@ -314,6 +270,10 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 
                             b1.Property<double>("Length")
                                 .HasColumnName("length")
+                                .HasColumnType("float");
+
+                            b1.Property<double>("Weight")
+                                .HasColumnName("weight")
                                 .HasColumnType("float");
 
                             b1.Property<double>("Width")

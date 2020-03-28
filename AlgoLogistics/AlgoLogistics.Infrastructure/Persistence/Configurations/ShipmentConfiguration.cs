@@ -15,16 +15,17 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.ToTable("Shipments");
 
 			builder.HasKey(p => p.ShipmentId);
-			builder.Property(p => p.ShipmentId).HasColumnName("shipment_id");
+			builder.Property(p => p.ShipmentId).HasColumnName("shipment_id").IsRequired();
 			builder.OwnsOne(p => p.Route,
 				route =>
 				{
-					route.Property(p => p.StartCity).HasColumnName("start_city");
-					route.Property(p => p.DestinationCity).HasColumnName("destination_city");
-					route.Property(p => p.Distance).HasColumnName("distance");
+					route.Property(p => p.StartCity).HasColumnName("start_city").IsRequired();
+					route.Property(p => p.DestinationCity).HasColumnName("destination_city").IsRequired();
+					route.Property(p => p.Distance).HasColumnName("distance").IsRequired();
 					route.Property(p => p.Path)
 						.HasConversion(p => string.Join('-', p), p => new Queue<string>(p.Split('-', StringSplitOptions.RemoveEmptyEntries).ToList()))
-						.HasColumnName("path");
+						.HasColumnName("path")
+						.IsRequired();
 				});
 			
 			builder.HasMany(p => p.Packages)

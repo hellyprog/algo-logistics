@@ -1,6 +1,7 @@
 ﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -18,6 +19,7 @@ namespace AlgoLogistics.Infrastructure.Persistence
 		public DbSet<Package> Packages { get; set; }
 		public DbSet<Shipment> Shipments { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<PackageCategory> PackageCategories { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -55,6 +57,49 @@ namespace AlgoLogistics.Infrastructure.Persistence
                 new City { CityId = 9, Name = "Khmelnytskyi" },
                 new City { CityId = 10, Name = "Vinnytsia" }
             );
+
+            builder.Entity<PackageCategory>().HasData(
+                    new PackageCategory 
+                    {
+                        PackageCategoryId = 1,
+                        SizeCategory = SizeCategory.ExtraSmall,
+                        Length = 0.2,
+                        Width = 0.15,
+                        Height = 0.05
+                    },
+                    new PackageCategory
+                    {
+                        PackageCategoryId = 2,
+                        SizeCategory = SizeCategory.Small,
+                        Length = 0.3,
+                        Width = 0.2,
+                        Height = 0.1
+                    },
+                    new PackageCategory
+                    {
+                        PackageCategoryId = 3,
+                        SizeCategory = SizeCategory.Medium,
+                        Length = 0.3,
+                        Width = 0.3,
+                        Height = 0.2
+                    },
+                    new PackageCategory
+                    {
+                        PackageCategoryId = 4,
+                        SizeCategory = SizeCategory.Large,
+                        Length = 0.4,
+                        Width = 0.3,
+                        Height = 0.3
+                    },
+                    new PackageCategory
+                    {
+                        PackageCategoryId = 5,
+                        SizeCategory = SizeCategory.ExtraLarge,
+                        Length = 0.45,
+                        Width = 0.3,
+                        Height = 0.3
+                    }
+                );
 		}
 	}
 }

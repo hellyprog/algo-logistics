@@ -31,10 +31,12 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 			if (!existingCities.Contains(deliveryDetails.FromCity) || !existingCities.Contains(deliveryDetails.ToCity))
 			{
-				return ExecutionResult.CreateFailureResult("Our serice doesn't work in provided city");
+				return ExecutionResult.CreateFailureResult("Our service doesn't work in provided city");
 			}
 
-			var package = new Package(request.Description, request.Price, physicalParameters, deliveryDetails);
+			var packageCategoryId = _applicationDbContext.PackageCategories.FirstOrDefault(pc =>
+				pc.Height >= physicalParameters.Height && pc.Length >= physicalParameters.Length && pc.Width >= physicalParameters.Width)?.PackageCategoryId;
+			var package = new Package(request.Description, request.Price, physicalParameters, deliveryDetails, packageCategoryId.Value);
 
 			_applicationDbContext.Packages.Add(package);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
