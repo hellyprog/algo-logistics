@@ -1,17 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AlgoLogistics.Algorithms;
-using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Application.Integration.Services;
 using AlgoLogistics.Application.Interfaces;
 using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
-using AlgoLogistics.Domain.Services.Queries;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
@@ -19,12 +11,10 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace AlgoLogistics
 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,27 +20,31 @@ namespace AlgoLogistics.Infrastructure.Logging
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var request = await FormatRequest(context.Request);
+            var requestBody = await GetRequestBodyAsync(context.Request);
             var originalBodyStream = context.Response.Body;
 
-            using (var responseBody = new MemoryStream())
-            {
-                context.Response.Body = responseBody;
+            Log.ForContext(LoggingConstants.TypeKey, LoggingConstants.RequestLogType)
+                .ForContext("Method", context.Request.Method)
+                .Information("{body}", requestBody);
 
-                await _next(context);
+            using var responseBody = new MemoryStream();
+            context.Response.Body = responseBody;
 
-                var response = await FormatResponse(context.Response);
+            await _next(context);
 
-                //TODO: Save log to chosen datastore
+            var response = await GerResponseBodyAsync(context.Response);
 
-                await responseBody.CopyToAsync(originalBodyStream);
-            }
+            Log.ForContext(LoggingConstants.TypeKey, LoggingConstants.ResponseLogType)
+                .ForContext("statusCode", context.Response.StatusCode)
+                .Information("{body}", response);
+
+            await responseBody.CopyToAsync(originalBodyStream);
         }
 
-        private async Task<string> FormatRequest(HttpRequest request)
+        private async Task<string> GetRequestBodyAsync(HttpRequest request)
         {
             var body = request.Body;
-            request.EnableRewind();
+            request.EnableBuffering();
 
             var buffer = new byte[Convert.ToInt32(request.ContentLength)];
             await request.Body.ReadAsync(buffer, 0, buffer.Length);
@@ -47,18 +52,16 @@ namespace AlgoLogistics.Infrastructure.Logging
 
             request.Body = body;
 
-            return $"{request.Scheme} {request.Host}{request.Path} {request.QueryString} {bodyAsText}";
+            return bodyAsText;
         }
 
-        private async Task<string> FormatResponse(HttpResponse response)
+        private async Task<string> GerResponseBodyAsync(HttpResponse response)
         {
             response.Body.Seek(0, SeekOrigin.Begin);
-
             string text = await new StreamReader(response.Body).ReadToEndAsync();
-
             response.Body.Seek(0, SeekOrigin.Begin);
 
-            return $"{response.StatusCode}: {text}";
+            return text;
         }
     }
 }
