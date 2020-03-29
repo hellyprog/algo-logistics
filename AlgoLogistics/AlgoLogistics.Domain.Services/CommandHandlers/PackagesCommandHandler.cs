@@ -34,9 +34,17 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 				return ExecutionResult.CreateFailureResult("Our service doesn't work in provided city");
 			}
 
-			var packageCategoryId = _applicationDbContext.PackageCategories.FirstOrDefault(pc =>
-				pc.Height >= physicalParameters.Height && pc.Length >= physicalParameters.Length && pc.Width >= physicalParameters.Width)?.PackageCategoryId;
-			var package = new Package(request.Description, request.Price, physicalParameters, deliveryDetails, packageCategoryId.Value);
+			var packageCategories = await _applicationDbContext.PackageCategories.ToListAsync();
+			var packageCategory = packageCategories
+				.OrderBy(pc => (int)pc.SizeCategory)
+				.FirstOrDefault(pc => pc.Length * pc.Width * pc.Height >= physicalParameters.Length * physicalParameters.Width * physicalParameters.Height);
+
+			if (packageCategory == null)
+			{
+				return ExecutionResult.CreateFailureResult("Package size is out of limits");
+			}
+
+			var package = new Package(request.Description, request.Price, physicalParameters, deliveryDetails, packageCategory);
 
 			_applicationDbContext.Packages.Add(package);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
