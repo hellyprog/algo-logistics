@@ -40,7 +40,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 					parameters.Property(p => p.Receiver).HasColumnName("receiver").IsRequired();
 				});
 
-			builder.Property(p => p.PackageCategoryId).HasColumnName("package_category_id").IsRequired();
 			builder.Property(p => p.Created).HasColumnName("created");
 			builder.Property(p => p.CreatedBy).HasColumnName("created_by");
 			builder.Property(p => p.LastModified).HasColumnName("last_modified");
@@ -50,8 +49,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 				.WithMany(p => p.Packages);
 
 			builder.HasOne(p => p.PackageCategory)
-				.WithMany(p => p.Packages)
-				.HasForeignKey(p => p.PackageCategoryId);
+				.WithMany(p => p.Packages);
 		}
 	}
 }

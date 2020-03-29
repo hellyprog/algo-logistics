@@ -9,7 +9,6 @@ using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,11 +34,6 @@ namespace AlgoLogistics
 			services.AddControllers();
 			services.AddHealthChecks();
 			services.AddInfrastructure(Configuration);
-
-			services.AddMvc(opt =>
-			{
-				opt.Filters.Add(typeof(ValidatorActionFilter));
-			}).AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Info>());
 
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
 			services.AddSingleton(GetMapper());

@@ -16,21 +16,20 @@ namespace AlgoLogistics.Domain.Entities
 		public decimal DeliveryPrice { get; private set; }
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
-		public int? PackageCategoryId { get; set; }
 		public PackageCategory PackageCategory { get; set; }
 		public DeliveryStatus Status { get; private set; }
 		public Shipment Shipment { get; private set; }
 
 		private Package() { }
 
-		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, int packageCategoryId)
+		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, PackageCategory packageCategory)
 		{
 			Description = !string.IsNullOrEmpty(description) ? description : throw new ArgumentNullException(nameof(description));
 			DeliveryDetails = deliveryDetails ?? throw new ArgumentNullException(nameof(deliveryDetails));
 			PhysicalParameters = physicalParameters ?? throw new ArgumentNullException(nameof(physicalParameters));
 			Price = price > 0 ? price : throw new ArgumentException($"{nameof(price)} cannot be less than zero", nameof(price));
 
-			PackageCategoryId = packageCategoryId;
+			PackageCategory = packageCategory;
 			Status = DeliveryStatus.NotSent;
 			InvoiceNo = GenerateInvoiceNo();
 		}
