@@ -1,9 +1,11 @@
 ﻿using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Enums;
+using AlgoLogistics.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Entities
 {
@@ -22,16 +24,34 @@ namespace AlgoLogistics.Domain.Entities
 
 		private Package() { }
 
-		public Package(string description, decimal price, PhysicalParameters physicalParameters, DeliveryDetails deliveryDetails, PackageCategory packageCategory)
+		private Package(
+			string description, 
+			decimal price, 
+			PhysicalParameters physicalParameters, 
+			DeliveryDetails deliveryDetails, 
+			PackageCategory packageCategory,
+			decimal deliveryPrice)
 		{
 			Description = !string.IsNullOrEmpty(description) ? description : throw new ArgumentNullException(nameof(description));
 			DeliveryDetails = deliveryDetails ?? throw new ArgumentNullException(nameof(deliveryDetails));
 			PhysicalParameters = physicalParameters ?? throw new ArgumentNullException(nameof(physicalParameters));
 			Price = price > 0 ? price : throw new ArgumentException($"{nameof(price)} cannot be less than zero", nameof(price));
-
+			DeliveryPrice = deliveryPrice;
 			PackageCategory = packageCategory;
 			Status = DeliveryStatus.NotSent;
 			InvoiceNo = GenerateInvoiceNo();
+		}
+
+		public static async Task<Package> CreateAsync(
+			string description,
+			decimal price,
+			PhysicalParameters physicalParameters,
+			DeliveryDetails deliveryDetails,
+			PackageCategory packageCategory,
+			IPriceCalculator priceCalculator)
+		{
+			var deliveryPrice = await priceCalculator.CalculateDeliveryPriceAsync();
+			return new Package(description, price, physicalParameters, deliveryDetails, packageCategory, deliveryPrice);
 		}
 
 		public void ProcessStatus()

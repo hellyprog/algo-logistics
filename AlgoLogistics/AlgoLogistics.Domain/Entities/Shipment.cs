@@ -12,7 +12,7 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Shipment : AuditableEntity
 	{
-		private HashSet<Package> _packages;
+		private readonly HashSet<Package> _packages;
 
 		public int ShipmentId { get; private set; }
 		public IEnumerable<Package> Packages => _packages?.ToList();
@@ -22,17 +22,16 @@ namespace AlgoLogistics.Domain.Entities
 		{
 		}
 
-		private Shipment(List<Package> packages)
+		private Shipment(List<Package> packages, Route route)
 		{
 			_packages = packages.ToHashSet();
+			Route = route;
 		}
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
-			var shipment = new Shipment(packages)
-			{
-				Route = await BuildRouteAsync(packages, cityNetworkProvider)
-			};
+			var route = await BuildRouteAsync(packages, cityNetworkProvider);
+			var shipment = new Shipment(packages, route);
 
 			return shipment;
 		}
