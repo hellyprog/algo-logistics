@@ -4,6 +4,7 @@ using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
+using AlgoLogistics.Domain.Services.Implementation;
 using AlgoLogistics.Filters;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
@@ -41,6 +42,7 @@ namespace AlgoLogistics
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
 			services.AddTransient<ICityNetworkProvider, CityNetworkProvider>();
+			services.AddTransient<IPriceCalculator, PriceCalculator>();
 
 			services.AddSwaggerGen(c =>
 			{
@@ -61,7 +63,7 @@ namespace AlgoLogistics
 			app.UseAuthorization();
 
 			//app.UseMiddleware<RequestResponseLoggingMiddleware>();
-			//app.UseMiddleware<ErrorHandlingMiddleware>();
+			app.UseMiddleware<ErrorHandlingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
