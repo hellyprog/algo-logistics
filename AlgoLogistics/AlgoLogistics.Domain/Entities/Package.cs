@@ -50,7 +50,7 @@ namespace AlgoLogistics.Domain.Entities
 			PackageCategory packageCategory,
 			IPriceCalculator priceCalculator)
 		{
-			var deliveryPrice = await priceCalculator.CalculateDeliveryPriceAsync();
+			var deliveryPrice = await priceCalculator.CalculateDeliveryPriceAsync(deliveryDetails.FromCity, deliveryDetails.ToCity);
 			return new Package(description, price, physicalParameters, deliveryDetails, packageCategory, deliveryPrice);
 		}
 

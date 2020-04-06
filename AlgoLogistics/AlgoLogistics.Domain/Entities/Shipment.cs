@@ -41,7 +41,7 @@ namespace AlgoLogistics.Domain.Entities
 			var startCity = packages.First().DeliveryDetails.FromCity;
 			var destinationCity = packages.First().DeliveryDetails.ToCity;
 			var cityNetwork = await cityNetworkProvider.GetCityNetworkAsync();
-			var graph = ConvertToGraph(cityNetwork);
+			var graph = Utils.ConvertToGraph(cityNetwork);
 
 			var searchAlgorithm = new DijkstraAlgorithm();
 			var algorithmResult = searchAlgorithm.Search(new DijkstraAlgorithmInput
@@ -54,21 +54,6 @@ namespace AlgoLogistics.Domain.Entities
 			var route = new Route(startCity, destinationCity, algorithmResult.Value, algorithmResult.Path);
 
 			return route;
-		}
-
-		private static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
-		{
-			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
-
-			foreach (var city in cityNetwork)
-			{
-				var key = city.Name;
-				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
-
-				graphDictionary.Add(key, value);
-			}
-
-			return graphDictionary;
 		}
 	}
 }

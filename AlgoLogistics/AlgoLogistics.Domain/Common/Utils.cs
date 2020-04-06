@@ -1,23 +1,26 @@
-﻿using System;
+﻿using AlgoLogistics.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AlgoLogistics.Domain.Common
 {
-	static class Utils
+	public static class Utils
 	{
-		public static bool LessThan(this (double, double, double) parameters, (double, double, double) otherParameters)
+		public static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
 		{
-			return parameters.Item1 < otherParameters.Item1
-				&& parameters.Item2 < otherParameters.Item2
-				&& parameters.Item3 < otherParameters.Item3;
-		}
+			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
 
-		public static bool GreaterThan(this (double, double, double) parameters, (double, double, double) otherParameters)
-		{
-			return parameters.Item1 > otherParameters.Item1
-				|| parameters.Item2 > otherParameters.Item2
-				|| parameters.Item3 > otherParameters.Item3;
+			foreach (var city in cityNetwork)
+			{
+				var key = city.Name;
+				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
+
+				graphDictionary.Add(key, value);
+			}
+
+			return graphDictionary;
 		}
 	}
 }

@@ -5,6 +5,8 @@ using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Algorithms.QuickSort;
 using AlgoLogistics.Algorithms.SelectionSort;
 using AlgoLogistics.Application.Integration.Services;
+using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,6 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.ConsoleTester
 {
-	public class City
-	{
-		public string Name { get; set; }
-		public List<ConnectedCity> Connections { get; set; }
-	}
-
-	public class ConnectedCity
-	{
-		public string Name { get; set; }
-		public double Distance { get; set; }
-	}
-
 	class Program
 	{
 		static async Task Main(string[] args)
@@ -39,7 +29,7 @@ namespace AlgoLogistics.ConsoleTester
 			var algorithm = new DijkstraAlgorithm();
 			var result = algorithm.Search(new DijkstraAlgorithmInput
 			{ 
-				Graph = ConvertToGraph(network),
+				Graph = Utils.ConvertToGraph(network),
 				Start = "Lutsk",
 				End = "Uzgorod"
 			});
@@ -47,21 +37,6 @@ namespace AlgoLogistics.ConsoleTester
 			Console.WriteLine(result.Value);
 			Console.WriteLine(string.Join('-', result.Path));
 			Console.ReadKey();
-		}
-
-		private static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
-		{
-			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
-
-			foreach (var city in cityNetwork)
-			{
-				var key = city.Name;
-				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
-
-				graphDictionary.Add(key, value);
-			}
-
-			return graphDictionary;
 		}
 	}
 }

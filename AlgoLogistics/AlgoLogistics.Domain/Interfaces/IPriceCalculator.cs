@@ -7,6 +7,6 @@ namespace AlgoLogistics.Domain.Interfaces
 {
 	public interface IPriceCalculator
 	{
-		Task<decimal> CalculateDeliveryPriceAsync();
+		Task<decimal> CalculateDeliveryPriceAsync(string fromCity, string toCity);
 	}
 }

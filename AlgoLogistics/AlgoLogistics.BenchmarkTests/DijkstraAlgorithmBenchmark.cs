@@ -1,4 +1,6 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
+using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Entities;
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 using System;
@@ -8,19 +10,7 @@ using System.Linq;
 using System.Text;
 
 namespace AlgoLogistics.BenchmarkTests
-{
-    public class City
-    {
-        public string Name { get; set; }
-        public List<ConnectedCity> Connections { get; set; }
-    }
-
-    public class ConnectedCity
-    {
-        public string Name { get; set; }
-        public double Distance { get; set; }
-    }
-
+{ 
     [MemoryDiagnoser]
     public class DijkstraAlgorithmBenchmark
     {
@@ -37,25 +27,10 @@ namespace AlgoLogistics.BenchmarkTests
             dijkstra = new DijkstraAlgorithm();
             input = new DijkstraAlgorithmInput
             {
-                Graph = ConvertToGraph(network),
+                Graph = Utils.ConvertToGraph(network),
                 Start = "Lutsk",
                 End = "Uzgorod"
             };
-        }
-
-        private static Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
-        {
-            var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
-
-            foreach (var city in cityNetwork)
-            {
-                var key = city.Name;
-                var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
-
-                graphDictionary.Add(key, value);
-            }
-
-            return graphDictionary;
         }
 
         [Benchmark]

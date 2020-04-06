@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
+using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -26,7 +27,7 @@ namespace AlgoLogistics.Tests.Algorithms
 			var json = sr.ReadToEnd();
 
 			var network = JsonConvert.DeserializeObject<List<City>>(json);
-			_graph = ConvertToGraph(network);
+			_graph = Utils.ConvertToGraph(network);
 		}
 
 		[TestCaseSource(typeof(DijkstraAlgorithmDataClass), "Data")]
@@ -42,21 +43,6 @@ namespace AlgoLogistics.Tests.Algorithms
 			var result = _sut.Search(input);
 
 			return result.Value;
-		}
-
-		private Dictionary<string, Dictionary<string, double>> ConvertToGraph(List<City> cityNetwork)
-		{
-			var graphDictionary = new Dictionary<string, Dictionary<string, double>>();
-
-			foreach (var city in cityNetwork)
-			{
-				var key = city.Name;
-				var value = city.Connections.ToDictionary(x => x.Name, x => x.Distance);
-
-				graphDictionary.Add(key, value);
-			}
-
-			return graphDictionary;
 		}
 	}
 
