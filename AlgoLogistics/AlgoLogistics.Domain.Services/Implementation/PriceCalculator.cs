@@ -33,7 +33,9 @@ namespace AlgoLogistics.Domain.Services.Implementation
 			});
 
 			var distance = algorithmResult.Value;
-			return (decimal)distance;
+			var basePrice = 20m;
+
+			return basePrice + decimal.Divide((decimal)distance, 10m);
 		}
 	}
 }
