@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics", "AlgoLogist
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Algorithms", "AlgoLogistics.Algorithms\AlgoLogistics.Algorithms.csproj", "{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{66B055AD-0BF6-45EF-93B5-C72A2B222687}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.ConsoleTester", "AlgoLogistics.ConsoleTester\AlgoLogistics.ConsoleTester.csproj", "{F6065110-8100-40EE-A208-CDB9A79AC031}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Domain", "AlgoLogistics.Domain\AlgoLogistics.Domain.csproj", "{1448BD66-4C48-4103-B183-A33865EAF824}"
@@ -23,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application.Integration", "AlgoLogistics.Application.IntegrationServices\AlgoLogistics.Application.Integration.csproj", "{BF772F9A-5FF9-4CCD-8405-0EA9C81E8D2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.BenchmarkTests", "AlgoLogistics.BenchmarkTests\AlgoLogistics.BenchmarkTests.csproj", "{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.BenchmarkTests", "AlgoLogistics.BenchmarkTests\AlgoLogistics.BenchmarkTests.csproj", "{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{0C61577A-4619-4E54-BFE6-24F8FF946D1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,6 @@ Global
 		{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{670D382B-64E7-473A-A4BB-DD17B1E8EE8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66B055AD-0BF6-45EF-93B5-C72A2B222687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66B055AD-0BF6-45EF-93B5-C72A2B222687}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66B055AD-0BF6-45EF-93B5-C72A2B222687}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66B055AD-0BF6-45EF-93B5-C72A2B222687}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6065110-8100-40EE-A208-CDB9A79AC031}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,10 @@ Global
 		{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C61577A-4619-4E54-BFE6-24F8FF946D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C61577A-4619-4E54-BFE6-24F8FF946D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C61577A-4619-4E54-BFE6-24F8FF946D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C61577A-4619-4E54-BFE6-24F8FF946D1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

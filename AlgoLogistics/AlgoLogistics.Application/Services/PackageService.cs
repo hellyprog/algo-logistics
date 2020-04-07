@@ -29,16 +29,14 @@ namespace AlgoLogistics.Application.Services
 
 		public async Task<ExecutionResult<Package>> GetPackageByInvoiceNoAsync(string invoiceNo)
 		{
-			var query = new GetPackageQuery { InvoiceNo = invoiceNo };
-			var result = await _mediator.Send(query);
+			var result = await _mediator.Send(new GetPackageQuery { InvoiceNo = invoiceNo });
 
 			return result;
 		}
 
 		public async Task<ExecutionResult<List<Package>>> GetPackagesAsync()
 		{
-			var query = new GetPackagesQuery();
-			var result = await _mediator.Send(query);
+			var result = await _mediator.Send(new GetPackagesQuery());
 
 			return result;
 		}

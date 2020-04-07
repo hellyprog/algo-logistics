@@ -12,10 +12,10 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Shipment : AuditableEntity
 	{
-		private readonly HashSet<Package> _packages;
+		private readonly List<Package> _packages;
 
 		public int ShipmentId { get; private set; }
-		public IEnumerable<Package> Packages => _packages?.ToList();
+		public IEnumerable<Package> Packages => _packages;
 		public Route Route { get; private set; }
 
 		private Shipment()
@@ -24,7 +24,7 @@ namespace AlgoLogistics.Domain.Entities
 
 		private Shipment(List<Package> packages, Route route)
 		{
-			_packages = packages.ToHashSet();
+			_packages = packages;
 			Route = route;
 		}
 

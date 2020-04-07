@@ -14,8 +14,8 @@ namespace AlgoLogistics.BenchmarkTests
     [MemoryDiagnoser]
     public class DijkstraAlgorithmBenchmark
     {
-        DijkstraAlgorithm dijkstra;
-        DijkstraAlgorithmInput input;
+        private readonly DijkstraAlgorithm dijkstra;
+        private readonly DijkstraAlgorithmInput input;
 
         public DijkstraAlgorithmBenchmark()
         {

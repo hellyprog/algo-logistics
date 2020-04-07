@@ -22,16 +22,14 @@ namespace AlgoLogistics.Application.Services
 
 		public async Task<ExecutionResult> GenerateShipmentsAsync()
 		{
-			var command = new GenerateShipmentsCommand();
-			var result = await _mediator.Send(command);
+			var result = await _mediator.Send(new GenerateShipmentsCommand());
 
 			return result;
 		}
 
 		public async Task<ExecutionResult<List<Shipment>>> GetShipmentsAsync()
 		{
-			var query = new GetShipmentsQuery();
-			var result = await _mediator.Send(query);
+			var result = await _mediator.Send(new GetShipmentsQuery());
 
 			return result;
 		}

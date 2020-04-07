@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlgoLogistics.Algorithms" Version="1.0.0" />
+    <ProjectReference Include="..\AlgoLogistics.Algorithms\AlgoLogistics.Algorithms.csproj" />
   </ItemGroup>
 
 </Project>
