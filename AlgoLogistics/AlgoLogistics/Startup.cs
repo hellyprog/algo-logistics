@@ -1,11 +1,12 @@
+using AlgoLogistics.Application.Common;
 using AlgoLogistics.Application.Integration.Services;
 using AlgoLogistics.Application.Interfaces;
 using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
-using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Implementation;
 using AlgoLogistics.Infrastructure;
+using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
 using MediatR;
@@ -60,7 +61,7 @@ namespace AlgoLogistics
 			app.UseRouting();
 			app.UseAuthorization();
 
-			//app.UseMiddleware<RequestResponseLoggingMiddleware>();
+			app.UseMiddleware<RequestResponseLoggingMiddleware>();
 			app.UseMiddleware<ErrorHandlingMiddleware>();
 			app.UseEndpoints(endpoints =>
 			{

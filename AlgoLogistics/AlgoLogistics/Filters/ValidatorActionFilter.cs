@@ -19,7 +19,6 @@ namespace AlgoLogistics.Filters
 
 		public void OnActionExecuted(ActionExecutedContext filterContext)
 		{
-
 		}
 	}
 }

@@ -18,25 +18,35 @@ namespace AlgoLogistics.Infrastructure.Logging
 
 		public async Task InvokeAsync(HttpContext context)
 		{
+			context.Request.EnableBuffering();
 			var requestBody = await GetRequestBodyAsync(context.Request);
+			context.Request.Body.Position = 0;
 			var originalBodyStream = context.Response.Body;
 
 			Log.ForContext(LoggingConstants.TypeKey, LoggingConstants.RequestLogType)
 				.ForContext("Method", context.Request.Method)
 				.Information("{body}", requestBody);
 
-			using var responseBody = new MemoryStream();
-			context.Response.Body = responseBody;
+			try
+			{
+				using var responseBody = new MemoryStream();
+				context.Response.Body = responseBody;
 
-			await _next(context);
+				await _next(context);
 
-			var response = await GerResponseBodyAsync(context.Response);
+				var response = await GerResponseBodyAsync(context.Response);
 
-			Log.ForContext(LoggingConstants.TypeKey, LoggingConstants.ResponseLogType)
-				.ForContext("statusCode", context.Response.StatusCode)
-				.Information("{body}", response);
+				Log.ForContext(LoggingConstants.TypeKey, LoggingConstants.ResponseLogType)
+					.ForContext("statusCode", context.Response.StatusCode)
+					.Information("{body}", response);
 
-			await responseBody.CopyToAsync(originalBodyStream);
+				responseBody.Position = 0;
+				await responseBody.CopyToAsync(originalBodyStream);
+			}
+			finally
+			{
+				context.Response.Body = originalBodyStream;
+			}
 		}
 
 		private async Task<string> GetRequestBodyAsync(HttpRequest request)

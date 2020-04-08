@@ -1,4 +1,4 @@
-﻿namespace AlgoLogistics.Domain.Services.DTOs
+﻿namespace AlgoLogistics.Application.DTOs
 {
 	public class DeliveryDetailsDTO
 	{

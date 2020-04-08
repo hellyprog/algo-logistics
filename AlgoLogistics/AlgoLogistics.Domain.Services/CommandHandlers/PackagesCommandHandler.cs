@@ -27,9 +27,8 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 		public async Task<ExecutionResult> Handle(CreatePackageCommand request, CancellationToken cancellationToken)
 		{
-			var deliveryDetails = _mapper.Map<DeliveryDetails>(request.DeliveryDetails);
-			var physicalParameters = _mapper.Map<PhysicalParameters>(request.PhysicalParameters);
-
+			var deliveryDetails = request.DeliveryDetails;
+			var physicalParameters = request.PhysicalParameters;
 			var existingCities = await _applicationDbContext.Cities.Select(c => c.Name).ToListAsync();
 
 			if (!existingCities.Contains(deliveryDetails.FromCity) || !existingCities.Contains(deliveryDetails.ToCity))
