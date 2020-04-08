@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+	public class ApplicationDbContext : DbContext, IApplicationDbContext
 	{
 		public ApplicationDbContext(DbContextOptions options) : base(options)
 		{
@@ -18,88 +18,88 @@ namespace AlgoLogistics.Infrastructure.Persistence
 
 		public DbSet<Package> Packages { get; set; }
 		public DbSet<Shipment> Shipments { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<PackageCategory> PackageCategories { get; set; }
+		public DbSet<City> Cities { get; set; }
+		public DbSet<PackageCategory> PackageCategories { get; set; }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        entry.Entity.Created = DateTime.Now;
-                        break;
-                    case EntityState.Modified:
-                        entry.Entity.LastModified = DateTime.Now;
-                        break;
-                }
-            }
+		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+		{
+			foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+			{
+				switch (entry.State)
+				{
+					case EntityState.Added:
+						entry.Entity.Created = DateTime.Now;
+						break;
+					case EntityState.Modified:
+						entry.Entity.LastModified = DateTime.Now;
+						break;
+				}
+			}
 
-            return base.SaveChangesAsync(cancellationToken);
-        }
+			return base.SaveChangesAsync(cancellationToken);
+		}
 
-        protected override void OnModelCreating(ModelBuilder builder)
+		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
 			base.OnModelCreating(builder);
 
-            builder.Entity<City>().HasData(
-                new City { CityId = 1, Name = "Lviv" },
-                new City { CityId = 2, Name = "Uzgorod" },
-                new City { CityId = 3, Name = "Lutsk" },
-                new City { CityId = 4, Name = "Rivne" },
-                new City { CityId = 5, Name = "Ternopil" },
-                new City { CityId = 6, Name = "Ivano-Frankivsk" },
-                new City { CityId = 7, Name = "Chernivtsi" },
-                new City { CityId = 8, Name = "Zhytomyr" },
-                new City { CityId = 9, Name = "Khmelnytskyi" },
-                new City { CityId = 10, Name = "Vinnytsia" }
-            );
+			builder.Entity<City>().HasData(
+				new City { CityId = 1, Name = "Lviv" },
+				new City { CityId = 2, Name = "Uzgorod" },
+				new City { CityId = 3, Name = "Lutsk" },
+				new City { CityId = 4, Name = "Rivne" },
+				new City { CityId = 5, Name = "Ternopil" },
+				new City { CityId = 6, Name = "Ivano-Frankivsk" },
+				new City { CityId = 7, Name = "Chernivtsi" },
+				new City { CityId = 8, Name = "Zhytomyr" },
+				new City { CityId = 9, Name = "Khmelnytskyi" },
+				new City { CityId = 10, Name = "Vinnytsia" }
+			);
 
-            builder.Entity<PackageCategory>().HasData(
-                    new PackageCategory 
-                    {
-                        PackageCategoryId = 1,
-                        SizeCategory = SizeCategory.ExtraSmall,
-                        Length = 0.2,
-                        Width = 0.15,
-                        Height = 0.05
-                    },
-                    new PackageCategory
-                    {
-                        PackageCategoryId = 2,
-                        SizeCategory = SizeCategory.Small,
-                        Length = 0.3,
-                        Width = 0.2,
-                        Height = 0.1
-                    },
-                    new PackageCategory
-                    {
-                        PackageCategoryId = 3,
-                        SizeCategory = SizeCategory.Medium,
-                        Length = 0.3,
-                        Width = 0.3,
-                        Height = 0.2
-                    },
-                    new PackageCategory
-                    {
-                        PackageCategoryId = 4,
-                        SizeCategory = SizeCategory.Large,
-                        Length = 0.4,
-                        Width = 0.3,
-                        Height = 0.3
-                    },
-                    new PackageCategory
-                    {
-                        PackageCategoryId = 5,
-                        SizeCategory = SizeCategory.ExtraLarge,
-                        Length = 0.45,
-                        Width = 0.3,
-                        Height = 0.3
-                    }
-                );
+			builder.Entity<PackageCategory>().HasData(
+					new PackageCategory
+					{
+						PackageCategoryId = 1,
+						SizeCategory = SizeCategory.ExtraSmall,
+						Length = 0.2,
+						Width = 0.15,
+						Height = 0.05
+					},
+					new PackageCategory
+					{
+						PackageCategoryId = 2,
+						SizeCategory = SizeCategory.Small,
+						Length = 0.3,
+						Width = 0.2,
+						Height = 0.1
+					},
+					new PackageCategory
+					{
+						PackageCategoryId = 3,
+						SizeCategory = SizeCategory.Medium,
+						Length = 0.3,
+						Width = 0.3,
+						Height = 0.2
+					},
+					new PackageCategory
+					{
+						PackageCategoryId = 4,
+						SizeCategory = SizeCategory.Large,
+						Length = 0.4,
+						Width = 0.3,
+						Height = 0.3
+					},
+					new PackageCategory
+					{
+						PackageCategoryId = 5,
+						SizeCategory = SizeCategory.ExtraLarge,
+						Length = 0.45,
+						Width = 0.3,
+						Height = 0.3
+					}
+				);
 		}
 	}
 }

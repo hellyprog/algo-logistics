@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AlgoLogistics.Application.Interfaces;
+﻿using AlgoLogistics.Application.Interfaces;
 using AlgoLogistics.Domain.Entities;
-using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
-using AlgoLogistics.Domain.Services.Queries;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Controllers
 {
@@ -19,11 +14,11 @@ namespace AlgoLogistics.Controllers
     {
         private readonly IShipmentService _shipmentService;
 
-        public ShipmentsController(IMediator mediator, IShipmentService shipmentService)
+        public ShipmentsController(IShipmentService shipmentService)
         {
             _shipmentService = shipmentService;
         }
-        
+
         [HttpGet]
         [ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetShipments()

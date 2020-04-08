@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using AlgoLogistics.Infrastructure.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
+using System;
+using System.IO;
 
 namespace AlgoLogistics
 {
@@ -41,7 +37,7 @@ namespace AlgoLogistics
 				{
 					config.SetBasePath(Directory.GetCurrentDirectory())
 						  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-					      .AddJsonFile($"appsettings.{EnvName}.json", optional: true)
+						  .AddJsonFile($"appsettings.{EnvName}.json", optional: true)
 						  .AddEnvironmentVariables();
 				})
 				.ConfigureWebHostDefaults(webBuilder =>

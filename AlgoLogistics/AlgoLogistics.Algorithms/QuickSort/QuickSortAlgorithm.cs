@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace AlgoLogistics.Algorithms.QuickSort
 {
@@ -30,7 +28,7 @@ namespace AlgoLogistics.Algorithms.QuickSort
 						else
 						{
 							greaterThanPivot.Add(input[i]);
-						} 
+						}
 					}
 				}
 

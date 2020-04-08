@@ -1,6 +1,4 @@
-﻿using AlgoLogistics.Algorithms;
-using AlgoLogistics.Algorithms.Dijkstra;
-using AlgoLogistics.DataAccess;
+﻿using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
@@ -32,9 +30,9 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
 			var packages = await (from package in _applicationDbContext.Packages
-								   where package.Status == DeliveryStatus.NotSent
-								   && package.Created.Date == DateTime.Now.AddDays(-1).Date
-								   select package).ToListAsync();
+								  where package.Status == DeliveryStatus.NotSent
+								  && package.Created.Date == DateTime.Now.AddDays(-1).Date
+								  select package).ToListAsync();
 
 			var shipmentList = new List<Shipment>();
 
@@ -60,7 +58,7 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 
 			return savingResult > 0
 				? ExecutionResult.CreateSuccessResult()
-                : ExecutionResult.CreateFailureResult("Shipment generation failed");
+				: ExecutionResult.CreateFailureResult("Shipment generation failed");
 		}
 	}
 }

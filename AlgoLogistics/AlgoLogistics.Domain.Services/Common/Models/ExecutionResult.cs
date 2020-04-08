@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgoLogistics.Domain.Services.Common.Models
+﻿namespace AlgoLogistics.Domain.Services.Common.Models
 {
 	public class ExecutionResult
 	{

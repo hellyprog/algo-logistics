@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgoLogistics.Domain.Services.Common.Models
+﻿namespace AlgoLogistics.Domain.Services.Common.Models
 {
 	public class ExecutionResult<T> : ExecutionResult
 	{
@@ -13,7 +9,8 @@ namespace AlgoLogistics.Domain.Services.Common.Models
 			return new ExecutionResult<T>
 			{
 				Data = data,
-				Success = true
+				Success = true,
+				CustomExecutionCode = customExecutionCode
 			};
 		}
 

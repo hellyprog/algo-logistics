@@ -15,7 +15,7 @@ namespace AlgoLogistics.Infrastructure
 				b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
 			services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-			
+
 			return services;
 		}
 	}

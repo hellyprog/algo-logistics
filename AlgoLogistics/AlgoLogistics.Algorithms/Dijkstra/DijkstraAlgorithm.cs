@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AlgoLogistics.Algorithms.Dijkstra
 {
@@ -47,11 +46,11 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 			return new DijkstraAlgorithmOutput
 			{
 				Value = costs[input.End],
-				Path = GetPath(parents, input.Start, input.End)
+				Path = GetPath(parents, input.End)
 			};
 		}
 
-		private Queue<string> GetPath(Dictionary<string, string> parents, string start, string end)
+		private Queue<string> GetPath(Dictionary<string, string> parents, string end)
 		{
 			var result = new List<string>
 			{
@@ -63,10 +62,10 @@ namespace AlgoLogistics.Algorithms.Dijkstra
 			while (parents.TryGetValue(keyToGet, out keyToGet))
 			{
 				result.Add(keyToGet);
-			} 
-			
+			}
+
 			result.Reverse();
-			
+
 			return new Queue<string>(result);
 		}
 

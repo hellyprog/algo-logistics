@@ -1,10 +1,8 @@
 ﻿using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Interfaces;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Application.Integration.Services

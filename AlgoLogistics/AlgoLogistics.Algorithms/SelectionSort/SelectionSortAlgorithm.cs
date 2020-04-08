@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgoLogistics.Algorithms.SelectionSort
+﻿namespace AlgoLogistics.Algorithms.SelectionSort
 {
 	public class SelectionSortAlgorithm : ISortAlgorithm<int[], int[]>
-	{ 
+	{
 		public int[] Sort(int[] input)
 		{
 			for (int i = 0; i < input.Length - 1; i++)

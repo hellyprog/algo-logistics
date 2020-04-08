@@ -2,16 +2,16 @@
 
 namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 {
-    public partial class ShipmentBackingFieldConfiguration : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+	public partial class ShipmentBackingFieldConfiguration : Migration
+	{
+		protected override void Up(MigrationBuilder migrationBuilder)
+		{
 
-        }
+		}
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+		protected override void Down(MigrationBuilder migrationBuilder)
+		{
 
-        }
-    }
+		}
+	}
 }

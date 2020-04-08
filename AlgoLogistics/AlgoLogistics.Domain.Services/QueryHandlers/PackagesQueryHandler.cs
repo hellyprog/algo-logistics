@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.QueryHandlers
 {
-	public class PackagesQueryHandler : 
+	public class PackagesQueryHandler :
 		IRequestHandler<GetPackagesQuery, ExecutionResult<List<Package>>>,
 		IRequestHandler<GetPackageQuery, ExecutionResult<Package>>
 	{

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgoLogistics.Domain.Services.DTOs
+﻿namespace AlgoLogistics.Domain.Services.DTOs
 {
 	public class DeliveryDetailsDTO
 	{

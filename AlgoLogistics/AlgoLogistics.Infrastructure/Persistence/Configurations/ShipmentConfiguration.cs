@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 {
@@ -27,7 +26,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 						.HasColumnName("path")
 						.IsRequired();
 				});
-			
+
 			builder.HasMany(p => p.Packages)
 				   .WithOne(p => p.Shipment)
 				   .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);

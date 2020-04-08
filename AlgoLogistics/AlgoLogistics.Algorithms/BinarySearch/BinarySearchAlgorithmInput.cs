@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AlgoLogistics.Algorithms.BinarySearch
+﻿namespace AlgoLogistics.Algorithms.BinarySearch
 {
 	public class BinarySearchAlgorithmInput
 	{

@@ -5,9 +5,7 @@ using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Common;
 using AlgoLogistics.Domain.Services.Implementation;
-using AlgoLogistics.Filters;
 using AlgoLogistics.Infrastructure;
-using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
 using MediatR;
@@ -29,7 +27,7 @@ namespace AlgoLogistics
 
 		public IConfiguration Configuration { get; }
 
-		
+
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();

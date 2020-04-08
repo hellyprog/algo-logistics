@@ -3,12 +3,9 @@ using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace AlgoLogistics.Tests.Algorithms
 {
@@ -47,10 +44,10 @@ namespace AlgoLogistics.Tests.Algorithms
 	}
 
 	internal class DijkstraAlgorithmDataClass
-	{ 
+	{
 		public static IEnumerable Data
 		{
-			get 
+			get
 			{
 				yield return new TestCaseData("Lutsk", "Uzgorod").Returns(417);
 				yield return new TestCaseData("Lviv", "Chernivtsi").Returns(269);

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Serilog;
-using Serilog.Formatting.Compact;
+﻿using Serilog;
 using Serilog.Formatting.Elasticsearch;
 using Serilog.Sinks.Elasticsearch;
 using System;

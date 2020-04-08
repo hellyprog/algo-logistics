@@ -2,9 +2,6 @@
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Entities
@@ -25,10 +22,10 @@ namespace AlgoLogistics.Domain.Entities
 		private Package() { }
 
 		private Package(
-			string description, 
-			decimal price, 
-			PhysicalParameters physicalParameters, 
-			DeliveryDetails deliveryDetails, 
+			string description,
+			decimal price,
+			PhysicalParameters physicalParameters,
+			DeliveryDetails deliveryDetails,
 			PackageCategory packageCategory,
 			decimal deliveryPrice)
 		{

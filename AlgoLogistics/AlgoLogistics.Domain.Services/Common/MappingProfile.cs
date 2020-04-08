@@ -1,9 +1,6 @@
-﻿using AlgoLogistics.Domain.Services.DTOs;
-using AlgoLogistics.Domain.Entities;
+﻿using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.DTOs;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AlgoLogistics.Domain.Services.Common
 {

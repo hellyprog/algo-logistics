@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace AlgoLogistics.Algorithms.BFS
 {
@@ -20,7 +17,7 @@ namespace AlgoLogistics.Algorithms.BFS
 			while (queue.Count > 0)
 			{
 				var node = queue.Dequeue();
-				
+
 				if (!checkedNodes.Contains(node))
 				{
 					if (node.Name == input.NameToSearch)
@@ -35,7 +32,7 @@ namespace AlgoLogistics.Algorithms.BFS
 						{
 							queue.Enqueue(item);
 						}
-					} 
+					}
 				}
 			}
 

@@ -1,10 +1,6 @@
 ﻿using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.DTOs;
-using AlgoLogistics.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AlgoLogistics.Domain.Services.Commands
 {

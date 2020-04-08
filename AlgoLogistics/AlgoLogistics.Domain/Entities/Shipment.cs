@@ -1,11 +1,8 @@
-﻿using AlgoLogistics.Algorithms;
-using AlgoLogistics.Algorithms.Dijkstra;
+﻿using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Entities
