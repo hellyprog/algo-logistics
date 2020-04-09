@@ -2,9 +2,10 @@
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
+using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
-using MediatR;
+using AlgoLogistics.Domain.Services.Queries;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Domain.Services.CommandHandlers
+namespace AlgoLogistics.Domain.Services.BusinessLogic
 {
-	public class ShipmentsCommandHandler : IRequestHandler<GenerateShipmentsCommand, ExecutionResult>
+	public class ShipmentService : IShipmentService
 	{
 		private readonly IApplicationDbContext _applicationDbContext;
 		private readonly ICityNetworkProvider _cityNetworkProvider;
 
-		public ShipmentsCommandHandler(
+		public ShipmentService(
 			IApplicationDbContext applicationDbContext,
 			ICityNetworkProvider cityNetworkProvider)
 		{
@@ -27,7 +28,7 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 			_cityNetworkProvider = cityNetworkProvider;
 		}
 
-		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
+		public async Task<ExecutionResult> GenerateShipments(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
 			var packages = await (from package in _applicationDbContext.Packages
 								  where package.Status == DeliveryStatus.NotSent
@@ -59,6 +60,13 @@ namespace AlgoLogistics.Domain.Services.CommandHandlers
 			return savingResult > 0
 				? ExecutionResult.CreateSuccessResult()
 				: ExecutionResult.CreateFailureResult("Shipment generation failed");
+		}
+
+		public async Task<ExecutionResult<List<Shipment>>> GetShipments(GetShipmentsQuery query)
+		{
+			var shipments = await _applicationDbContext.Shipments.ToListAsync();
+
+			return ExecutionResult<List<Shipment>>.CreateSuccessResult(shipments);
 		}
 	}
 }

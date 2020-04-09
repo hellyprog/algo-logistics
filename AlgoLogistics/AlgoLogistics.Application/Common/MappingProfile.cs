@@ -10,7 +10,7 @@ namespace AlgoLogistics.Application.Common
 		public MappingProfile()
 		{
 			CreateMap<CreatePackageDTO, CreatePackageCommand>()
-				.ForMember(s => s.PhysicalParameters, 
+				.ForMember(s => s.PhysicalParameters,
 					x => x.MapFrom(d => new PhysicalParameters(d.PhysicalParameters.Length, d.PhysicalParameters.Width, d.PhysicalParameters.Height)))
 				.ForMember(s => s.DeliveryDetails,
 					x => x.MapFrom(d => new DeliveryDetails(d.DeliveryDetails.Sender, d.DeliveryDetails.Receiver, d.DeliveryDetails.FromCity, d.DeliveryDetails.ToCity)));

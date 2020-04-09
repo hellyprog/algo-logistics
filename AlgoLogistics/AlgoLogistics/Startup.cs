@@ -1,10 +1,10 @@
 using AlgoLogistics.Application.Common;
+using AlgoLogistics.Application.Executors;
+using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Application.Integration.Services;
-using AlgoLogistics.Application.Interfaces;
-using AlgoLogistics.Application.Services;
 using AlgoLogistics.Domain.Interfaces;
-using AlgoLogistics.Domain.Services;
-using AlgoLogistics.Domain.Services.Implementation;
+using AlgoLogistics.Domain.Services.BusinessLogic;
+using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
@@ -35,9 +35,11 @@ namespace AlgoLogistics
 			services.AddHealthChecks();
 			services.AddInfrastructure(Configuration);
 
-			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Info).Assembly);
+			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Application.Info).Assembly);
 			services.AddSingleton(GetMapper());
 
+			services.AddTransient<IPackageLogicExecutor, PackageLogicExecutor>();
+			services.AddTransient<IShipmentLogicExecutor, ShipmentLogicExecutor>();
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
 			services.AddTransient<ICityNetworkProvider, CityNetworkProvider>();

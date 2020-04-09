@@ -3,7 +3,7 @@ using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Interfaces;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Domain.Services.Implementation
+namespace AlgoLogistics.Domain.Services.BusinessLogic
 {
 	public class PriceCalculator : IPriceCalculator
 	{

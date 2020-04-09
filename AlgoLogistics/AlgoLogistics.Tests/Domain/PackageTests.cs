@@ -1,6 +1,6 @@
 ﻿using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Interfaces;
-using AlgoLogistics.Domain.Services.Implementation;
+using AlgoLogistics.Domain.Services.BusinessLogic;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;

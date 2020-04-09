@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Application.Interfaces;
+﻿using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Common.Models;
 using Microsoft.AspNetCore.Http;
@@ -8,36 +8,36 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ShipmentsController : BaseAlgoLogisticsController
-    {
-        private readonly IShipmentService _shipmentService;
+	[Route("api/[controller]")]
+	[ApiController]
+	public class ShipmentsController : BaseAlgoLogisticsController
+	{
+		private readonly IShipmentLogicExecutor _shipmentLogicExecutor;
 
-        public ShipmentsController(IShipmentService shipmentService)
-        {
-            _shipmentService = shipmentService;
-        }
+		public ShipmentsController(IShipmentLogicExecutor shipmentLogicExecutor)
+		{
+			_shipmentLogicExecutor = shipmentLogicExecutor;
+		}
 
-        [HttpGet]
-        [ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetShipments()
-        {
-            var result = await _shipmentService.GetShipmentsAsync();
+		[HttpGet]
+		[ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
+		public async Task<IActionResult> GetShipments()
+		{
+			var result = await _shipmentLogicExecutor.GetShipmentsAsync();
 
-            return StatusCode(StatusCodes.Status200OK, result);
-        }
+			return StatusCode(StatusCodes.Status200OK, result);
+		}
 
-        [HttpPost]
-        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GenerateShipments()
-        {
-            var result = await _shipmentService.GenerateShipmentsAsync();
+		[HttpPost]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> GenerateShipments()
+		{
+			var result = await _shipmentLogicExecutor.GenerateShipmentsAsync();
 
-            return result.Success
-                ? StatusCode(StatusCodes.Status200OK, result)
-                : StatusCode(StatusCodes.Status400BadRequest, result);
-        }
-    }
+			return result.Success
+				? StatusCode(StatusCodes.Status200OK, result)
+				: StatusCode(StatusCodes.Status400BadRequest, result);
+		}
+	}
 }

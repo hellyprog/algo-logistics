@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Application.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.BenchmarkTests", "AlgoLogistics.BenchmarkTests\AlgoLogistics.BenchmarkTests.csproj", "{2E4D62A8-A28D-4DCD-A679-A5B778CA0522}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{0C61577A-4619-4E54-BFE6-24F8FF946D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlgoLogistics.Tests", "AlgoLogistics.Tests\AlgoLogistics.Tests.csproj", "{0C61577A-4619-4E54-BFE6-24F8FF946D1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

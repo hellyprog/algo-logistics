@@ -1,5 +1,5 @@
 ﻿using AlgoLogistics.Application.DTOs;
-using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
@@ -9,14 +9,14 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.Services
+namespace AlgoLogistics.Application.Executors
 {
-	public class PackageService : IPackageService
+	public class PackageLogicExecutor : IPackageLogicExecutor
 	{
 		private readonly IMediator _mediator;
 		private readonly IMapper _mapper;
 
-		public PackageService(IMediator mediator, IMapper mapper)
+		public PackageLogicExecutor(IMediator mediator, IMapper mapper)
 		{
 			_mediator = mediator;
 			_mapper = mapper;

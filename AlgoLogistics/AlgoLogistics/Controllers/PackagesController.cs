@@ -1,7 +1,6 @@
 ﻿using AlgoLogistics.Application.DTOs;
-using AlgoLogistics.Application.Interfaces;
+using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
-using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,18 +13,18 @@ namespace AlgoLogistics.Controllers
 	[ApiController]
 	public class PackagesController : ControllerBase
 	{
-		private readonly IPackageService _packageService;
+		private readonly IPackageLogicExecutor _packageLogicExecutor;
 
-		public PackagesController(IPackageService packageService)
+		public PackagesController(IPackageLogicExecutor packageLogicExecutor)
 		{
-			_packageService = packageService;
+			_packageLogicExecutor = packageLogicExecutor;
 		}
 
 		[HttpGet]
 		[ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetPackages()
 		{
-			var result = await _packageService.GetPackagesAsync();
+			var result = await _packageLogicExecutor.GetPackagesAsync();
 
 			return StatusCode(StatusCodes.Status200OK, result);
 		}
@@ -34,7 +33,7 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetPackage(string invoiceNo)
 		{
-			var result = await _packageService.GetPackageByInvoiceNoAsync(invoiceNo);
+			var result = await _packageLogicExecutor.GetPackageByInvoiceNoAsync(invoiceNo);
 
 			return StatusCode(StatusCodes.Status200OK, result);
 		}
@@ -44,7 +43,7 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreatePackage(CreatePackageDTO dto)
 		{
-			var result = await _packageService.CreatePackageAsync(dto);
+			var result = await _packageLogicExecutor.CreatePackageAsync(dto);
 
 			return result.Success
 				? StatusCode(StatusCodes.Status201Created, result)

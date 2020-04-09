@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Application.Interfaces;
+﻿using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
@@ -7,13 +7,13 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.Services
+namespace AlgoLogistics.Application.Executors
 {
-	public class ShipmentService : IShipmentService
+	public class ShipmentLogicExecutor : IShipmentLogicExecutor
 	{
 		private readonly IMediator _mediator;
 
-		public ShipmentService(IMediator mediator)
+		public ShipmentLogicExecutor(IMediator mediator)
 		{
 			_mediator = mediator;
 		}
