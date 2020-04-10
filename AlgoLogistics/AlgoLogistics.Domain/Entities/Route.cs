@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoLogistics.Domain.Common.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace AlgoLogistics.Domain.Entities
@@ -7,10 +8,10 @@ namespace AlgoLogistics.Domain.Entities
 	{
 		public Route(string startCity, string destinationCity, double distance, Queue<string> path)
 		{
-			StartCity = startCity ?? throw new ArgumentNullException(nameof(startCity));
-			DestinationCity = destinationCity ?? throw new ArgumentNullException(nameof(destinationCity));
-			Path = path ?? throw new ArgumentNullException(nameof(path));
-			Distance = distance > 0 ? distance : throw new ArgumentException(nameof(distance));
+			StartCity = !string.IsNullOrEmpty(startCity) ? startCity : throw new AlgoLogisticsException($"{nameof(startCity)} cannot be null or empty");
+			DestinationCity = !string.IsNullOrEmpty(destinationCity) ? destinationCity : throw new AlgoLogisticsException($"{nameof(startCity)} cannot be null or empty");
+			Path = path ?? throw new AlgoLogisticsException($"{nameof(path)} cannot be null");
+			Distance = distance > 0 ? distance : throw new AlgoLogisticsException($"{nameof(distance)} cannot be less or equal to 0");
 		}
 
 		public string StartCity { get; set; }

@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Common.Exceptions;
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using System;
@@ -29,10 +30,10 @@ namespace AlgoLogistics.Domain.Entities
 			PackageCategory packageCategory,
 			decimal deliveryPrice)
 		{
-			Description = !string.IsNullOrEmpty(description) ? description : throw new ArgumentNullException(nameof(description));
-			DeliveryDetails = deliveryDetails ?? throw new ArgumentNullException(nameof(deliveryDetails));
-			PhysicalParameters = physicalParameters ?? throw new ArgumentNullException(nameof(physicalParameters));
-			Price = price > 0 ? price : throw new ArgumentException($"{nameof(price)} cannot be less than zero", nameof(price));
+			Description = !string.IsNullOrEmpty(description) ? description : throw new AlgoLogisticsException($"{nameof(description)} cannot be null or empty");
+			DeliveryDetails = deliveryDetails ?? throw new AlgoLogisticsException($"{nameof(deliveryDetails)} cannot be null");
+			PhysicalParameters = physicalParameters ?? throw new AlgoLogisticsException($"{nameof(physicalParameters)} cannot be null");
+			Price = price > 0 ? price : throw new AlgoLogisticsException($"{nameof(price)} cannot be less than zero");
 			DeliveryPrice = deliveryPrice;
 			PackageCategory = packageCategory;
 			Status = DeliveryStatus.NotSent;
@@ -59,7 +60,7 @@ namespace AlgoLogistics.Domain.Entities
 				DeliveryStatus.OnTheRoad => DeliveryStatus.Arrived,
 				DeliveryStatus.Arrived => DeliveryStatus.Received,
 				DeliveryStatus.Received => DeliveryStatus.Received,
-				_ => throw new ArgumentException(message: "Invalid emun value", nameof(Status))
+				_ => throw new AlgoLogisticsException($"Invalid emun value: {Status}")
 			};
 		}
 

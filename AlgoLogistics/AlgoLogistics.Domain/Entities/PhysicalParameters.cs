@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoLogistics.Domain.Common.Exceptions;
+using System;
 
 namespace AlgoLogistics.Domain.Entities
 {
@@ -14,7 +15,7 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			if (width <= 0 || height <= 0 || length <= 0)
 			{
-				throw new ArgumentException("Parameters cannot be negative or equal to zero");
+				throw new AlgoLogisticsException("Parameters cannot be negative or equal to 0");
 			}
 
 			Width = width;

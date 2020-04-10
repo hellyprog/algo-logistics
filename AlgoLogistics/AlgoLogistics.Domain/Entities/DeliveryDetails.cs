@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoLogistics.Domain.Common.Exceptions;
+using System;
 using System.Globalization;
 
 namespace AlgoLogistics.Domain.Entities
@@ -16,10 +17,18 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			var textInfo = new CultureInfo("en-US", false).TextInfo;
 
-			Sender = textInfo.ToTitleCase(sender) ?? throw new ArgumentNullException(nameof(sender));
-			Receiver = textInfo.ToTitleCase(receiver) ?? throw new ArgumentNullException(nameof(receiver));
-			FromCity = textInfo.ToTitleCase(fromCity) ?? throw new ArgumentNullException(nameof(fromCity));
-			ToCity = textInfo.ToTitleCase(toCity) ?? throw new ArgumentNullException(nameof(toCity));
+			Sender = !string.IsNullOrEmpty(sender) 
+				? textInfo.ToTitleCase(sender) 
+				: throw new AlgoLogisticsException($"{nameof(sender)} cannot be null or empty");
+			Receiver = !string.IsNullOrEmpty(receiver) 
+				? textInfo.ToTitleCase(receiver) 
+				: throw new AlgoLogisticsException($"{nameof(receiver)} cannot be null or empty");
+			FromCity = !string.IsNullOrEmpty(fromCity) 
+				? textInfo.ToTitleCase(fromCity) 
+				: throw new AlgoLogisticsException($"{nameof(fromCity)} cannot be null or empty");
+			ToCity = !string.IsNullOrEmpty(ToCity) 
+				? textInfo.ToTitleCase(toCity) 
+				: throw new AlgoLogisticsException($"{nameof(ToCity)} cannot be null or empty");
 		}
 	}
 }
