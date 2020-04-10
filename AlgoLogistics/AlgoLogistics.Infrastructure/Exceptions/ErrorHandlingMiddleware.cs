@@ -1,4 +1,5 @@
-﻿using AlgoLogistics.Domain.Services.Common.Models;
+﻿using AlgoLogistics.Domain.Common.Exceptions;
+using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Infrastructure.Logging;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -33,8 +34,15 @@ namespace AlgoLogistics.Middlewares
 		private Task HandleExceptionAsync(HttpContext context, Exception ex)
 		{
 			var code = HttpStatusCode.InternalServerError;
+			var errorMessage = ex.Message;
 
-			var result = JsonConvert.SerializeObject(ExecutionResult.CreateFailureResult(ex.Message, code.ToString()));
+			if (ex.InnerException != null && ex.InnerException is AlgoLogisticsException)
+			{
+				errorMessage = ex.InnerException.Message;
+				code = HttpStatusCode.BadRequest;
+			}
+
+			var result = JsonConvert.SerializeObject(ExecutionResult.CreateFailureResult(errorMessage, code.ToString()));
 			context.Response.ContentType = "application/json";
 			context.Response.StatusCode = (int)code;
 
