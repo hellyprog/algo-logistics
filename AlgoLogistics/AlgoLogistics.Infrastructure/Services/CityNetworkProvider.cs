@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AlgoLogistics.Application.Integration.Services
+namespace AlgoLogistics.Infrastructure.Services
 {
 	public class CityNetworkProvider : ICityNetworkProvider
 	{

@@ -1,7 +1,6 @@
 using AlgoLogistics.Application.Common;
 using AlgoLogistics.Application.Executors;
 using AlgoLogistics.Application.Executors.Interfaces;
-using AlgoLogistics.Application.Integration.Services;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.BusinessLogic;
 using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
@@ -42,7 +41,6 @@ namespace AlgoLogistics
 			services.AddTransient<IShipmentLogicExecutor, ShipmentLogicExecutor>();
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
-			services.AddTransient<ICityNetworkProvider, CityNetworkProvider>();
 			services.AddTransient<IPriceCalculator, PriceCalculator>();
 
 			services.AddSwaggerGen(c =>

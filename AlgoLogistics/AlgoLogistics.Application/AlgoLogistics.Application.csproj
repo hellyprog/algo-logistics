@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlgoLogistics.Application.IntegrationServices\AlgoLogistics.Application.Integration.csproj" />
     <ProjectReference Include="..\AlgoLogistics.Domain.Services\AlgoLogistics.Domain.Services.csproj" />
   </ItemGroup>
 
