@@ -1,5 +1,6 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace AlgoLogistics.Domain.Entities
 		public int ShipmentId { get; private set; }
 		public IEnumerable<Package> Packages => _packages;
 		public Route Route { get; private set; }
+		public ShipmentStatus ShipmentStatus { get; set; }
 
 		private Shipment()
 		{
@@ -23,6 +25,7 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			_packages = packages;
 			Route = route;
+			ShipmentStatus = ShipmentStatus.Shipping;
 		}
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)

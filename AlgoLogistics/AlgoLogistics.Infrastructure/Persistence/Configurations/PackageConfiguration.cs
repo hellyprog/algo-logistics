@@ -10,7 +10,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 	{
 		public void Configure(EntityTypeBuilder<Package> builder)
 		{
-			var deliveryStatusConverter = new EnumToStringConverter<DeliveryStatus>();
+			var deliveryStatusConverter = new EnumToStringConverter<PackageDeliveryStatus>();
 
 			builder.ToTable("Packages");
 

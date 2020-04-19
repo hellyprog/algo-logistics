@@ -1,6 +1,6 @@
 ﻿namespace AlgoLogistics.Domain.Enums
 {
-	public enum DeliveryStatus
+	public enum PackageDeliveryStatus
 	{
 		NotSent,
 		OnTheRoad,

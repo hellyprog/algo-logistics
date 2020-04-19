@@ -17,7 +17,7 @@ namespace AlgoLogistics.Domain.Entities
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
 		public PackageCategory PackageCategory { get; set; }
-		public DeliveryStatus Status { get; private set; }
+		public PackageDeliveryStatus Status { get; private set; }
 		public Shipment Shipment { get; private set; }
 
 		private Package() { }
@@ -36,7 +36,7 @@ namespace AlgoLogistics.Domain.Entities
 			Price = price > 0 ? price : throw new AlgoLogisticsException($"{nameof(price)} cannot be less than zero");
 			DeliveryPrice = deliveryPrice;
 			PackageCategory = packageCategory;
-			Status = DeliveryStatus.NotSent;
+			Status = PackageDeliveryStatus.NotSent;
 			InvoiceNo = GenerateInvoiceNo();
 		}
 
@@ -56,10 +56,10 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			Status = Status switch
 			{
-				DeliveryStatus.NotSent => DeliveryStatus.OnTheRoad,
-				DeliveryStatus.OnTheRoad => DeliveryStatus.Arrived,
-				DeliveryStatus.Arrived => DeliveryStatus.Received,
-				DeliveryStatus.Received => DeliveryStatus.Received,
+				PackageDeliveryStatus.NotSent => PackageDeliveryStatus.OnTheRoad,
+				PackageDeliveryStatus.OnTheRoad => PackageDeliveryStatus.Arrived,
+				PackageDeliveryStatus.Arrived => PackageDeliveryStatus.Received,
+				PackageDeliveryStatus.Received => PackageDeliveryStatus.Received,
 				_ => throw new AlgoLogisticsException($"Invalid emun value: {Status}")
 			};
 		}

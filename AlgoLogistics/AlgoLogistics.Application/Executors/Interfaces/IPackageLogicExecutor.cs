@@ -1,4 +1,4 @@
-﻿using AlgoLogistics.Application.DTOs;
+﻿using AlgoLogistics.Application.DTO;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Common.Models;
 using System.Collections.Generic;

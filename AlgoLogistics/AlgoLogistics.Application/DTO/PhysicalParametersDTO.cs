@@ -1,4 +1,4 @@
-﻿namespace AlgoLogistics.Application.DTOs
+﻿namespace AlgoLogistics.Application.DTO
 {
 	public class PhysicalParametersDTO
 	{

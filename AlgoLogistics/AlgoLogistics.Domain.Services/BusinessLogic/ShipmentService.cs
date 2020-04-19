@@ -31,7 +31,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 		public async Task<ExecutionResult> GenerateShipments(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
 			var packages = await (from package in _applicationDbContext.Packages
-								  where package.Status == DeliveryStatus.NotSent
+								  where package.Status == PackageDeliveryStatus.NotSent
 								  && package.Created.Date == DateTime.Now.AddDays(-1).Date
 								  select package).ToListAsync();
 

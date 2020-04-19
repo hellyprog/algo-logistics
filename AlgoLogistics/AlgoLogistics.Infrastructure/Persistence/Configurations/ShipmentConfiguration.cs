@@ -1,6 +1,8 @@
 ﻿using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.HasMany(p => p.Packages)
 				   .WithOne(p => p.Shipment)
 				   .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+			builder.Property(p => p.ShipmentStatus).HasColumnName("status").IsRequired().HasConversion(new EnumToStringConverter<ShipmentStatus>());
 
 			builder.Property(p => p.Created).HasColumnName("created");
 			builder.Property(p => p.CreatedBy).HasColumnName("created_by");
