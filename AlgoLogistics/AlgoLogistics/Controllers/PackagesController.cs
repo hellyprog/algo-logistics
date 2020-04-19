@@ -34,8 +34,9 @@ namespace AlgoLogistics.Controllers
 		public async Task<IActionResult> GetPackage(string invoiceNo)
 		{
 			var result = await _packageLogicExecutor.GetPackageByInvoiceNoAsync(invoiceNo);
+			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
-			return StatusCode(StatusCodes.Status200OK, result);
+			return StatusCode(statusCode, result);
 		}
 
 		[HttpPost]
@@ -44,10 +45,9 @@ namespace AlgoLogistics.Controllers
 		public async Task<IActionResult> CreatePackage(CreatePackageDTO dto)
 		{
 			var result = await _packageLogicExecutor.CreatePackageAsync(dto);
+			var statusCode = result.Success ? StatusCodes.Status201Created : StatusCodes.Status400BadRequest;
 
-			return result.Success
-				? StatusCode(StatusCodes.Status201Created, result)
-				: StatusCode(StatusCodes.Status400BadRequest, result);
+			return StatusCode(statusCode, result);
 		}
 	}
 }

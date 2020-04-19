@@ -1,4 +1,6 @@
-﻿namespace AlgoLogistics.Application.DTO
+﻿using FluentValidation;
+
+namespace AlgoLogistics.Application.DTO
 {
 	public class CreatePackageDTO
 	{

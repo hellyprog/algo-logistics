@@ -24,8 +24,9 @@ namespace AlgoLogistics.Controllers
 		public async Task<IActionResult> GetShipments()
 		{
 			var result = await _shipmentLogicExecutor.GetShipmentsAsync();
+			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
-			return StatusCode(StatusCodes.Status200OK, result);
+			return StatusCode(statusCode, result);
 		}
 
 		[HttpPost]
@@ -34,10 +35,9 @@ namespace AlgoLogistics.Controllers
 		public async Task<IActionResult> GenerateShipments()
 		{
 			var result = await _shipmentLogicExecutor.GenerateShipmentsAsync();
+			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
-			return result.Success
-				? StatusCode(StatusCodes.Status200OK, result)
-				: StatusCode(StatusCodes.Status400BadRequest, result);
+			return StatusCode(statusCode, result);
 		}
 	}
 }

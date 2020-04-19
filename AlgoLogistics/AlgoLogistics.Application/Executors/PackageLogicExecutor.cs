@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Application.DTO;
+using AlgoLogistics.Application.DTO.Validators;
 using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Services.Commands;
@@ -32,6 +33,11 @@ namespace AlgoLogistics.Application.Executors
 
 		public async Task<ExecutionResult<Package>> GetPackageByInvoiceNoAsync(string invoiceNo)
 		{
+			if (string.IsNullOrEmpty(invoiceNo))
+			{
+				return ExecutionResult<Package>.CreateFailureResult($"{nameof(invoiceNo)} cannot be null or empty");
+			}
+
 			var result = await _mediator.Send(new GetPackageQuery { InvoiceNo = invoiceNo });
 
 			return result;

@@ -4,13 +4,16 @@ using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.BusinessLogic;
 using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
+using AlgoLogistics.Filters;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,7 +33,19 @@ namespace AlgoLogistics
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
+			services.AddControllers(options => 
+			{
+				options.Filters.Add(typeof(ValidateModelStateAttribute));
+			})
+			.AddFluentValidation(fv =>
+			{
+				fv.RegisterValidatorsFromAssemblyContaining(typeof(Application.Info));
+				fv.ImplicitlyValidateChildProperties = true;
+			});
+			services.Configure<ApiBehaviorOptions>(options =>
+			{
+				options.SuppressModelStateInvalidFilter = true;
+			});
 			services.AddHealthChecks();
 			services.AddInfrastructure(Configuration);
 

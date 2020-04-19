@@ -30,10 +30,14 @@ namespace AlgoLogistics.Domain.Entities
 			PackageCategory packageCategory,
 			decimal deliveryPrice)
 		{
-			Description = !string.IsNullOrEmpty(description) ? description : throw new AlgoLogisticsException($"{nameof(description)} cannot be null or empty");
+			Description = !string.IsNullOrEmpty(description) 
+				? description 
+				: throw new AlgoLogisticsException($"{nameof(description)} cannot be null or empty");
 			DeliveryDetails = deliveryDetails ?? throw new AlgoLogisticsException($"{nameof(deliveryDetails)} cannot be null");
 			PhysicalParameters = physicalParameters ?? throw new AlgoLogisticsException($"{nameof(physicalParameters)} cannot be null");
-			Price = price > 0 ? price : throw new AlgoLogisticsException($"{nameof(price)} cannot be less than zero");
+			Price = price >= 0 
+				? price 
+				: throw new AlgoLogisticsException($"{nameof(price)} cannot be less than zero");
 			DeliveryPrice = deliveryPrice;
 			PackageCategory = packageCategory;
 			Status = PackageDeliveryStatus.NotSent;
