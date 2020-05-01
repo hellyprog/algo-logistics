@@ -1,6 +1,8 @@
-﻿using AlgoLogistics.Application.Executors.Interfaces;
-using AlgoLogistics.Domain.Entities;
+﻿using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -12,18 +14,18 @@ namespace AlgoLogistics.Controllers
 	[ApiController]
 	public class ShipmentsController : BaseAlgoLogisticsController
 	{
-		private readonly IShipmentLogicExecutor _shipmentLogicExecutor;
+		private readonly IMediator _mediator;
 
-		public ShipmentsController(IShipmentLogicExecutor shipmentLogicExecutor)
+		public ShipmentsController(IMediator mediator)
 		{
-			_shipmentLogicExecutor = shipmentLogicExecutor;
+			_mediator = mediator;
 		}
 
 		[HttpGet]
 		[ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetShipments()
 		{
-			var result = await _shipmentLogicExecutor.GetShipmentsAsync();
+			var result = await _mediator.Send(new GenerateShipmentsCommand());
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
@@ -34,7 +36,7 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> GenerateShipments()
 		{
-			var result = await _shipmentLogicExecutor.GenerateShipmentsAsync();
+			var result = await _mediator.Send(new GetShipmentsQuery());
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);

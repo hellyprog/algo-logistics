@@ -1,6 +1,4 @@
 using AlgoLogistics.Application.Common;
-using AlgoLogistics.Application.Executors;
-using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.BusinessLogic;
 using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
@@ -52,8 +50,6 @@ namespace AlgoLogistics
 			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(Application.Info).Assembly);
 			services.AddSingleton(GetMapper());
 
-			services.AddTransient<IPackageLogicExecutor, PackageLogicExecutor>();
-			services.AddTransient<IShipmentLogicExecutor, ShipmentLogicExecutor>();
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, ShipmentService>();
 			services.AddTransient<IPriceCalculator, PriceCalculator>();

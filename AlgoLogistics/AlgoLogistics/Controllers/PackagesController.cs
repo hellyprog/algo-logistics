@@ -1,7 +1,10 @@
 ﻿using AlgoLogistics.Application.DTO;
-using AlgoLogistics.Application.Executors.Interfaces;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
+using AlgoLogistics.Domain.Services.Queries;
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,18 +16,20 @@ namespace AlgoLogistics.Controllers
 	[ApiController]
 	public class PackagesController : ControllerBase
 	{
-		private readonly IPackageLogicExecutor _packageLogicExecutor;
+		private readonly IMediator _mediator;
+		private readonly IMapper _mapper;
 
-		public PackagesController(IPackageLogicExecutor packageLogicExecutor)
+		public PackagesController(IMediator mediator, IMapper mapper)
 		{
-			_packageLogicExecutor = packageLogicExecutor;
+			_mediator = mediator;
+			_mapper = mapper;
 		}
 
 		[HttpGet]
 		[ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetPackages()
 		{
-			var result = await _packageLogicExecutor.GetPackagesAsync();
+			var result = await _mediator.Send(new GetPackagesQuery());
 
 			return StatusCode(StatusCodes.Status200OK, result);
 		}
@@ -33,7 +38,12 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult<List<Package>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetPackage(string invoiceNo)
 		{
-			var result = await _packageLogicExecutor.GetPackageByInvoiceNoAsync(invoiceNo);
+			if (string.IsNullOrEmpty(invoiceNo))
+			{
+				return BadRequest(ExecutionResult<Package>.CreateFailureResult($"{nameof(invoiceNo)} cannot be null or empty"));
+			}
+
+			var result = await _mediator.Send(new GetPackageQuery { InvoiceNo = invoiceNo });
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
@@ -44,7 +54,8 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreatePackage(CreatePackageDTO dto)
 		{
-			var result = await _packageLogicExecutor.CreatePackageAsync(dto);
+			var command = _mapper.Map<CreatePackageCommand>(dto);
+			var result = await _mediator.Send(command);
 			var statusCode = result.Success ? StatusCodes.Status201Created : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
