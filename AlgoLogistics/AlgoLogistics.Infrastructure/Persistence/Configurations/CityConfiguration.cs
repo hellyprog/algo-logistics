@@ -12,7 +12,8 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 
 			builder.HasKey(x => x.CityId);
 			builder.Property(p => p.CityId).HasColumnName("city_id").IsRequired();
-			builder.Property(p => p.Name).HasColumnName("Name").IsRequired();
+			builder.Property(p => p.Name).HasColumnName("name").IsRequired();
+			builder.Property(p => p.Country).HasColumnName("country").IsRequired();
 			builder.Ignore(p => p.Connections);
 		}
 	}

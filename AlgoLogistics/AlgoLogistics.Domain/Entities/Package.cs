@@ -12,8 +12,8 @@ namespace AlgoLogistics.Domain.Entities
 		public int PackageId { get; private set; }
 		public string InvoiceNo { get; private set; }
 		public string Description { get; private set; }
-		public decimal Price { get; private set; }
-		public decimal DeliveryPrice { get; private set; }
+		public Money Price { get; private set; }
+		public Money DeliveryPrice { get; private set; }
 		public PhysicalParameters PhysicalParameters { get; private set; }
 		public DeliveryDetails DeliveryDetails { get; set; }
 		public PackageCategory PackageCategory { get; set; }
@@ -24,20 +24,18 @@ namespace AlgoLogistics.Domain.Entities
 
 		private Package(
 			string description,
-			decimal price,
+			Money price,
 			PhysicalParameters physicalParameters,
 			DeliveryDetails deliveryDetails,
 			PackageCategory packageCategory,
-			decimal deliveryPrice)
+			Money deliveryPrice)
 		{
 			Description = !string.IsNullOrEmpty(description) 
 				? description 
 				: throw new AlgoLogisticsException($"{nameof(description)} cannot be null or empty");
 			DeliveryDetails = deliveryDetails ?? throw new AlgoLogisticsException($"{nameof(deliveryDetails)} cannot be null");
 			PhysicalParameters = physicalParameters ?? throw new AlgoLogisticsException($"{nameof(physicalParameters)} cannot be null");
-			Price = price >= 0 
-				? price 
-				: throw new AlgoLogisticsException($"{nameof(price)} cannot be less than zero");
+			Price = price;
 			DeliveryPrice = deliveryPrice;
 			PackageCategory = packageCategory;
 			Status = PackageDeliveryStatus.NotSent;
@@ -46,7 +44,7 @@ namespace AlgoLogistics.Domain.Entities
 
 		public static async Task<Package> CreateAsync(
 			string description,
-			decimal price,
+			Money price,
 			PhysicalParameters physicalParameters,
 			DeliveryDetails deliveryDetails,
 			PackageCategory packageCategory,
@@ -56,7 +54,7 @@ namespace AlgoLogistics.Domain.Entities
 			return new Package(description, price, physicalParameters, deliveryDetails, packageCategory, deliveryPrice);
 		}
 
-		public void ProcessStatus()
+		public void ProcessPackageToNextStatus()
 		{
 			Status = Status switch
 			{

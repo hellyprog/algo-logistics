@@ -4,14 +4,16 @@ using AlgoLogistics.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200506172037_MoneyType")]
+    partial class MoneyType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,14 +29,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnName("country")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("name")
+                        .HasColumnName("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CityId");
@@ -45,61 +42,51 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                         new
                         {
                             CityId = 1,
-                            Country = "Ukraine",
                             Name = "Lviv"
                         },
                         new
                         {
                             CityId = 2,
-                            Country = "Ukraine",
                             Name = "Uzgorod"
                         },
                         new
                         {
                             CityId = 3,
-                            Country = "Ukraine",
                             Name = "Lutsk"
                         },
                         new
                         {
                             CityId = 4,
-                            Country = "Ukraine",
                             Name = "Rivne"
                         },
                         new
                         {
                             CityId = 5,
-                            Country = "Ukraine",
                             Name = "Ternopil"
                         },
                         new
                         {
                             CityId = 6,
-                            Country = "Ukraine",
                             Name = "Ivano-Frankivsk"
                         },
                         new
                         {
                             CityId = 7,
-                            Country = "Ukraine",
                             Name = "Chernivtsi"
                         },
                         new
                         {
                             CityId = 8,
-                            Country = "Ukraine",
                             Name = "Zhytomyr"
                         },
                         new
                         {
                             CityId = 9,
-                            Country = "Ukraine",
                             Name = "Khmelnytskyi"
                         },
                         new
                         {
                             CityId = 10,
-                            Country = "Ukraine",
                             Name = "Vinnytsia"
                         });
                 });
@@ -119,6 +106,10 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnName("created_by")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DeliveryPrice")
+                        .HasColumnName("delivery_price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -309,30 +300,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                                 .HasForeignKey("PackageId");
                         });
 
-                    b.OwnsOne("AlgoLogistics.Domain.Entities.Money", "DeliveryPrice", b1 =>
-                        {
-                            b1.Property<int>("PackageId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<decimal>("Amount")
-                                .HasColumnName("delivery_price_amount")
-                                .HasColumnType("decimal(18,2)");
-
-                            b1.Property<string>("Currency")
-                                .IsRequired()
-                                .HasColumnName("delivery_price_currency")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("PackageId");
-
-                            b1.ToTable("Packages");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PackageId");
-                        });
-
                     b.OwnsOne("AlgoLogistics.Domain.Entities.Money", "Price", b1 =>
                         {
                             b1.Property<int>("PackageId")
@@ -341,12 +308,12 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<decimal>("Amount")
-                                .HasColumnName("price_amount")
+                                .HasColumnName("amount")
                                 .HasColumnType("decimal(18,2)");
 
                             b1.Property<string>("Currency")
                                 .IsRequired()
-                                .HasColumnName("price_currency")
+                                .HasColumnName("currency")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("PackageId");

@@ -10,6 +10,7 @@ namespace AlgoLogistics.Application.Common
 		public MappingProfile()
 		{
 			CreateMap<CreatePackageDTO, CreatePackageCommand>()
+				.ForMember(s => s.Price, x => x.MapFrom(d => new Money(d.Price.Amount, d.Price.Currency)))
 				.ForMember(s => s.PhysicalParameters,
 					x => x.MapFrom(d => new PhysicalParameters(d.PhysicalParameters.Length, d.PhysicalParameters.Width, d.PhysicalParameters.Height)))
 				.ForMember(s => s.DeliveryDetails,

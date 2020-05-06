@@ -33,7 +33,7 @@ namespace AlgoLogistics.Tests.Domain
 			_cityProvider.Setup(x => x.GetCityNetworkAsync()).ReturnsAsync(_network);
 			var package = await Package.CreateAsync(
 				"desc",
-				20,
+				new Money(20, "UAH"),
 				new PhysicalParameters(20, 20, 20),
 				new DeliveryDetails("s", "r", "Lviv", "Uzgorod"),
 				new PackageCategory(),

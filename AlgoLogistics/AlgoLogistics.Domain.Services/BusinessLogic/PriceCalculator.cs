@@ -1,5 +1,6 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Interfaces;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			_cityNetworkProvider = cityNetworkProvider;
 		}
 
-		public async Task<decimal> CalculateDeliveryPriceAsync(string fromCity, string toCity)
+		public async Task<Money> CalculateDeliveryPriceAsync(string fromCity, string toCity)
 		{
 			var cityNetwork = await _cityNetworkProvider.GetCityNetworkAsync();
 			var graph = Utils.ConvertToGraph(cityNetwork);
@@ -30,7 +31,8 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			var distance = algorithmResult.Value;
 			var basePrice = 20m;
 
-			return basePrice + decimal.Divide((decimal)distance, 10m);
+			var amount = basePrice + decimal.Divide((decimal)distance, 10m);
+			return new Money(amount, "UAH");
 		}
 	}
 }

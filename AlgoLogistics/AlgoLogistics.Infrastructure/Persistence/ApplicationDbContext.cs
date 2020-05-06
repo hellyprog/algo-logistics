@@ -46,16 +46,16 @@ namespace AlgoLogistics.Infrastructure.Persistence
 			base.OnModelCreating(builder);
 
 			builder.Entity<City>().HasData(
-				new City { CityId = 1, Name = "Lviv" },
-				new City { CityId = 2, Name = "Uzgorod" },
-				new City { CityId = 3, Name = "Lutsk" },
-				new City { CityId = 4, Name = "Rivne" },
-				new City { CityId = 5, Name = "Ternopil" },
-				new City { CityId = 6, Name = "Ivano-Frankivsk" },
-				new City { CityId = 7, Name = "Chernivtsi" },
-				new City { CityId = 8, Name = "Zhytomyr" },
-				new City { CityId = 9, Name = "Khmelnytskyi" },
-				new City { CityId = 10, Name = "Vinnytsia" }
+				new City { CityId = 1, Name = "Lviv", Country = "Ukraine" },
+				new City { CityId = 2, Name = "Uzgorod", Country = "Ukraine" },
+				new City { CityId = 3, Name = "Lutsk", Country = "Ukraine" },
+				new City { CityId = 4, Name = "Rivne", Country = "Ukraine" },
+				new City { CityId = 5, Name = "Ternopil", Country = "Ukraine" },
+				new City { CityId = 6, Name = "Ivano-Frankivsk", Country = "Ukraine" },
+				new City { CityId = 7, Name = "Chernivtsi", Country = "Ukraine" },
+				new City { CityId = 8, Name = "Zhytomyr", Country = "Ukraine" },
+				new City { CityId = 9, Name = "Khmelnytskyi", Country = "Ukraine" },
+				new City { CityId = 10, Name = "Vinnytsia", Country = "Ukraine" }
 			);
 
 			builder.Entity<PackageCategory>().HasData(

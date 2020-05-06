@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using AlgoLogistics.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Interfaces
 {
 	public interface IPriceCalculator
 	{
-		Task<decimal> CalculateDeliveryPriceAsync(string fromCity, string toCity);
+		Task<Money> CalculateDeliveryPriceAsync(string fromCity, string toCity);
 	}
 }

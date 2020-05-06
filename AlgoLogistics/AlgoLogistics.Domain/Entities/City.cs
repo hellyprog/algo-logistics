@@ -6,6 +6,7 @@ namespace AlgoLogistics.Domain.Entities
 	{
 		public int CityId { get; set; }
 		public string Name { get; set; }
+		public string Country { get; set; }
 		public List<ConnectedCity> Connections { get; set; }
 	}
 }

@@ -9,7 +9,6 @@ namespace AlgoLogistics.Application.DTO.Validators
 	{
 		public CreatePackageDTOValidator()
 		{
-			RuleFor(x => x.Price).GreaterThanOrEqualTo(0);
 			RuleFor(x => x.Description).NotNull();
 		}
 	}

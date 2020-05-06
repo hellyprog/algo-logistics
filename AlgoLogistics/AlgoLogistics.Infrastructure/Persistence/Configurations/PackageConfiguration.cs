@@ -18,8 +18,18 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.Property(p => p.PackageId).HasColumnName("package_id").IsRequired();
 			builder.Property(p => p.InvoiceNo).HasColumnName("invoice_no").IsRequired();
 			builder.Property(p => p.Description).HasColumnName("description").IsRequired();
-			builder.Property(p => p.Price).HasColumnName("price").IsRequired();
-			builder.Property(p => p.DeliveryPrice).HasColumnName("delivery_price").IsRequired();
+			builder.OwnsOne(p => p.Price,
+				parameter =>
+				{
+					parameter.Property(p => p.Amount).HasColumnName("price_amount").IsRequired();
+					parameter.Property(p => p.Currency).HasColumnName("price_currency").IsRequired();
+				});
+			builder.OwnsOne(p => p.DeliveryPrice,
+				parameter =>
+				{
+					parameter.Property(p => p.Amount).HasColumnName("delivery_price_amount").IsRequired();
+					parameter.Property(p => p.Currency).HasColumnName("delivery_price_currency").IsRequired();
+				});
 			builder.Property(p => p.Status).HasColumnName("status").IsRequired().HasConversion(deliveryStatusConverter);
 			builder.OwnsOne(p => p.PhysicalParameters,
 				parameters =>
