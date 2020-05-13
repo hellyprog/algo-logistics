@@ -1,4 +1,5 @@
-﻿using AlgoLogistics.Domain.Entities;
+﻿using AlgoLogistics.DataAccess;
+using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.BusinessLogic;
 using Moq;
@@ -15,6 +16,7 @@ namespace AlgoLogistics.Tests.Domain
 		private Mock<ICityNetworkProvider> _cityProvider;
 		private IPriceCalculator _priceCalculator;
 		private List<City> _network;
+		private Mock<IApplicationDbContext> _applicationDbContext;
 
 		[SetUp]
 		public void Setup()
@@ -24,7 +26,8 @@ namespace AlgoLogistics.Tests.Domain
 
 			_network = JsonConvert.DeserializeObject<List<City>>(json);
 			_cityProvider = new Mock<ICityNetworkProvider>();
-			_priceCalculator = new PriceCalculator(_cityProvider.Object);
+			_applicationDbContext = new Mock<IApplicationDbContext>();
+			_priceCalculator = new PriceCalculator(_cityProvider.Object, _applicationDbContext.Object);
 		}
 
 		[Test]

@@ -1,7 +1,10 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
+using AlgoLogistics.DataAccess;
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.BusinessLogic
@@ -9,10 +12,12 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 	public class PriceCalculator : IPriceCalculator
 	{
 		private readonly ICityNetworkProvider _cityNetworkProvider;
+		private readonly IApplicationDbContext _applicationDbContext;
 
-		public PriceCalculator(ICityNetworkProvider cityNetworkProvider)
+		public PriceCalculator(ICityNetworkProvider cityNetworkProvider, IApplicationDbContext applicationDbContext)
 		{
 			_cityNetworkProvider = cityNetworkProvider;
+			_applicationDbContext = applicationDbContext;
 		}
 
 		public async Task<Money> CalculateDeliveryPriceAsync(string fromCity, string toCity)
@@ -29,9 +34,15 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			});
 
 			var distance = algorithmResult.Value;
-			var basePrice = 20m;
+			var basePrice = _applicationDbContext.ApplicationConfigs.FirstOrDefault(x => x.ConfigName == "BaseDeliveryPrice")?.ConfigValue;
+			var canParse = decimal.TryParse(basePrice, out decimal basePriceParsed);
 
-			var amount = basePrice + decimal.Divide((decimal)distance, 10m);
+			if (!canParse)
+			{
+				return default;
+			}
+
+			var amount = basePriceParsed + decimal.Divide((decimal)distance, 10m);
 			return new Money(amount, "UAH");
 		}
 	}

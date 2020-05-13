@@ -2,6 +2,7 @@
 using AlgoLogistics.Domain.Common;
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Enums;
+using AlgoLogistics.Infrastructure.Persistence.DefaultData;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Reflection;
@@ -20,6 +21,7 @@ namespace AlgoLogistics.Infrastructure.Persistence
 		public DbSet<Shipment> Shipments { get; set; }
 		public DbSet<City> Cities { get; set; }
 		public DbSet<PackageCategory> PackageCategories { get; set; }
+		public DbSet<ApplicationConfig> ApplicationConfigs { get; set; }
 
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
 		{
@@ -45,61 +47,10 @@ namespace AlgoLogistics.Infrastructure.Persistence
 
 			base.OnModelCreating(builder);
 
-			builder.Entity<City>().HasData(
-				new City { CityId = 1, Name = "Lviv", Country = "Ukraine" },
-				new City { CityId = 2, Name = "Uzgorod", Country = "Ukraine" },
-				new City { CityId = 3, Name = "Lutsk", Country = "Ukraine" },
-				new City { CityId = 4, Name = "Rivne", Country = "Ukraine" },
-				new City { CityId = 5, Name = "Ternopil", Country = "Ukraine" },
-				new City { CityId = 6, Name = "Ivano-Frankivsk", Country = "Ukraine" },
-				new City { CityId = 7, Name = "Chernivtsi", Country = "Ukraine" },
-				new City { CityId = 8, Name = "Zhytomyr", Country = "Ukraine" },
-				new City { CityId = 9, Name = "Khmelnytskyi", Country = "Ukraine" },
-				new City { CityId = 10, Name = "Vinnytsia", Country = "Ukraine" }
-			);
+			builder.Entity<City>().HasData(DefaultDataProvider.GetCities());
+			builder.Entity<PackageCategory>().HasData(DefaultDataProvider.GetPackageCategories());
 
-			builder.Entity<PackageCategory>().HasData(
-					new PackageCategory
-					{
-						PackageCategoryId = 1,
-						SizeCategory = SizeCategory.ExtraSmall,
-						Length = 0.2,
-						Width = 0.15,
-						Height = 0.05
-					},
-					new PackageCategory
-					{
-						PackageCategoryId = 2,
-						SizeCategory = SizeCategory.Small,
-						Length = 0.3,
-						Width = 0.2,
-						Height = 0.1
-					},
-					new PackageCategory
-					{
-						PackageCategoryId = 3,
-						SizeCategory = SizeCategory.Medium,
-						Length = 0.3,
-						Width = 0.3,
-						Height = 0.2
-					},
-					new PackageCategory
-					{
-						PackageCategoryId = 4,
-						SizeCategory = SizeCategory.Large,
-						Length = 0.4,
-						Width = 0.3,
-						Height = 0.3
-					},
-					new PackageCategory
-					{
-						PackageCategoryId = 5,
-						SizeCategory = SizeCategory.ExtraLarge,
-						Length = 0.45,
-						Width = 0.3,
-						Height = 0.3
-					}
-				);
+			builder.Entity<ApplicationConfig>().HasData(DefaultDataProvider.GetApplicationConfigs());
 		}
 	}
 }

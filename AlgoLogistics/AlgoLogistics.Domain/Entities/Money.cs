@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlgoLogistics.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,8 +9,8 @@ namespace AlgoLogistics.Domain.Entities
 	{
 		public Money(decimal amount, string currency)
 		{
-			Amount = amount;
-			Currency = currency ?? throw new ArgumentNullException(nameof(currency));
+			this.Amount = amount;
+			this.Currency = currency;
 		}
 
 		public decimal Amount { get; set; }
