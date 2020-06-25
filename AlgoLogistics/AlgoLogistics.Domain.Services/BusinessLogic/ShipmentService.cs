@@ -28,6 +28,11 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			_cityNetworkProvider = cityNetworkProvider;
 		}
 
+		public Task<ExecutionResult> AssignCarsToShipmentsAsync()
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task<ExecutionResult> GenerateShipments(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
 			var packages = await (from package in _applicationDbContext.Packages

@@ -77,11 +77,11 @@ namespace AlgoLogistics.Infrastructure.Persistence.DefaultData
 			return new List<ApplicationConfig>
 			{
 				new ApplicationConfig
-					{
-						ApplicationConfigId = 1,
-						ConfigName = "BaseDeliveryPrice",
-						ConfigValue = "20"
-					}
+				{
+					ApplicationConfigId = 1,
+					ConfigName = "BaseDeliveryPrice",
+					ConfigValue = "20"
+				}
 			};
 		}
 	}

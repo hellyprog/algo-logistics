@@ -8,6 +8,6 @@ namespace AlgoLogistics.Domain.Entities
 	{
 		public int ApplicationConfigId { get; set; }
 		public string ConfigName { get; set; }
-		public string ConfigValue { get; set; }
+		public object ConfigValue { get; set; }
 	}
 }

@@ -13,5 +13,6 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic.Interfaces
 		Task<ExecutionResult> CreatePackageAsync(CreatePackageCommand command, CancellationToken cancellationToken);
 		Task<ExecutionResult<Package>> GetPackage(GetPackageQuery query);
 		Task<ExecutionResult<List<Package>>> GetPackages(GetPackagesQuery query);
+		Task<ExecutionResult> UpdatePackageAsync(UpdatePackageCommand request, CancellationToken cancellationToken);
 	}
 }

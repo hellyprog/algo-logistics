@@ -60,5 +60,29 @@ namespace AlgoLogistics.Controllers
 
 			return StatusCode(statusCode, result);
 		}
+
+		[HttpPut]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> UpdatePackage(UpdatePackageDTO dto)
+		{
+			var command = _mapper.Map<UpdatePackageCommand>(dto);
+			var result = await _mediator.Send(command);
+			var statusCode = result.Success ? StatusCodes.Status204NoContent : StatusCodes.Status400BadRequest;
+
+			return StatusCode(statusCode, result);
+		}
+
+		[HttpDelete]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
+		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> DeletePackage(int packageId)
+		{
+			var command = new DeletePackageCommand { PackageId = packageId };
+			var result = await _mediator.Send(command);
+			var statusCode = result.Success ? StatusCodes.Status204NoContent : StatusCodes.Status400BadRequest;
+
+			return StatusCode(statusCode, result);
+		}
 	}
 }

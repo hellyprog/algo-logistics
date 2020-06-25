@@ -68,5 +68,15 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 			return ExecutionResult<Package>.CreateSuccessResult(package);
 		}
+
+		public Task<ExecutionResult> UpdatePackageAsync(UpdatePackageCommand request, CancellationToken cancellationToken)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public Task<ExecutionResult> DeletePackageAsync(DeletePackageCommand request, CancellationToken cancellationToken)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }

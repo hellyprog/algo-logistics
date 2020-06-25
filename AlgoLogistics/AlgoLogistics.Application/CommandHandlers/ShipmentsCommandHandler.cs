@@ -18,9 +18,14 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
-			var result = await _shipmentService.GenerateShipments(request, cancellationToken);
+			var shipmentGenerationResult = await _shipmentService.GenerateShipments(request, cancellationToken);
 
-			return result;
+			if (shipmentGenerationResult.Success)
+			{
+				var carAssigningExecutionResult = await _shipmentService.AssignCarsToShipmentsAsync();
+			}
+
+			return default;
 		}
 	}
 }
