@@ -28,7 +28,6 @@ namespace AlgoLogistics
 
 		public IConfiguration Configuration { get; }
 
-
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers(options => 
