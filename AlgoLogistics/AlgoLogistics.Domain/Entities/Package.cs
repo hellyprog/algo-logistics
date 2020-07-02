@@ -54,6 +54,33 @@ namespace AlgoLogistics.Domain.Entities
 			return new Package(description, price, physicalParameters, deliveryDetails, packageCategory, deliveryPrice);
 		}
 
+		public async Task<Package> UpdateDeliveryDetailsAsync(DeliveryDetails deliveryDetails, IPriceCalculator priceCalculator)
+		{
+			DeliveryDetails = deliveryDetails ?? throw new AlgoLogisticsException($"{nameof(deliveryDetails)} cannot be null");
+			DeliveryPrice = await priceCalculator.CalculateDeliveryPriceAsync(deliveryDetails.FromCity, deliveryDetails.ToCity);
+
+			return this;
+		}
+
+		public Package UpdatePhysicalParameters(PhysicalParameters physicalParameters)
+		{
+			PhysicalParameters = physicalParameters;
+
+			return this;
+		}
+
+		public Package UpdatePrice(Money price)
+		{
+			Price = price;
+			return this;
+		}
+
+		public Package UpdateDescription(string description)
+		{
+			Description = description;
+			return this;
+		}
+
 		public void ProcessPackageToNextStatus()
 		{
 			Status = Status switch

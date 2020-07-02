@@ -26,7 +26,7 @@ namespace AlgoLogistics.Domain.Entities
 			FromCity = !string.IsNullOrEmpty(fromCity) 
 				? textInfo.ToTitleCase(fromCity) 
 				: throw new AlgoLogisticsException($"{nameof(fromCity)} cannot be null or empty");
-			ToCity = !string.IsNullOrEmpty(ToCity) 
+			ToCity = !string.IsNullOrEmpty(toCity) 
 				? textInfo.ToTitleCase(toCity) 
 				: throw new AlgoLogisticsException($"{nameof(ToCity)} cannot be null or empty");
 		}

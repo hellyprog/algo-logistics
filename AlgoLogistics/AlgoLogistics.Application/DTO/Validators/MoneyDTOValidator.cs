@@ -10,7 +10,7 @@ namespace AlgoLogistics.Application.DTO.Validators
 		public MoneyDTOValidator()
 		{
 			RuleFor(p => p.Amount).GreaterThan(0);
-			RuleFor(p => p.Currency).NotNull();
+			RuleFor(p => p.Currency).NotNull().Length(3);
 		}
 	}
 }

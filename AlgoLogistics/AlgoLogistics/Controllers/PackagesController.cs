@@ -68,7 +68,7 @@ namespace AlgoLogistics.Controllers
 		{
 			var command = _mapper.Map<UpdatePackageCommand>(dto);
 			var result = await _mediator.Send(command);
-			var statusCode = result.Success ? StatusCodes.Status204NoContent : StatusCodes.Status400BadRequest;
+			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
 		}
@@ -80,7 +80,7 @@ namespace AlgoLogistics.Controllers
 		{
 			var command = new DeletePackageCommand { PackageId = packageId };
 			var result = await _mediator.Send(command);
-			var statusCode = result.Success ? StatusCodes.Status204NoContent : StatusCodes.Status400BadRequest;
+			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
 		}

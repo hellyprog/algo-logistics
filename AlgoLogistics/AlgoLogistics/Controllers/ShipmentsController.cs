@@ -5,6 +5,7 @@ using AlgoLogistics.Domain.Services.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace AlgoLogistics.Controllers
 		[ProducesResponseType(typeof(ExecutionResult<List<Shipment>>), StatusCodes.Status200OK)]
 		public async Task<IActionResult> GetShipments()
 		{
-			var result = await _mediator.Send(new GenerateShipmentsCommand());
+			var result = await _mediator.Send(new GetShipmentsQuery());
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
@@ -34,9 +35,9 @@ namespace AlgoLogistics.Controllers
 		[HttpPost]
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> GenerateShipments()
+		public async Task<IActionResult> GenerateShipments(GenerateShipmentsCommand command)
 		{
-			var result = await _mediator.Send(new GetShipmentsQuery());
+			var result = await _mediator.Send(command);
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);

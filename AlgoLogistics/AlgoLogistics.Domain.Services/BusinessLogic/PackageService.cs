@@ -58,16 +58,24 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public async Task<ExecutionResult> UpdatePackageAsync(UpdatePackageCommand request, CancellationToken cancellationToken)
 		{
-			var executionResult = ExecutionResult.CreateSuccessResult();//await CreatePackageAsync(command);
+			var package = await _applicationDbContext.Packages.FirstOrDefaultAsync(package => package.PackageId == request.PackageId);
 
-			if (!executionResult.Success)
+			if (package.Shipment != null)
 			{
-				return executionResult;
+				return ExecutionResult.CreateFailureResult("You cannot update package which included into shipment");
 			}
 
-			var package = executionResult.Data;
+			await package.UpdateDescription(request.Description)
+						 .UpdatePhysicalParameters(request.PhysicalParameters)
+						 .UpdatePrice(request.Price)
+						 .UpdateDeliveryDetailsAsync(request.DeliveryDetails, _priceCalculator);
 
-			return null;
+			_applicationDbContext.Packages.Update(package);
+			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+			return savingResult > 0
+				? ExecutionResult.CreateSuccessResult()
+				: ExecutionResult.CreateFailureResult("Package update failed");
 		}
 
 		public async Task<ExecutionResult> DeletePackageAsync(DeletePackageCommand request, CancellationToken cancellationToken)
