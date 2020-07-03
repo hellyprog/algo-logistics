@@ -20,7 +20,7 @@ namespace AlgoLogistics.Application.QueryHandlers
 
 		public async Task<ExecutionResult<List<Shipment>>> Handle(GetShipmentsQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _shipmentService.GetShipments(request);
+			var result = await _shipmentService.GetShipmentsAsync(request);
 
 			return result;
 		}

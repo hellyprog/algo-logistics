@@ -31,6 +31,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 
 			builder.HasMany(p => p.Packages)
 				   .WithOne(p => p.Shipment)
+				   .OnDelete(DeleteBehavior.SetNull)
 				   .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 			builder.Property(p => p.ShipmentStatus).HasColumnName("status").IsRequired().HasConversion(new EnumToStringConverter<ShipmentStatus>());
 
@@ -38,7 +39,6 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.Property(p => p.CreatedBy).HasColumnName("created_by");
 			builder.Property(p => p.LastModified).HasColumnName("last_modified");
 			builder.Property(p => p.LastModifiedBy).HasColumnName("last_modified_by");
-
 		}
 	}
 }

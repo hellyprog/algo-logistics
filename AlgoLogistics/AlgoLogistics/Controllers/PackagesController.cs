@@ -73,7 +73,7 @@ namespace AlgoLogistics.Controllers
 			return StatusCode(statusCode, result);
 		}
 
-		[HttpDelete]
+		[HttpDelete("{packageId}")]
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status200OK)]
 		[ProducesResponseType(typeof(ExecutionResult), StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> DeletePackage(int packageId)

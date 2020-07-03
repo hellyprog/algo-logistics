@@ -42,14 +42,14 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 				: ExecutionResult.CreateFailureResult("Saving of package failed");
 		}
 
-		public async Task<ExecutionResult<List<Package>>> GetPackages(GetPackagesQuery query)
+		public async Task<ExecutionResult<List<Package>>> GetPackagesAsync(GetPackagesQuery query)
 		{
 			var packages = await _applicationDbContext.Packages.ToListAsync();
 
 			return ExecutionResult<List<Package>>.CreateSuccessResult(packages);
 		}
 
-		public async Task<ExecutionResult<Package>> GetPackage(GetPackageQuery query)
+		public async Task<ExecutionResult<Package>> GetPackageAsync(GetPackageQuery query)
 		{
 			var package = await _applicationDbContext.Packages.FirstOrDefaultAsync(p => p.InvoiceNo == query.InvoiceNo);
 

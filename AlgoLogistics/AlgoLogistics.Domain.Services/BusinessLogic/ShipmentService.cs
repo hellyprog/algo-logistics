@@ -33,11 +33,23 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			throw new NotImplementedException();
 		}
 
-		public async Task<ExecutionResult> GenerateShipments(GenerateShipmentsCommand command, CancellationToken cancellationToken)
+		public async Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken)
+		{
+			var shipmentToDelete = await _applicationDbContext.Shipments.FirstOrDefaultAsync(s => s.ShipmentId == request.ShipmentId);
+			_applicationDbContext.Shipments.Remove(shipmentToDelete);
+			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+			return savingResult > 0
+				? ExecutionResult.CreateSuccessResult()
+				: ExecutionResult.CreateFailureResult("Cannot remove shipment");
+		}
+
+		public async Task<ExecutionResult> GenerateShipmentsAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
 			var packages = await (from package in _applicationDbContext.Packages
 								  where package.Status == PackageDeliveryStatus.NotSent
-								  && package.Created.Date == DateTime.Now.AddDays(-1).Date
+								  && package.Created > command.FromDate
+								  && package.Created < command.ToDate
 								  select package).ToListAsync();
 
 			var shipmentList = new List<Shipment>();
@@ -67,7 +79,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 				: ExecutionResult.CreateFailureResult("Shipment generation failed");
 		}
 
-		public async Task<ExecutionResult<List<Shipment>>> GetShipments(GetShipmentsQuery query)
+		public async Task<ExecutionResult<List<Shipment>>> GetShipmentsAsync(GetShipmentsQuery query)
 		{
 			var shipments = await _applicationDbContext.Shipments.ToListAsync();
 

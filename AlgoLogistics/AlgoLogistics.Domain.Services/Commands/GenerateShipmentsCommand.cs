@@ -6,7 +6,7 @@ namespace AlgoLogistics.Domain.Services.Commands
 {
 	public class GenerateShipmentsCommand : IRequest<ExecutionResult>
 	{
-		public DateTime From { get; set; }
-		public DateTime To { get; set; }
+		public DateTime FromDate { get; set; }
+		public DateTime ToDate { get; set; }
 	}
 }

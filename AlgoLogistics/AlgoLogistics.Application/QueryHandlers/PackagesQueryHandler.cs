@@ -22,14 +22,14 @@ namespace AlgoLogistics.Application.QueryHandlers
 
 		public async Task<ExecutionResult<List<Package>>> Handle(GetPackagesQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _packageService.GetPackages(request);
+			var result = await _packageService.GetPackagesAsync(request);
 
 			return result;
 		}
 
 		public async Task<ExecutionResult<Package>> Handle(GetPackageQuery request, CancellationToken cancellationToken)
 		{
-			var result = await _packageService.GetPackage(request);
+			var result = await _packageService.GetPackageAsync(request);
 
 			return result;
 		}
