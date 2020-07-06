@@ -15,7 +15,7 @@ namespace AlgoLogistics.Domain.Entities
 		public int ShipmentId { get; private set; }
 		public IEnumerable<Package> Packages => _packages;
 		public Route Route { get; private set; }
-		public ShipmentStatus ShipmentStatus { get; set; }
+		public ShipmentStatus ShipmentStatus { get; private set; }
 
 		private Shipment()
 		{

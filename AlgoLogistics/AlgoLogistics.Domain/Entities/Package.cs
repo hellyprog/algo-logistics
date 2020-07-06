@@ -19,6 +19,7 @@ namespace AlgoLogistics.Domain.Entities
 		public PackageCategory PackageCategory { get; set; }
 		public PackageDeliveryStatus Status { get; private set; }
 		public Shipment Shipment { get; private set; }
+		public Transport Transport { get; set; }
 
 		private Package() { }
 

@@ -50,7 +50,7 @@ namespace AlgoLogistics
 			services.AddSingleton(GetMapper());
 
 			services.AddTransient<IPackageService, PackageService>();
-			services.AddTransient<IShipmentService, ShipmentService>();
+			services.AddTransient<IShipmentService, CarShipmentService>();
 			services.AddTransient<IPriceCalculator, PriceCalculator>();
 
 			services.AddSwaggerGen(c =>

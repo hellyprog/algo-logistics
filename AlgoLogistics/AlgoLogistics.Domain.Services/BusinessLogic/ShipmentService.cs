@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Services.BusinessLogic
 {
-	public class ShipmentService : IShipmentService
+	public abstract class ShipmentService : IShipmentService
 	{
-		private readonly IApplicationDbContext _applicationDbContext;
+		protected readonly IApplicationDbContext _applicationDbContext;
 		private readonly ICityNetworkProvider _cityNetworkProvider;
 
 		public ShipmentService(
@@ -28,10 +28,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			_cityNetworkProvider = cityNetworkProvider;
 		}
 
-		public Task<ExecutionResult> AssignCarsToShipmentsAsync()
-		{
-			throw new NotImplementedException();
-		}
+		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command);
 
 		public async Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken)
 		{

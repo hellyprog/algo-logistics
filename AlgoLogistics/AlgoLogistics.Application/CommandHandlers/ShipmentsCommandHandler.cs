@@ -25,7 +25,7 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 			if (shipmentGenerationResult.Success)
 			{
-				var carAssigningExecutionResult = await _shipmentService.AssignCarsToShipmentsAsync();
+				var carAssigningExecutionResult = await _shipmentService.AssignShipmentsToTransportAsync(request);
 			}
 
 			return default;

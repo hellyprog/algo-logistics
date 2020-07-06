@@ -55,6 +55,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.HasOne(p => p.Shipment)
 				.WithMany(p => p.Packages);
 
+			builder.HasOne(p => p.Transport)
+				.WithMany(p => p.Packages);
+
 			builder.HasOne(p => p.PackageCategory)
 				.WithMany(p => p.Packages);
 		}

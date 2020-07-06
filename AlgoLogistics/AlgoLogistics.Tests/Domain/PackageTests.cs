@@ -2,6 +2,7 @@
 using AlgoLogistics.Domain.Entities;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.BusinessLogic;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -28,21 +29,6 @@ namespace AlgoLogistics.Tests.Domain
 			_cityProvider = new Mock<ICityNetworkProvider>();
 			_applicationDbContext = new Mock<IApplicationDbContext>();
 			_priceCalculator = new PriceCalculator(_cityProvider.Object, _applicationDbContext.Object);
-		}
-
-		[Test]
-		public async Task PackageDeliveryPrice_FromLvivToUzgorod_ShouldBeEqualTo46Point7()
-		{
-			_cityProvider.Setup(x => x.GetCityNetworkAsync()).ReturnsAsync(_network);
-			var package = await Package.CreateAsync(
-				"desc",
-				new Money(20, "UAH"),
-				new PhysicalParameters(20, 20, 20),
-				new DeliveryDetails("s", "r", "Lviv", "Uzgorod"),
-				new PackageCategory(),
-				_priceCalculator);
-
-			Assert.AreEqual(package.DeliveryPrice, 46.7);
 		}
 	}
 }
