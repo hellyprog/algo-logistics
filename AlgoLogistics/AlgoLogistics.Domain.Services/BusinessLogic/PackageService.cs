@@ -58,7 +58,9 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public async Task<ExecutionResult> UpdatePackageAsync(UpdatePackageCommand request, CancellationToken cancellationToken)
 		{
-			var package = await _applicationDbContext.Packages.FirstOrDefaultAsync(package => package.PackageId == request.PackageId);
+			var package = await _applicationDbContext.Packages.FirstOrDefaultAsync(package =>
+				package.PackageId == request.PackageId 
+				&& package.Status == Enums.PackageDeliveryStatus.NotSent);
 
 			if (package.Shipment != null)
 			{
@@ -80,7 +82,13 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public async Task<ExecutionResult> DeletePackageAsync(DeletePackageCommand request, CancellationToken cancellationToken)
 		{
-			var packageToRemove = await _applicationDbContext.Packages.FirstOrDefaultAsync(x => x.PackageId == request.PackageId);
+			var packageToRemove = await _applicationDbContext.Packages.FirstOrDefaultAsync(x => x.PackageId == request.PackageId && x.Status == Enums.PackageDeliveryStatus.NotSent);
+
+			if (packageToRemove == null)
+			{
+				return ExecutionResult.CreateFailureResult("There is no package with given id that could be deleted");
+			}
+			
 			_applicationDbContext.Packages.Remove(packageToRemove);
 			var deletionResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

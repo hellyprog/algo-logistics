@@ -30,9 +30,20 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 
+		public Task<ExecutionResult> DeassignPackagesWithoutTransport(CancellationToken cancellationToken)
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken)
 		{
-			var shipmentToDelete = await _applicationDbContext.Shipments.FirstOrDefaultAsync(s => s.ShipmentId == request.ShipmentId);
+			var shipmentToDelete = await _applicationDbContext.Shipments.FirstOrDefaultAsync(s => s.ShipmentId == request.ShipmentId && s.ShipmentStatus == ShipmentStatus.TransportAssigned);
+
+			if (shipmentToDelete == null)
+			{
+				return ExecutionResult.CreateFailureResult("There is no shipment with given id that could be deleted");
+			}
+
 			_applicationDbContext.Shipments.Remove(shipmentToDelete);
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

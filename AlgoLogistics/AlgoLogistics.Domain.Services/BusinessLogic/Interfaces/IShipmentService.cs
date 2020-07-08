@@ -13,6 +13,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic.Interfaces
 		Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 		Task<ExecutionResult> GenerateShipmentsAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 		Task<ExecutionResult<List<Shipment>>> GetShipmentsAsync(GetShipmentsQuery query);
+		Task<ExecutionResult> DeassignPackagesWithoutTransport(CancellationToken cancellationToken);
 		Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken);
 	}
 }
