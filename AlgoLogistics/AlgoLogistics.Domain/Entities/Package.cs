@@ -92,7 +92,8 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			Status = Status switch
 			{
-				PackageDeliveryStatus.NotSent => PackageDeliveryStatus.OnTheRoad,
+				PackageDeliveryStatus.NotSent => PackageDeliveryStatus.ShipmentCreated,
+				PackageDeliveryStatus.ShipmentCreated => PackageDeliveryStatus.OnTheRoad,
 				PackageDeliveryStatus.OnTheRoad => PackageDeliveryStatus.Arrived,
 				PackageDeliveryStatus.Arrived => PackageDeliveryStatus.Received,
 				PackageDeliveryStatus.Received => PackageDeliveryStatus.Received,

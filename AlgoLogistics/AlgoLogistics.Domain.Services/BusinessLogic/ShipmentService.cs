@@ -30,7 +30,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 
-		public Task<ExecutionResult> DeassignPackagesWithoutTransport(CancellationToken cancellationToken)
+		public Task<ExecutionResult> DeassignPackagesWithoutTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
 			throw new NotImplementedException();
 		}

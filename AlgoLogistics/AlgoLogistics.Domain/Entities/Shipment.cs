@@ -41,11 +41,6 @@ namespace AlgoLogistics.Domain.Entities
 			};
 		}
 
-		public void RemovePackagesWithoutTransport(List<Package> packages)
-		{
-			packages.ForEach(x => _packages.Remove(x));
-		}
-
 		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var route = await BuildRouteAsync(packages, cityNetworkProvider);
