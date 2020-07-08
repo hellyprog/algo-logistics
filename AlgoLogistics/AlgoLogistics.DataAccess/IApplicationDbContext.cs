@@ -12,6 +12,7 @@ namespace AlgoLogistics.DataAccess
 		DbSet<City> Cities { get; set; }
 		DbSet<PackageCategory> PackageCategories { get; set; }
 		DbSet<ApplicationConfig> ApplicationConfigs { get; set; }
+		DbSet<Transport> Transports { get; set; }
 
 		Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 	}

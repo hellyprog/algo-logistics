@@ -14,14 +14,14 @@ namespace AlgoLogistics.Application.Common
 				.ForMember(s => s.PhysicalParameters,
 					x => x.MapFrom(d => new PhysicalParameters(d.PhysicalParameters.Length, d.PhysicalParameters.Width, d.PhysicalParameters.Height)))
 				.ForMember(s => s.DeliveryDetails,
-					x => x.MapFrom(d => new DeliveryDetails(d.DeliveryDetails.Sender, d.DeliveryDetails.Receiver, d.DeliveryDetails.FromCity, d.DeliveryDetails.ToCity)));
+					x => x.MapFrom(d => new DeliveryDetails(d.DeliveryDetails.Sender, d.DeliveryDetails.SenderEmail, d.DeliveryDetails.Receiver, d.DeliveryDetails.ReceiverEmail, d.DeliveryDetails.FromCity, d.DeliveryDetails.ToCity)));
 
 			CreateMap<UpdatePackageDTO, UpdatePackageCommand>()
 				.ForMember(s => s.Price, x => x.MapFrom(d => new Money(d.Price.Amount, d.Price.Currency)))
 				.ForMember(s => s.PhysicalParameters,
 					x => x.MapFrom(d => new PhysicalParameters(d.PhysicalParameters.Length, d.PhysicalParameters.Width, d.PhysicalParameters.Height)))
 				.ForMember(s => s.DeliveryDetails,
-					x => x.MapFrom(d => new DeliveryDetails(d.DeliveryDetails.Sender, d.DeliveryDetails.Receiver, d.DeliveryDetails.FromCity, d.DeliveryDetails.ToCity)));
+					x => x.MapFrom(d => new DeliveryDetails(d.DeliveryDetails.Sender, d.DeliveryDetails.SenderEmail, d.DeliveryDetails.Receiver, d.DeliveryDetails.ReceiverEmail, d.DeliveryDetails.FromCity, d.DeliveryDetails.ToCity)));
 		}
 	}
 }

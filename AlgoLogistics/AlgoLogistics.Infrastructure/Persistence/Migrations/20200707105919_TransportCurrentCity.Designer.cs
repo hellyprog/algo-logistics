@@ -4,14 +4,16 @@ using AlgoLogistics.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AlgoLogistics.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200707105919_TransportCurrentCity")]
+    partial class TransportCurrentCity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -364,19 +366,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Migrations
                                 .HasColumnName("receiver")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.Property<string>("ReceiverEmail")
-                                .IsRequired()
-                                .HasColumnName("receiver_email")
-                                .HasColumnType("nvarchar(max)");
-
                             b1.Property<string>("Sender")
                                 .IsRequired()
                                 .HasColumnName("sender")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("SenderEmail")
-                                .IsRequired()
-                                .HasColumnName("sender_email")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("ToCity")

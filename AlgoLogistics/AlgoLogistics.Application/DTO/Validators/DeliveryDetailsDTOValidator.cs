@@ -12,7 +12,9 @@ namespace AlgoLogistics.Application.DTO.Validators
 			RuleFor(x => x.FromCity).NotNull();
 			RuleFor(x => x.ToCity).NotNull();
 			RuleFor(x => x.Sender).NotNull();
+			RuleFor(x => x.SenderEmail).NotNull().EmailAddress();
 			RuleFor(x => x.Receiver).NotNull();
+			RuleFor(x => x.ReceiverEmail).NotNull().EmailAddress();
 		}
 	}
 }

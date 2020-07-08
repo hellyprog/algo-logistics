@@ -1,16 +1,18 @@
 ﻿using AlgoLogistics.Algorithms.Dijkstra;
 using AlgoLogistics.Domain.Common;
+using AlgoLogistics.Domain.Common.Exceptions;
 using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace AlgoLogistics.Domain.Entities
 {
 	public class Shipment : AuditableEntity
 	{
-		private readonly List<Package> _packages;
+		private List<Package> _packages;
 
 		public int ShipmentId { get; private set; }
 		public IEnumerable<Package> Packages => _packages;
@@ -25,12 +27,29 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			_packages = packages;
 			Route = route;
-			ShipmentStatus = ShipmentStatus.Shipping;
+			ShipmentStatus = ShipmentStatus.PackagesGrouped;
+		}
+
+		public void ChangeStatus()
+		{
+			ShipmentStatus = ShipmentStatus switch
+			{
+				Enums.ShipmentStatus.PackagesGrouped => Enums.ShipmentStatus.TransportAssigned,
+				Enums.ShipmentStatus.TransportAssigned => Enums.ShipmentStatus.Shipping,
+				Enums.ShipmentStatus.Shipping => Enums.ShipmentStatus.Shipped,
+				_ => throw new AlgoLogisticsException($"Invalid emun value: {ShipmentStatus}")
+			};
+		}
+
+		public void RemovePackagesWithoutTransport(List<Package> packages)
+		{
+			packages.ForEach(x => _packages.Remove(x));
 		}
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)
 		{
 			var route = await BuildRouteAsync(packages, cityNetworkProvider);
+			packages.ForEach(x => x.ChangeStatus());
 			var shipment = new Shipment(packages, route);
 
 			return shipment;

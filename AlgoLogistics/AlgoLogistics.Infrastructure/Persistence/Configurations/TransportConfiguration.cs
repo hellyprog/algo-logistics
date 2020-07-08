@@ -1,4 +1,5 @@
 ﻿using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -29,6 +30,7 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 				   .WithOne(p => p.Transport)
 				   .OnDelete(DeleteBehavior.SetNull)
 				   .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+			builder.Property(p => p.CurrentCity).HasColumnName("current_city").IsRequired();
 		}
 	}
 }

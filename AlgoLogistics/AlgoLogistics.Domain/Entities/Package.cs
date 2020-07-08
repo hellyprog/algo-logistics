@@ -81,8 +81,14 @@ namespace AlgoLogistics.Domain.Entities
 			Description = description;
 			return this;
 		}
+		
+		public void RemoveFromShipment()
+		{
+			Shipment = null;
+			Status = PackageDeliveryStatus.NotSent;
+		}
 
-		public void ProcessPackageToNextStatus()
+		public void ChangeStatus()
 		{
 			Status = Status switch
 			{

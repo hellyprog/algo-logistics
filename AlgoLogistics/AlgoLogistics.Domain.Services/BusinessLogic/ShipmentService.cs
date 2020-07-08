@@ -28,7 +28,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			_cityNetworkProvider = cityNetworkProvider;
 		}
 
-		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command);
+		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 
 		public async Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken)
 		{
@@ -45,8 +45,8 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 		{
 			var packages = await (from package in _applicationDbContext.Packages
 								  where package.Status == PackageDeliveryStatus.NotSent
-								  && package.Created > command.FromDate
-								  && package.Created < command.ToDate
+								  && package.Created >= command.FromDate
+								  && package.Created <= command.ToDate
 								  select package).ToListAsync();
 
 			var shipmentList = new List<Shipment>();

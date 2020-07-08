@@ -1,4 +1,4 @@
-﻿namespace AlgoLogistics.Domain.Entities
+﻿namespace AlgoLogistics.Domain.Enums
 {
 	public enum TransportType
 	{

@@ -44,7 +44,9 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 					parameters.Property(p => p.FromCity).HasColumnName("from_city").IsRequired();
 					parameters.Property(p => p.ToCity).HasColumnName("to_city").IsRequired();
 					parameters.Property(p => p.Sender).HasColumnName("sender").IsRequired();
+					parameters.Property(p => p.SenderEmail).HasColumnName("sender_email").IsRequired();
 					parameters.Property(p => p.Receiver).HasColumnName("receiver").IsRequired();
+					parameters.Property(p => p.ReceiverEmail).HasColumnName("receiver_email").IsRequired();
 				});
 
 			builder.Property(p => p.Created).HasColumnName("created");

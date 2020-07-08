@@ -3,6 +3,7 @@
 	public enum PackageDeliveryStatus
 	{
 		NotSent,
+		ShipmentCreated,
 		OnTheRoad,
 		Arrived,
 		Received

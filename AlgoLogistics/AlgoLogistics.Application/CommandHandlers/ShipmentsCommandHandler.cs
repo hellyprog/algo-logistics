@@ -25,10 +25,12 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 			if (shipmentGenerationResult.Success)
 			{
-				var carAssigningExecutionResult = await _shipmentService.AssignShipmentsToTransportAsync(request);
+				var carAssigningExecutionResult = await _shipmentService.AssignShipmentsToTransportAsync(request, cancellationToken);
+
+				return carAssigningExecutionResult;
 			}
 
-			return default;
+			return shipmentGenerationResult;
 		}
 
 		public async Task<ExecutionResult> Handle(DeleteShipmentCommand request, CancellationToken cancellationToken)

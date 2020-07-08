@@ -22,6 +22,7 @@ namespace AlgoLogistics.Infrastructure.Persistence
 		public DbSet<City> Cities { get; set; }
 		public DbSet<PackageCategory> PackageCategories { get; set; }
 		public DbSet<ApplicationConfig> ApplicationConfigs { get; set; }
+		public DbSet<Transport> Transports { get; set; }
 
 		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
 		{
@@ -49,7 +50,6 @@ namespace AlgoLogistics.Infrastructure.Persistence
 
 			builder.Entity<City>().HasData(DefaultDataProvider.GetCities());
 			builder.Entity<PackageCategory>().HasData(DefaultDataProvider.GetPackageCategories());
-
 			builder.Entity<ApplicationConfig>().HasData(DefaultDataProvider.GetApplicationConfigs());
 		}
 	}
