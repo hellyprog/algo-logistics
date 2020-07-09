@@ -30,9 +30,19 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 		public abstract Task<ExecutionResult> AssignShipmentsToTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken);
 
-		public Task<ExecutionResult> DeassignPackagesWithoutTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken)
+		public async Task<ExecutionResult> DeassignPackagesWithoutTransportAsync(GenerateShipmentsCommand command, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			var packagesToDeassign = await (from package in _applicationDbContext.Packages
+											where package.Status == PackageDeliveryStatus.ShipmentCreated
+											&& package.Transport == null
+											select package).ToListAsync();
+
+			packagesToDeassign.ForEach(x => x.RemoveFromShipment());
+			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+			return savingResult > 0
+				? ExecutionResult.CreateSuccessResult()
+				: ExecutionResult.CreateFailureResult("Package deassignment failed");
 		}
 
 		public async Task<ExecutionResult> DeleteShipmentAsync(DeleteShipmentCommand request, CancellationToken cancellationToken)
