@@ -37,10 +37,21 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 											&& package.Transport == null
 											select package).ToListAsync();
 
-			packagesToDeassign.ForEach(x => x.RemoveFromShipment());
+			if (!packagesToDeassign.Any())
+			{
+				return ExecutionResult.CreateSuccessResult();
+			}
+
+			var results = packagesToDeassign.Select(x => x.RemoveFromShipment());
+
+			if (!results.All(x => x))
+			{
+				return ExecutionResult.CreateFailureResult("Package deassignment failed");
+			}
+
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
-			return savingResult > 0
+			return savingResult > 0 && packagesToDeassign.Any()
 				? ExecutionResult.CreateSuccessResult()
 				: ExecutionResult.CreateFailureResult("Package deassignment failed");
 		}

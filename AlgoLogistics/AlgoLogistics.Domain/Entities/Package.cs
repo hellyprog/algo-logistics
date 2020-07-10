@@ -82,10 +82,17 @@ namespace AlgoLogistics.Domain.Entities
 			return this;
 		}
 		
-		public void RemoveFromShipment()
+		public bool RemoveFromShipment()
 		{
-			Shipment = null;
-			Status = PackageDeliveryStatus.NotSent;
+			if (Status == PackageDeliveryStatus.ShipmentCreated && Shipment != null)
+			{
+				Shipment = null;
+				Status = PackageDeliveryStatus.NotSent;
+
+				return true;
+			}
+
+			return false;
 		}
 
 		public void ChangeStatus()
