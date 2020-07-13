@@ -38,7 +38,7 @@ namespace AlgoLogistics.Infrastructure.Persistence
 						break;
 				}
 			}
-
+			
 			return base.SaveChangesAsync(cancellationToken);
 		}
 

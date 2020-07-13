@@ -1,14 +1,14 @@
 ﻿using AlgoLogistics.DataAccess;
-using AlgoLogistics.Domain.Entities;
-using AlgoLogistics.Domain.Enums;
 using AlgoLogistics.Domain.Interfaces;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
+using AlgoLogistics.Domain.Enums;
+using AlgoLogistics.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace AlgoLogistics.Domain.Services.BusinessLogic
 {

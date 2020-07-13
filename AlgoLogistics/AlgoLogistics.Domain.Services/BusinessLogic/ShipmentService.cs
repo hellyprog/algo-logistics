@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AlgoLogistics.Domain.Services.BusinessLogic
 {
@@ -35,16 +36,17 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			var packagesToDeassign = await (from package in _applicationDbContext.Packages
 											where package.Status == PackageDeliveryStatus.ShipmentCreated
 											&& package.Transport == null
-											select package).ToListAsync();
+											select package)
+											.ToListAsync();
 
 			if (!packagesToDeassign.Any())
 			{
 				return ExecutionResult.CreateSuccessResult();
 			}
 
-			var results = packagesToDeassign.Select(x => x.RemoveFromShipment());
+			var results = packagesToDeassign.Select(x => x.RemoveFromShipment()).ToList();
 
-			if (!results.All(x => x))
+			if (!results.All(x => x == true))
 			{
 				return ExecutionResult.CreateFailureResult("Package deassignment failed");
 			}
@@ -83,9 +85,9 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 
 			var shipmentList = new List<Shipment>();
 
-			var groupedPackagesByFromCity = from package in packages
+			var groupedPackagesByFromCity = (from package in packages
 											group package by package.DeliveryDetails.FromCity into g
-											select new { g.Key, Grouped = g };
+											select new { g.Key, Grouped = g }).ToList();
 
 			foreach (var groupedPackageByFromCity in groupedPackagesByFromCity)
 			{

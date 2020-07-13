@@ -5,6 +5,8 @@ using AlgoLogistics.Domain.Services.BusinessLogic.Interfaces;
 using AlgoLogistics.Filters;
 using AlgoLogistics.Infrastructure;
 using AlgoLogistics.Infrastructure.Logging;
+using AlgoLogistics.Messages;
+using AlgoLogistics.Messages.Producers;
 using AlgoLogistics.Middlewares;
 using AutoMapper;
 using FluentValidation.AspNetCore;
@@ -43,6 +45,7 @@ namespace AlgoLogistics
 			{
 				options.SuppressModelStateInvalidFilter = true;
 			});
+			services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
 			services.AddHealthChecks();
 			services.AddInfrastructure(Configuration);
 
@@ -52,6 +55,7 @@ namespace AlgoLogistics
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, CarShipmentService>();
 			services.AddTransient<IPriceCalculator, PriceCalculator>();
+			services.AddTransient<INotificationProducer, NotificationProducer>();
 
 			services.AddSwaggerGen(c =>
 			{

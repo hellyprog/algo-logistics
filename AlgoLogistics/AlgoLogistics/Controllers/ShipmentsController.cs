@@ -3,6 +3,7 @@ using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.Queries;
+using AlgoLogistics.Messages.Producers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,12 @@ namespace AlgoLogistics.Controllers
 	public class ShipmentsController : BaseAlgoLogisticsController
 	{
 		private readonly IMediator _mediator;
+		private readonly INotificationProducer notificationProducer;
 
-		public ShipmentsController(IMediator mediator)
+		public ShipmentsController(IMediator mediator, INotificationProducer notificationProducer)
 		{
 			_mediator = mediator;
+			this.notificationProducer = notificationProducer;
 		}
 
 		[HttpGet]
@@ -54,6 +57,14 @@ namespace AlgoLogistics.Controllers
 			var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
 
 			return StatusCode(statusCode, result);
+		}
+
+		[HttpGet("message")]
+		public async Task<IActionResult> SendMessage(string message)
+		{
+			notificationProducer.ProduceNotification(message);
+
+			return Ok();
 		}
 	}
 }

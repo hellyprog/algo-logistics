@@ -55,10 +55,16 @@ namespace AlgoLogistics.Infrastructure.Persistence.Configurations
 			builder.Property(p => p.LastModifiedBy).HasColumnName("last_modified_by");
 
 			builder.HasOne(p => p.Shipment)
-				.WithMany(p => p.Packages);
+				.WithMany(p => p.Packages)
+				.HasForeignKey(p => p.ShipmentId);
+
+			builder.Property(p => p.ShipmentId).HasColumnName("shipment_id");
 
 			builder.HasOne(p => p.Transport)
-				.WithMany(p => p.Packages);
+				.WithMany(p => p.Packages)
+				.HasForeignKey(p => p.TransportId);
+
+			builder.Property(p => p.TransportId).HasColumnName("transport_id");
 
 			builder.HasOne(p => p.PackageCategory)
 				.WithMany(p => p.Packages);

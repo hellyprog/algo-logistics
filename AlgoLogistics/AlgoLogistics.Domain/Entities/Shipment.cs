@@ -12,10 +12,8 @@ namespace AlgoLogistics.Domain.Entities
 {
 	public class Shipment : AuditableEntity
 	{
-		private List<Package> _packages;
-
 		public int ShipmentId { get; private set; }
-		public IEnumerable<Package> Packages => _packages;
+		public List<Package> Packages { get; private set; }
 		public Route Route { get; private set; }
 		public ShipmentStatus ShipmentStatus { get; private set; }
 
@@ -25,7 +23,7 @@ namespace AlgoLogistics.Domain.Entities
 
 		private Shipment(List<Package> packages, Route route)
 		{
-			_packages = packages;
+			Packages = packages;
 			Route = route;
 			ShipmentStatus = ShipmentStatus.PackagesGrouped;
 		}
@@ -39,6 +37,11 @@ namespace AlgoLogistics.Domain.Entities
 				Enums.ShipmentStatus.Shipping => Enums.ShipmentStatus.Shipped,
 				_ => throw new AlgoLogisticsException($"Invalid emun value: {ShipmentStatus}")
 			};
+		}
+
+		public bool RemovePackage(Package package)
+		{
+			return Packages.Remove(package);
 		}
 
 		public static async Task<Shipment> CreateAsync(List<Package> packages, ICityNetworkProvider cityNetworkProvider)

@@ -18,6 +18,8 @@ namespace AlgoLogistics.Domain.Entities
 		public DeliveryDetails DeliveryDetails { get; set; }
 		public PackageCategory PackageCategory { get; set; }
 		public PackageDeliveryStatus Status { get; private set; }
+		public int? ShipmentId { get; private set; }
+		public int? TransportId { get; private set; }
 		public Shipment Shipment { get; private set; }
 		public Transport Transport { get; set; }
 
@@ -86,8 +88,9 @@ namespace AlgoLogistics.Domain.Entities
 		{
 			if (Status == PackageDeliveryStatus.ShipmentCreated && Shipment != null)
 			{
-				Shipment = null;
 				Status = PackageDeliveryStatus.NotSent;
+				Shipment = null;
+				ShipmentId = null;
 
 				return true;
 			}
