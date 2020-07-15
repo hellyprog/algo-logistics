@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AlgoLogistics.Messages.Model;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -19,7 +21,7 @@ namespace AlgoLogistics.Messages.Producers
 			_password = rabbitMqOptions.Value.Password;
 		}
 
-		public void ProduceNotification(string notification)
+		public void ProduceNotification<T>(T notification) where T : Notification
 		{
 			var factory = new ConnectionFactory() { HostName = _hostname, UserName = _username, Password = _password };
 
@@ -27,7 +29,8 @@ namespace AlgoLogistics.Messages.Producers
 			using var channel = connection.CreateModel();
 			channel.QueueDeclare(queue: _queueName, durable: false, exclusive: false, autoDelete: false, arguments: null);
 
-			var body = Encoding.UTF8.GetBytes(notification);
+			var serializedNotification = JsonConvert.SerializeObject(notification);
+			var body = Encoding.UTF8.GetBytes(serializedNotification);
 
 			channel.BasicPublish(exchange: "", routingKey: _queueName, basicProperties: null, body: body);
 		}

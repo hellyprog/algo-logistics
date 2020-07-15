@@ -3,6 +3,7 @@ using AlgoLogistics.Domain.Services;
 using AlgoLogistics.Domain.Services.Commands;
 using AlgoLogistics.Domain.Services.Common.Models;
 using AlgoLogistics.Domain.Services.Queries;
+using AlgoLogistics.Messages.Model;
 using AlgoLogistics.Messages.Producers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -62,7 +63,12 @@ namespace AlgoLogistics.Controllers
 		[HttpGet("message")]
 		public async Task<IActionResult> SendMessage(string message)
 		{
-			notificationProducer.ProduceNotification(message);
+			notificationProducer.ProduceNotification(new EmailNotification 
+			{ 
+				Message = message,
+				Subject = "Package",
+				ToEmail = "v.b.romaniv@gmail.com"
+			});
 
 			return Ok();
 		}
