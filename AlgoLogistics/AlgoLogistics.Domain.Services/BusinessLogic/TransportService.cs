@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 using AlgoLogistics.Domain.Entities;
+using AlgoLogistics.Domain.Enums;
 
 namespace AlgoLogistics.Domain.Services.BusinessLogic
 {
@@ -22,11 +23,11 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			_applicationDbContext = applicationDbContext;
 		}
 
-		public async Task<ExecutionResult<List<DeliveryDetails>>> GetTransportShipmentEmails(string transportNo)
+		public async Task<ExecutionResult<List<DeliveryDetails>>> GetTransportShipmentEmails(string transportNo, PackageDeliveryStatus packageDeliveryStatus)
 		{
 			var transport = await _applicationDbContext.Transports
 				.Include(t => t.Packages)
-				.FirstOrDefaultAsync(t => t.TransportNo == transportNo && t.Packages.All(p => p.Status == Enums.PackageDeliveryStatus.OnTheRoad));
+				.FirstOrDefaultAsync(t => t.TransportNo == transportNo && t.Packages.All(p => p.Status == packageDeliveryStatus));
 
 			var result = transport.Packages.Select(p => p.DeliveryDetails).ToList();
 
@@ -38,7 +39,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			var transport = await _applicationDbContext.Transports
 				.Include(t => t.Packages)
 					.ThenInclude(p => p.Shipment)
-				.FirstOrDefaultAsync(t => t.TransportNo == command.TransportNo && t.Packages.All(p => p.Status == Enums.PackageDeliveryStatus.OnTheRoad));
+				.FirstOrDefaultAsync(t => t.TransportNo == command.TransportNo && t.Packages.All(p => p.Status == PackageDeliveryStatus.OnTheRoad));
 
 			var shipment = transport.Packages.FirstOrDefault()?.Shipment;
 

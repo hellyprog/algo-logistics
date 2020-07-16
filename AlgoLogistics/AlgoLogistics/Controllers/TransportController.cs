@@ -28,5 +28,14 @@ namespace AlgoLogistics.Controllers
 
             return StatusCode(statusCode, result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterArrival([FromBody]RegisterTransportArrivalCommand command)
+        {
+            var result = await _mediator.Send(command);
+            var statusCode = result.Success ? StatusCodes.Status200OK : StatusCodes.Status400BadRequest;
+
+            return StatusCode(statusCode, result);
+        }
     }
 }

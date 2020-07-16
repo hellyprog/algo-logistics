@@ -34,11 +34,11 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 			if (executionResult.Success)
 			{
-				var deliveryDetails = await transportService.GetTransportShipmentEmails(request.TransportNo);
+				var deliveryDetails = await transportService.GetTransportShipmentEmails(request.TransportNo, Domain.Enums.PackageDeliveryStatus.OnTheRoad);
 
 				deliveryDetails?.Data.ForEach(d =>
 				{
-					var notification = CreateEmailNotification(d);
+					var notification = CreateDepartureEmailNotification(d);
 					notificationProducer.ProduceNotification(notification);
 				});
 			}
@@ -52,11 +52,11 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 			if (executionResult.Success)
 			{
-				var deliveryDetails = await transportService.GetTransportShipmentEmails(request.TransportNo);
+				var deliveryDetails = await transportService.GetTransportShipmentEmails(request.TransportNo, Domain.Enums.PackageDeliveryStatus.Arrived);
 
 				deliveryDetails?.Data.ForEach(d =>
 				{
-					var notification = CreateEmailNotification(d);
+					var notification = CreateArrivalEmailNotification(d);
 					notificationProducer.ProduceNotification(notification);
 				});
 			}
@@ -64,11 +64,23 @@ namespace AlgoLogistics.Application.CommandHandlers
 			return executionResult;
 		}
 
-		private EmailNotification CreateEmailNotification(DeliveryDetails deliveryDetails)
+		private EmailNotification CreateDepartureEmailNotification(DeliveryDetails deliveryDetails)
 		{
 			var notification = new EmailNotification
 			{
 				Message = $"Dear, {deliveryDetails.Receiver}. Your package from {deliveryDetails.FromCity} is shipping.",
+				Subject = "Delivery",
+				ToEmail = deliveryDetails.ReceiverEmail
+			};
+
+			return notification;
+		}
+
+		private EmailNotification CreateArrivalEmailNotification(DeliveryDetails deliveryDetails)
+		{
+			var notification = new EmailNotification
+			{
+				Message = $"Dear, {deliveryDetails.Receiver}. Your package from {deliveryDetails.FromCity} has arrived.",
 				Subject = "Delivery",
 				ToEmail = deliveryDetails.ReceiverEmail
 			};
