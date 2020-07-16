@@ -30,7 +30,7 @@ namespace AlgoLogistics.Domain.Entities
 			CurrentCity = currentCity;
 		}
 
-		public void Departure()
+		public void Depart()
 		{
 			_packages.ForEach(p =>
 			{
@@ -43,8 +43,13 @@ namespace AlgoLogistics.Domain.Entities
 			});
 		}
 
-		public void ClearTransport()
+		public void Arrive()
 		{
+			_packages.ForEach(p =>
+			{
+				p.ChangeStatus();
+			});
+
 			_packages?.Clear();
 		}
 

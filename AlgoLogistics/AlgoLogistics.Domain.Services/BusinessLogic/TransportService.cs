@@ -33,6 +33,29 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 			return ExecutionResult<List<DeliveryDetails>>.CreateSuccessResult(result);
 		}
 
+		public async Task<ExecutionResult> RegisterTransportArrival(RegisterTransportArrivalCommand command, CancellationToken cancellationToken)
+		{
+			var transport = await _applicationDbContext.Transports
+				.Include(t => t.Packages)
+					.ThenInclude(p => p.Shipment)
+				.FirstOrDefaultAsync(t => t.TransportNo == command.TransportNo && t.Packages.All(p => p.Status == Enums.PackageDeliveryStatus.OnTheRoad));
+
+			var shipment = transport.Packages.FirstOrDefault()?.Shipment;
+
+			transport.Arrive();
+
+			if (!transport.Packages.Select(p => p.Transport).Any())
+			{
+				shipment.ChangeStatus();
+			}
+
+			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
+
+			return savingResult > 0
+				? ExecutionResult.CreateSuccessResult()
+				: ExecutionResult.CreateFailureResult("Transport arrival failed");
+		}
+
 		public async Task<ExecutionResult> RegisterTransportDeparture(RegisterTransportDepartureCommand command, CancellationToken cancellationToken)
 		{
 			var transport = await _applicationDbContext.Transports
@@ -40,7 +63,7 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic
 					.ThenInclude(p => p.Shipment)
 				.FirstOrDefaultAsync(t => t.TransportNo == command.TransportNo && t.Packages.All(p => p.Status == Enums.PackageDeliveryStatus.ShipmentCreated));
 
-			transport.Departure();
+			transport.Depart();
 
 			var savingResult = await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

@@ -11,5 +11,6 @@ namespace AlgoLogistics.Domain.Services.BusinessLogic.Interfaces
 	{
 		Task<ExecutionResult<List<DeliveryDetails>>> GetTransportShipmentEmails(string transportNo);
 		Task<ExecutionResult> RegisterTransportDeparture(RegisterTransportDepartureCommand command, CancellationToken cancellationToken);
+		Task<ExecutionResult> RegisterTransportArrival(RegisterTransportArrivalCommand command, CancellationToken cancellationToken);
 	}
 }

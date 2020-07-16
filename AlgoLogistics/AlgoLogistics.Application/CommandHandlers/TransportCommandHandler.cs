@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 
 namespace AlgoLogistics.Application.CommandHandlers
 {
-	public class TransportCommandHandler : IRequestHandler<RegisterTransportDepartureCommand, ExecutionResult>
+	public class TransportCommandHandler :
+		IRequestHandler<RegisterTransportDepartureCommand, ExecutionResult>,
+		IRequestHandler<RegisterTransportArrivalCommand, ExecutionResult>
 	{
 		private readonly ITransportService transportService;
 		private readonly INotificationProducer notificationProducer;
@@ -29,6 +31,24 @@ namespace AlgoLogistics.Application.CommandHandlers
 		public async Task<ExecutionResult> Handle(RegisterTransportDepartureCommand request, CancellationToken cancellationToken)
 		{
 			var executionResult = await transportService.RegisterTransportDeparture(request, cancellationToken);
+
+			if (executionResult.Success)
+			{
+				var deliveryDetails = await transportService.GetTransportShipmentEmails(request.TransportNo);
+
+				deliveryDetails?.Data.ForEach(d =>
+				{
+					var notification = CreateEmailNotification(d);
+					notificationProducer.ProduceNotification(notification);
+				});
+			}
+
+			return executionResult;
+		}
+
+		public async Task<ExecutionResult> Handle(RegisterTransportArrivalCommand request, CancellationToken cancellationToken)
+		{
+			var executionResult = await transportService.RegisterTransportArrival(request, cancellationToken);
 
 			if (executionResult.Success)
 			{
