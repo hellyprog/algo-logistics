@@ -30,10 +30,22 @@ namespace AlgoLogistics.Domain.Entities
 			CurrentCity = currentCity;
 		}
 
-		public Transport ClearTransport()
+		public void Departure()
+		{
+			_packages.ForEach(p =>
+			{
+				p.ChangeStatus();
+
+				if (p.Shipment.ShipmentStatus == ShipmentStatus.TransportAssigned)
+				{
+					p.Shipment.ChangeStatus(); 
+				}
+			});
+		}
+
+		public void ClearTransport()
 		{
 			_packages?.Clear();
-			return this;
 		}
 
 		public void AddPackage(Package package)

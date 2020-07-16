@@ -54,6 +54,7 @@ namespace AlgoLogistics
 
 			services.AddTransient<IPackageService, PackageService>();
 			services.AddTransient<IShipmentService, CarShipmentService>();
+			services.AddTransient<ITransportService, TransportService>();
 			services.AddTransient<IPriceCalculator, PriceCalculator>();
 			services.AddTransient<INotificationProducer, NotificationProducer>();
 

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AlgoLogistics.Domain.Services\AlgoLogistics.Domain.Services.csproj" />
+    <ProjectReference Include="..\AlgoLogistics.Messages\AlgoLogistics.Messages.csproj" />
   </ItemGroup>
 
 </Project>

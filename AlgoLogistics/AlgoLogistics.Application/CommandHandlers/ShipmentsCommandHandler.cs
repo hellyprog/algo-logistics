@@ -21,7 +21,6 @@ namespace AlgoLogistics.Application.CommandHandlers
 
 		public async Task<ExecutionResult> Handle(GenerateShipmentsCommand request, CancellationToken cancellationToken)
 		{
-			//state machine?
 			var shipmentGenerationResult = await _shipmentService.GenerateShipmentsAsync(request, cancellationToken);
 
 			if (shipmentGenerationResult.Success)

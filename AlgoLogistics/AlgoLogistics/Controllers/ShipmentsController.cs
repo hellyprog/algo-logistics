@@ -59,18 +59,5 @@ namespace AlgoLogistics.Controllers
 
 			return StatusCode(statusCode, result);
 		}
-
-		[HttpGet("message")]
-		public async Task<IActionResult> SendMessage(string message)
-		{
-			notificationProducer.ProduceNotification(new EmailNotification 
-			{ 
-				Message = message,
-				Subject = "Package",
-				ToEmail = "v.b.romaniv@gmail.com"
-			});
-
-			return Ok();
-		}
 	}
 }
